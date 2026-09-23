@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Site Footer
+   Solid black bar: brand lockup (logo + copyright) on the left, editorial
+   info in the middle, contact details on the right.
+   ========================================================================== */
+
+.site-footer {
+  width: 100%;
+  background-color: #000000;
+}
+
+/* Full-bleed, same as .header-container (components.css) — no
+   max-width/centering, just a flat 32px inset on both sides, so the
+   footer spans edge to edge like the nav bar instead of staying boxed
+   to the shared 1440px content width. */
+.footer-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+  padding-inline: 32px;
+  padding-block: 28px;
+  box-sizing: border-box;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo nav.png is drawn in the header's own red/dark palette (for a
+   white header background) — brightness(0) crushes every non-transparent
+   pixel to black, then invert(1) flips that to solid white, giving the
+   footer a plain white lockup without needing a second logo asset. */
+.footer-logo {
+  width: 196px;
+  height: 34px;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.footer-copyright {
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding-left: 20px;
+}
+
+/* Taken out of the row's own flex flow (space-between otherwise has no
+   way to place a middle item at an arbitrary X) and positioned via
+   initFooterEditorAlign() in js/main.js, which measures Section 10's
+   CTA button and sets `left` to match it exactly — the two live in
+   unrelated flex layouts, so no pure-CSS rule can line them up at
+   every viewport width. The `left` below is just a same-as-before
+   fallback for the instant before that JS runs. */
+.footer-editor {
+  position: absolute;
+  left: 33%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.footer-editor-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-editor-name {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: right;
+}
+
+.footer-contact p {
+  margin: 0;
+}
+
+.footer-contact a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  /* Section 10 also drops to a simple stacked layout below its own
+     768px breakpoint, so matching its CTA button's X position no
+     longer means anything here — fall back to sitting in normal flow
+     with everything else. */
+  .footer-editor {
+    position: static;
+    transform: none;
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer-copyright {
+    border-left: none;
+    padding-left: 0;
+  }
+}

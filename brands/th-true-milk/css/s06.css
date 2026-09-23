@@ -1,0 +1,396 @@
+/* ==========================================================================
+   Section 06: Lịch sử hình thành (History Timeline)
+   Figma Node: 732:1950
+   ========================================================================== */
+
+/* Was height: 100vh with the title/timeline/footer spaced out via
+   justify-content: space-between, letting whatever leftover viewport
+   height there was stretch the gaps between them. Now auto-height (hugs
+   its content, no longer forced full-viewport), so that leftover-space
+   trick has nothing to distribute any more — the title-to-timeline gap
+   is set explicitly on .s06-title below instead. */
+.s06 {
+  position: relative;
+  width: 100%;
+  background-color: #f5f5f7;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.s06-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--content-max-width, 1440px);
+  margin-inline: auto;
+  padding-inline: var(--page-padding, 32px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section Title - Figma: 1K Faculty Glyphic, 40px, regular
+   margin-bottom is the title-to-timeline gap, narrowed to 2/3 of its
+   previous ~120px (space-between-derived, viewport-height-dependent)
+   value now that it's a fixed number instead — an estimate, since the
+   old value wasn't a fixed px to measure precisely; flag it if it still
+   needs tuning. */
+.s06-title {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: #000000;
+  margin-top: 0;
+  margin-bottom: 80px;
+  margin-left: clamp(0px, calc(381px - var(--page-padding, 32px)), 349px);
+}
+
+/* Beyond the shared content-max-width (1440px), fix the title at a flat
+   50px instead of letting the clamp's vw term keep scaling it. */
+@media (min-width: 1441px) {
+  .s06-title {
+    font-size: 50px;
+  }
+}
+
+/* Interactive Timeline Wrapper (starts aligned with title at x: 381px on desktop) */
+.s06-interactive-wrap {
+  position: relative;
+  margin-left: clamp(0px, calc(381px - var(--page-padding, 32px)), 349px);
+  max-width: 1030px;
+  width: calc(100% - clamp(0px, calc(381px - var(--page-padding, 32px)), 349px));
+  margin-bottom: clamp(45px, 7.5vh, 80px); /* Thu hẹp khoảng trống phần số 1 giữa Title và Timeline lại 20% */
+}
+
+/* Fixed Vertical Indicator Line (Vạch màu đen dọc cố định)
+   Extends from timeline top flush to the bottom edge of the milestone image */
+.s06-fixed-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.5px;
+  height: 420px;
+  background-color: #000000;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Timeline Viewport: clips left and right, lets ruler pan */
+.s06-timeline-viewport {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  overflow: visible;
+  user-select: none;
+}
+
+/* The sliding timeline rail */
+.s06-timeline-track {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Each Year Segment (Width 350px) */
+.s06-year-segment {
+  position: relative;
+  flex: 0 0 350px;
+  width: 350px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Cột mốc cao nằm ngay trước mỗi năm (Ref số 2: cao hơn các cột tick khác) */
+.s06-year-marker-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 120px;
+  background-color: #d9d9d9;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Top part of segment: Year text - khoảng cách tới tick marks gấp đôi */
+.s06-year-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.s06-year-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  padding-left: 20px;
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #cccccc;
+  transition: color 0.35s ease, transform 0.35s ease;
+  text-align: left;
+}
+
+.s06-year-btn:hover {
+  color: #888888;
+}
+
+/* Active Year is Black */
+.s06-year-segment.active .s06-year-btn {
+  color: #000000;
+  font-weight: 500;
+}
+
+/* Bottom part of segment: Ruler Tick Marks (Height 40px) */
+.s06-ruler-ticks {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.s06-ticks-svg {
+  width: 100%;
+  height: 40px;
+  display: block;
+}
+
+/* Content Box (Cụm thông tin tương ứng - CỐ ĐỊNH, không di chuyển ngang) */
+.s06-content-panel {
+  position: relative;
+  min-height: 240px;
+  padding-left: 24px;
+  box-sizing: border-box;
+  margin-top: 60px; /* Figma: 60px gap from ticks to title */
+  margin-bottom: clamp(28px, 4.5vh, 60px);
+}
+
+.s06-content-inner {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.s06-content-inner.is-changing {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.s06-text-group {
+  margin-bottom: 40px; /* Figma: 40px gap from desc to image */
+}
+
+/* Milestone Title - Header 32px */
+.s06-milestone-title {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #000000;
+  margin-bottom: 16px; /* Figma: 16px gap between title and desc */
+}
+
+/* Milestone Subtitle / Body - 20px */
+.s06-milestone-desc {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Milestone Image - 240px width (3:2 ratio: 240x160), borderless and flat */
+.s06-media-wrap {
+  width: 240px;
+  height: 160px;
+  aspect-ratio: 3 / 2;
+  border-radius: 0;
+  border: none;
+  overflow: hidden;
+  box-shadow: none;
+  background-color: #e5e5e7;
+}
+
+.s06-milestone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+  border: none;
+  outline: none;
+  transition: transform 0.4s ease;
+}
+
+.s06-media-wrap:hover .s06-milestone-img {
+  transform: scale(1.04);
+}
+
+/* Footer Row: Navigation Controls & Counter
+   No max-width here (unlike the title/wrap above) — this needs to span
+   the full container width so justify-content: space-between pushes the
+   counter all the way out to the section's actual right margin, not just
+   the 1030px column the timeline itself is constrained to.
+   align-items: flex-end bottom-aligns the counter against the nav
+   buttons instead of centering them against each other. */
+.s06-footer {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.s06-nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 40x40px rounded squircle button */
+.s06-btn-nav {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000000;
+  padding: 0;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.s06-btn-nav svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.s06-btn-nav:hover:not(:disabled) {
+  background-color: #000000;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.s06-btn-nav:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.s06-btn-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Counter: 01 /06 — pinned to the RIGHT edge of the viewport, flush with
+   the header's "NỘP HỒ SƠ" CTA button (.btn-submit-cta sits in
+   .header-container, which is full-bleed with a fixed 32px
+   padding-inline — no max-width). .s06-container, by contrast, caps at
+   var(--content-max-width) and centers once the viewport exceeds it, so
+   .s06-footer's own right edge (which right: 0 would otherwise use) sits
+   further in from the true viewport edge past that breakpoint. The
+   negative right offset below cancels exactly that extra centering
+   margin — max(0px, (100vw - content-max-width) / 2) — so the counter
+   lands at var(--page-padding) from the viewport edge at every width,
+   same as the nav CTA, instead of drifting inward on wide screens.
+   position: absolute + bottom: 0 (relative to .s06-footer, a plain flex
+   row whose height is just the 40px nav buttons) bottom-aligns it
+   against them without any hand-calculated offset. */
+.s06-counter {
+  position: absolute;
+  right: calc(-1 * max(0px, (100vw - var(--content-max-width, 1440px)) / 2));
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+.s06-counter-current {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  color: #000000;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.s06-counter-total {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.4);
+  padding-top: 1px;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (min-width: 1440px) {
+  .s06-content-panel {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .s06-title,
+  .s06-interactive-wrap {
+    margin-left: 0;
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .s06 {
+    height: auto;
+    min-height: 100vh;
+    padding-block: 48px;
+  }
+
+  .s06-title {
+    margin-bottom: 28px;
+  }
+
+  .s06-year-segment {
+    flex: 0 0 280px;
+    width: 280px;
+  }
+
+  .s06-content-panel {
+    min-height: auto;
+    margin-top: 24px;
+    margin-bottom: 36px;
+  }
+
+  .s06-milestone-title {
+    font-size: 24px;
+  }
+
+  .s06-media-wrap {
+    width: 140px;
+    height: 94px;
+  }
+}

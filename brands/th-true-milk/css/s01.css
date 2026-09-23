@@ -1,0 +1,506 @@
+/* ==========================================================================
+   Section 01: Hero TH True Milk
+   Full-width Responsive with Aspect Ratio Lock
+   Aligned with Figma Frame: 651:7271 & User Requirements
+   ========================================================================== */
+
+.s01-hero {
+  /* Vùng nhìn thấy dưới header: toàn bộ hero (đặc biệt cột thông tin bên phải) phải nằm gọn trong đây */
+  --s01-avail-h: calc(100vh - var(--header-height, 77px));
+  position: relative;
+  width: 100%;
+  background-color: var(--color-bg-white);
+  overflow: hidden;
+}
+
+/* Full Width Container for Home Section */
+.s01-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Two-Column Hero Split:
+   Left: Visual column with locked aspect-ratio matching 615/691
+   Right: Content column responsive, driving row height
+*/
+.s01-layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 0;
+  align-items: stretch;
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Product Visual & Clean QR Badge
+   Pure-CSS replacement for what used to be a JS-measured width (see the
+   removed initHeroRatioSync in js/main.js) — that measured
+   .s01-layout's rendered width on load and set an inline px width/height
+   from it, which on some cold reloads read a stale/incorrect width
+   before the very first layout pass had settled, producing a visibly
+   too-narrow image column that only fixed itself once something else
+   (e.g. a window resize) forced a re-measurement.
+   flex-basis: 43% gives the column a WIDTH that's a definite share of
+   the row, independent of anything else in it. align-self: flex-start
+   (not stretch) then means its HEIGHT is free to be derived from that
+   width via aspect-ratio, instead of being forced to match
+   .s01-content-col's height first (which is what stretch + aspect-ratio
+   would otherwise do, and exactly the "image cropped by object-fit:
+   cover to fill a mismatched box" bug this avoids). When the content
+   column's text is taller than the image, the row (align-items:
+   stretch on .s01-layout) grows to match it and the image just sits at
+   its own correct height at the top, instead of stretching to fill and
+   cropping.
+   -------------------------------------------------------------------------- */
+.s01-visual-col {
+  position: relative;
+  /* min(43%, ...): giữ tỉ lệ 615/691 nhưng không cao hơn vùng nhìn thấy (không crop ảnh) */
+  width: min(43%, calc(var(--s01-avail-h) * 615 / 691));
+  flex: 0 0 min(43%, calc(var(--s01-avail-h) * 615 / 691));
+  height: auto;
+  aspect-ratio: 615 / 691;
+  background-color: #e9e9e9;
+  overflow: hidden;
+  align-self: flex-start;
+}
+
+.s01-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s01-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Hanging Certificate Shield Badge (Figma Node: 651:7276 / Frame 2087330433)
+   - Width: 120px, Height: 189.75px, Position: left: 32px, top: 0
+   - Background: #ffffff with border-radius: 0 0 90px 90px
+   - Header tag: "CHỨNG NHẬN" (Manrope 700 10px #295ebd)
+   - Subtitle: "doanh nghiệp đạt thương hiệu quốc gia" (Manrope 500 10px 132%)
+   - Pill Capsule (82px x 76.88px) with rosette ornament & QR code
+   -------------------------------------------------------------------------- */
+.s01-cert-badge {
+  position: absolute;
+  top: 0;
+  left: 32px;
+  z-index: 10;
+  width: 120px;
+  height: 189.75px;
+  background-color: #ffffff;
+  border: 0.75px solid #d9d9d9;
+  border-top: none;
+  border-radius: 0 0 90px 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.s01-cert-badge:hover {
+  transform: translateY(3px);
+}
+
+/* Header Text Group (Frame 2087330589: 120px x 68px) */
+.s01-cert-header {
+  width: 100%;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* Blue Upper Tag: "CHỨNG NHẬN" (Frame 2087330555) */
+.s01-cert-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 29px;
+  padding: 8px 10px 0;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 13.2px;
+  color: #295ebd;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Subtitle: "doanh nghiệp đạt thương hiệu quốc gia" */
+.s01-cert-title {
+  width: 100%;
+  margin: 0;
+  padding: 0 8px;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 13.2px;
+  color: rgba(28, 28, 28, 0.8);
+  text-align: center;
+  text-transform: none;
+  box-sizing: border-box;
+}
+
+/* Flower & QR Wrapper: perfectly centered in shield card */
+.s01-cert-flower-wrap {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Rosette SVG ornament (92px x 92px, centered in wrap) */
+.s01-cert-rosette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Transparent QR code centered directly on flower */
+.s01-cert-qr-img {
+  position: relative;
+  z-index: 2;
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  background: transparent;
+  mix-blend-mode: darken;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Brand Profile, Headline, Philosophy, Actions
+   - Fully responsive, naturally wraps and determines hero height
+   -------------------------------------------------------------------------- */
+.s01-content-col {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: clamp(20px, 5vh, 56px) 32px;
+}
+
+/* Top Block: Honor Badge + Headline + Description */
+.s01-top-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Honor Badge Pill (Figma Node: 651:7289) */
+.s01-honor-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: clamp(10px, 2.4vh, 28px);
+  transition: transform 0.25s ease;
+}
+
+.s01-honor-badge:hover {
+  transform: translateY(-2px);
+}
+
+.s01-rosette-icon {
+  width: 18px;
+  height: 24px;
+  color: #295ebd;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: s01FadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
+}
+
+@keyframes s01FadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.s01-honor-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.32;
+  color: #295ebd;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Main Headline H1 (Node: 651:7293)
+   Flat H1 size (matches .heading-1 in tokens.css: 68px) for the whole
+   desktop range up to and including 1440px. The min-width:1441px
+   breakpoint below steps it up to 100px for anything wider — 1441px, not
+   1440px, so 1440px itself still gets H1. Mobile/tablet breakpoints
+   further down have their own explicit overrides. */
+.s01-headline {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  /* Cỡ chữ co theo chiều cao màn hình để cả cột phải luôn nằm gọn trong 1vh */
+  font-size: clamp(32px, 6.6vh, 58px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #000000;
+  margin-bottom: clamp(10px, 1.6vh, 20px);
+  max-width: 960px;
+  width: 100%;
+  padding-inline: clamp(16px, 2.5vw, 36px);
+  text-align: center;
+}
+
+/* Description / Slogan (Node: 651:7294) */
+.s01-description {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: rgba(0, 0, 0, 0.8);
+  max-width: 580px;
+  width: 100%;
+  padding-inline: 16px;
+  text-align: center;
+}
+
+/* Brand Logo (Node: 651:7295) */
+.s01-brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: clamp(10px, 2.4vh, 28px) 0;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: s01FadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.36s forwards;
+}
+
+.s01-brand-logo {
+  /* Logo TH nhỏ lại còn 1/2 so với trước */
+  width: clamp(56px, 6.5vw, 98px);
+  height: auto;
+  max-height: clamp(22px, 4vh, 40px);
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.s01-brand-logo:hover {
+  transform: scale(1.03);
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Action Buttons: Download Report & Share
+   Figma Node: 651:7297 (Frame 2087330549)
+   -------------------------------------------------------------------------- */
+.s01-actions-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.action-buttons-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: s01FadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.44s forwards;
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  color: #4d4d4d;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-action:hover {
+  color: #111827;
+  background-color: rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+}
+
+.btn-action:active {
+  transform: translateY(0);
+}
+
+.btn-action-icon {
+  display: block;
+  flex-shrink: 0;
+  color: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.btn-action-icon.icon-download {
+  width: 24px;
+  height: 17px;
+}
+
+.btn-action-icon.icon-share {
+  width: 18px;
+  height: 20px;
+}
+
+.btn-action:hover .btn-action-icon {
+  transform: scale(1.08);
+}
+
+.btn-action-label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: currentColor;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints: Large / 2K+ screens
+   -------------------------------------------------------------------------- */
+@media (min-width: 1441px) {
+  .s01-headline {
+    font-size: clamp(32px, 7.2vh, 76px); /* was 100px */
+  }
+}
+
+/* Desktop: 3 dòng tiêu đề (đã có <br>) không được tự ngắt thêm dòng */
+@media (min-width: 861px) {
+  .s01-headline {
+    white-space: nowrap;
+    max-width: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints: Tablet & Mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .s01-layout {
+    flex-direction: column-reverse;
+    min-height: auto;
+  }
+
+  .s01-visual-col {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: 0 auto;
+    aspect-ratio: 615 / 691;
+    flex: none;
+    align-self: center;
+  }
+
+  .s01-cert-badge {
+    left: 20px;
+  }
+
+  .s01-content-col {
+    width: 100%;
+    flex: none;
+    min-height: auto;
+    padding: 40px 20px 32px 20px;
+    gap: 28px;
+  }
+
+  .s01-headline {
+    font-size: clamp(30px, 6vw, 44px);
+    padding-inline: 0;
+  }
+
+  .s01-description {
+    font-size: 15px;
+    padding-inline: 0;
+  }
+
+  .action-buttons-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .s01-content-col {
+    padding: 32px 16px 24px 16px;
+    gap: 24px;
+  }
+
+  .s01-headline {
+    font-size: 28px;
+  }
+
+  .s01-description {
+    font-size: 14px;
+  }
+
+  .s01-brand-logo {
+    width: 140px;
+  }
+
+  .action-buttons-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .btn-action {
+    width: 100%;
+    justify-content: center;
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+
+  .s01-cert-badge {
+    left: 14px;
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+
+  .s01-cert-badge:hover {
+    transform: scale(0.85) translateY(2px);
+  }
+}

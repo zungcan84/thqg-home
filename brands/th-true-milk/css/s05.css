@@ -1,0 +1,558 @@
+/* ==========================================================================
+   Section 05: Lĩnh vực nông nghiệp công nghệ cao và sản xuất, chế biến sữa
+   Figma Node: 651:7460
+   Horizontal scroll-jack: vertical scroll page-wide, translated into
+   horizontal motion of a "rail" of frames while the section is pinned —
+   same pinning technique as Section 02 (tall track + sticky viewport),
+   just driving translateX instead of swapping card states. See
+   initS05HorizontalScroll in js/main.js for the scroll-to-position math.
+   ========================================================================== */
+
+/* Outer track: JS sets this element's height to (the rail's total
+   scrollable width - one viewport width) + one viewport height, i.e. a 1:1
+   mapping of vertical scroll px to horizontal pan px, giving the rail
+   exactly the scroll distance it needs to travel fully across (frames can
+   be wider than 100vw, e.g. the combo frame's locked-ratio image) while
+   the section stays pinned. */
+.s05-track {
+  position: relative;
+  width: 100%;
+}
+
+/* Pinned viewport: sticks below the header for as long as the track has
+   scroll room left, clipping the rail so only one frame-width shows at a
+   time. */
+.s05-sticky {
+  position: sticky;
+  top: var(--header-height, 77px);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height, 77px));
+  height: calc(100dvh - var(--header-height, 77px));
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* The horizontally-panning strip. JS sets transform: translateX(...) on
+   this directly in response to scroll — no transition here, since the
+   translate needs to track the scrollbar 1:1 (like Section 02's cards),
+   not ease independently of it. */
+.s05-rail {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  will-change: transform;
+}
+
+.s05-frame {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   Section 05 Scene: intro text (Frame 1) + background photo (Image 1) + 5 text cards (Frame 3+).
+   initS05HorizontalScroll's measure() in js/main.js dynamically auto-calculates
+   the exact rendered width of Image 1 based on viewport height (ratio 2462/1800),
+   and sets the distance between Frame 1 and Frame 3 to match that width seamlessly,
+   completely filling the space with Image 1 so no white background is ever exposed
+   during scroll.
+   -------------------------------------------------------------------------- */
+.s05-frame--parallax {
+  flex: 0 0 200vw;
+  width: 200vw;
+  position: relative;
+  overflow: hidden;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+  background-color: #2555ad;
+}
+
+.s05-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-sizing: border-box;
+  will-change: transform;
+}
+
+/* Locked to the photo's real ratio (2462/1800) — width is auto-computed
+   from that ratio against the fixed height. Positioned seamlessly between
+   Frame 1 (text) and Frame 3 (cards) by JS measure() so only Image 1 is
+   visible in the gap during scrolling. */
+.s05-layer--image {
+  width: auto;
+  height: 100%;
+  aspect-ratio: 2462 / 1800;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Resting flush at the scene's left edge — same visual position the old
+   combo-text panel had. Left padding is computed the same way
+   .s04-container arrives at its content inset (page padding, or more
+   once the viewport is wider than the shared content-max-width and the
+   container starts centering) so this text lines up pixel-for-pixel with
+   Section 04's left edge instead of just matching it by coincidence at
+   one viewport width. */
+.s05-layer--text {
+  width: 70vw;
+  z-index: 1; /* sits above .s05-layer--image so its opaque background covers the image as it slides across it */
+  display: flex;
+  align-items: stretch;
+  background-color: #2555ad;
+  color: #ffffff;
+  padding-block: 100px;
+  padding-right: var(--page-padding, 32px);
+  padding-left: max(
+    var(--page-padding, 32px),
+    calc((100vw - var(--content-max-width, 1440px)) / 2 + var(--page-padding, 32px))
+  );
+}
+
+/* Resting position is set inline by JS (initS05HorizontalScroll,
+   measure()) as `left` — a small, deliberate overlap (CARD_OVERLAP_PX)
+   into .s05-layer--image's own ACTUAL right edge, same idea as the text
+   panel's overlap on the image's left edge, so only a narrow strip is
+   ever covered rather than a gap opening up between them. The JS entry
+   shift (translateX) still applies on top of this JS-set `left`, so the
+   whole group starts further off-screen and catches up ahead of the
+   rail's own pace, all 5 cards moving together as one block at one
+   shared speed — not staggered/individual. */
+.s05-layer--cards {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  z-index: 1; /* same reasoning as .s05-layer--text */
+}
+
+/* Widened from the old 22vw text-only column to fit the new
+   title/body + index-number/media-square layout (see .s05-text-bottom
+   and .s05-card-media below) at a comfortable reading width. */
+.s05-card {
+  flex: 0 0 min(70vw, 920px);
+  min-width: 480px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #000000;
+  padding-block: 80px;
+  padding-inline: 64px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover state: card flips to a solid brand-blue fill with white text —
+   every text element inside gets its own color override below since
+   each one normally sets its own explicit color rather than inheriting. */
+.s05-card:hover {
+  background-color: var(--color-primary-blue, #005bac);
+}
+
+.s05-card:hover .s05-text-heading,
+.s05-card:hover .s05-text-body,
+.s05-card:hover .s05-rank-item p,
+.s05-card:hover .s05-rank-label {
+  color: #ffffff;
+}
+
+.s05-card:hover .s05-text-index {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.s05-card:hover .s05-rank-item {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Vertical divider between consecutive cards (not before the first) —
+   border-left instead of a gap on .s05-layer--cards so the cards stay
+   flush edge-to-edge, matching how they dock against the image before
+   them. */
+.s05-card + .s05-card {
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+/* Two stacked clusters, top and bottom (Figma node 726:10903) — NOT a
+   left/right column split. Cụm 1 (label + title) sits at the top; cụm 2
+   (arrow + body copy + scroll prompt) sits at the bottom, as one row of
+   its own. space-between pins each to its edge regardless of how tall the
+   frame is.
+   The column fills .s05-layer--text (which already carries the
+   page-padding inset), so no extra max-width/centering is applied here. */
+.s05-intro-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+/* Cụm 1: label + 3-line title — align top */
+.s05-intro-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.s05-tag {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Typography (font-family, size, weight, line-height, letter-spacing)
+   comes from the shared .heading-1 utility class (tokens.css) applied
+   alongside this one in the HTML — this rule only adds the color, so
+   there's no duplicate/conflicting type declaration between the two. */
+.s05-headline {
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Cụm 2: arrow (left) + body copy & scroll prompt (right) — align bottom.
+   The arrow lines up with the top of the paragraph block (flex-start),
+   not centered/bottom against it, matching the reference. */
+.s05-intro-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: clamp(77px, 12.8vw, 224px); /* was clamp(48px, 8vw, 140px), scaled up 60% */
+}
+
+/* assets/decor-mui-ten.svg — 60x28 native (so 60px width here renders it
+   at 1:1 scale), opacity already baked into the file (40% white fill), so
+   no color/opacity override needed here. */
+.s05-arrow {
+  flex: 0 0 auto;
+  width: 60px;
+  height: auto;
+  display: block;
+  margin-top: 6px; /* optical alignment with the first line of body text */
+}
+
+.s05-intro-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 540px;
+}
+
+.s05-intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.s05-intro-text p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.s05-scroll-prompt {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   Lagging background image (.s05-layer--image)
+   -------------------------------------------------------------------------- */
+.s05-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.s05-frame-img {
+  position: absolute;
+  top: 0;
+  /* Rendered wider than the wrap (and shifted left by half the overscan)
+     so the up-to-160px lag shift JS applies (IMAGE_LAG_MAX_PX in
+     initS05HorizontalScroll, js/main.js) never exposes an empty edge
+     inside the overflow: hidden wrap. Keep this in sync if that constant
+     changes. */
+  left: -160px;
+  width: calc(100% + 320px);
+  height: 100%;
+  /* width/height attributes on the <img> tag (2462x1800, the source
+     file's real pixel size) reserve the correct box before the image has
+     loaded, avoiding layout shift — same pattern as other <img> tags in
+     this project. */
+  object-fit: cover;
+  display: block;
+  /* transform is set inline by JS (initS05HorizontalScroll) for the
+     small counter-parallax shift — no transition here for the same reason
+     as .s05-rail: it needs to track scroll position exactly, not ease. */
+}
+
+/* --------------------------------------------------------------------------
+   Inner content shared by all 5 cards inside .s05-layer--cards (Tầm nhìn
+   / Sứ mệnh / Vị thế thị trường / Làm chủ giá trị chuỗi / Vươn tầm quốc
+   tế) — each .s05-card is a plain flex child of the group (see
+   .s05-layer--cards above), not an independent rail frame any more.
+   -------------------------------------------------------------------------- */
+
+/* Top cluster (heading + body) and bottom cluster (index number + media
+   square) pin to their respective edges, same space-between pattern as
+   .s05-intro-col. */
+.s05-text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.s05-text-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.s05-text-heading {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 3vw, 50px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+.s05-text-body {
+  margin: 0;
+  max-width: 640px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.55);
+  transition: color 0.3s ease;
+}
+
+/* Bottom cluster: the big outline index number sits bottom-left, the
+   gray placeholder square bottom-right — both bottom-aligned to each
+   other (align-items: flex-end) since the square is taller than the
+   number's own line-height. */
+.s05-text-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+/* Faculty Glyphic (var(--font-heading), same family as Section 06's
+   year labels) draws "0" with a diamond counter — that's the source of
+   the number's distinctive look, no extra icon/graphic needed. */
+.s05-text-index {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(72px, 7vw, 128px);
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.2);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
+}
+
+/* Icon tile — line-art PNG from assets/s5 (one per card's theme) centered
+   on a flat #F5F5F5 square. */
+.s05-card-media {
+  flex: 0 0 auto;
+  width: 44%;
+  max-width: 340px;
+  aspect-ratio: 1 / 1;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+/* On hover the tile itself lightens to a translucent white-over-blue
+   tint (reading as a lighter blue square against the card's now-blue
+   fill), and the icon — dark line art on transparent PNG — is flipped
+   to solid white via filter rather than needing separate white-icon
+   assets: brightness(0) crushes every non-transparent pixel to black,
+   invert(1) then flips that black to white. */
+.s05-card:hover .s05-card-media {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.s05-card:hover .s05-card-media-icon {
+  filter: brightness(0) invert(1);
+}
+
+.s05-card-media-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.3s ease;
+}
+
+/* "Vị thế thị trường" ranked list — a stack of "Top X / mốc + mô tả"
+   rows separated by hairline dividers, replacing the shared
+   title+paragraph body the other 4 cards use. Kept compact (18px, no
+   extra vertical gap beyond each row's own padding) since this card
+   still has to fit inside the fixed pinned-viewport height like every
+   other card in the rail, with no scroll of its own. */
+.s05-rank-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.s05-rank-item {
+  padding-block: 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: border-color 0.3s ease;
+}
+
+.s05-rank-item:first-child {
+  padding-top: 0;
+}
+
+.s05-rank-item:last-child {
+  border-bottom: none;
+}
+
+.s05-rank-item p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.85);
+  transition: color 0.3s ease;
+}
+
+.s05-rank-label {
+  font-weight: 700;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive: same horizontal scroll-jack mechanic at every width, just
+   smaller type/spacing on narrow screens. The intro frame's title is a
+   flat 68px (per spec) — below 1024px it scales down with a clamp()
+   instead of staying flat, and cụm 2's arrow+text row stacks vertically
+   once there isn't enough width for both side by side.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .s05-headline {
+    font-size: clamp(30px, 5vw, 56px);
+  }
+}
+
+@media (max-width: 640px) {
+  .s05-intro-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Not enough width (or screen depth) for the layered parallax scene —
+     drop the absolute positioning and JS motion entirely (its inline
+     transforms are neutralized below) and fall back to a plain stacked
+     column: image, then text, then all 5 cards (also stacked, not a
+     row — no room for that either), all static and full-width, same
+     simplification the rest of this section already applies on mobile. */
+  .s05-frame--parallax {
+    flex: 0 0 100vw;
+    width: 100vw;
+    flex-direction: column;
+    height: auto;
+    min-height: 100%;
+  }
+
+  .s05-layer {
+    position: static;
+    width: 100% !important;
+    height: auto;
+    transform: none !important;
+  }
+
+  .s05-layer--image {
+    height: 220px;
+  }
+
+  .s05-frame-img {
+    transform: none !important; /* neutralize the JS-driven lag shift too, not just the layer wrappers */
+  }
+
+  .s05-layer--cards {
+    flex-direction: column;
+  }
+
+  .s05-layer--text,
+  .s05-card {
+    padding-block: 32px;
+    padding-inline: 20px;
+  }
+
+  .s05-card {
+    flex: 0 0 auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Cards stack vertically here, so the divider moves from the side
+     (border-left) to the top edge. */
+  .s05-card + .s05-card {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .s05-headline {
+    font-size: clamp(26px, 7vw, 36px);
+  }
+
+  .s05-text-heading {
+    font-size: 28px;
+  }
+
+  .s05-intro-text p {
+    font-size: 13px;
+  }
+
+  .s05-intro-right {
+    max-width: 100%;
+  }
+
+  .s05-text-body {
+    font-size: 14px;
+  }
+
+  .s05-text-index {
+    font-size: 32px;
+  }
+
+  .s05-card-media {
+    max-width: 120px;
+  }
+}

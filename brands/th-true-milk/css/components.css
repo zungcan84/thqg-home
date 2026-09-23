@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Components: Header, Buttons, Badges, Toast & Interactive Elements
+   Aligned with Figma Design System (Frame 651:7271) & README.md
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Site Header / Navigation
+   Figma Node: 651:7272 (navigration)
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 77px;
+  background-color: var(--color-bg-white);
+  border-bottom: 1px solid #dbdbdb;
+  z-index: 1000;
+  transition: box-shadow 0.25s ease;
+}
+
+.site-header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 32px;
+  margin-inline: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* Figma Frame 146 itemSpacing: 32px */
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header-brand img {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Desktop Navigation Menu (Frame 58) */
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* Figma Frame 58 itemSpacing: 24px */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.48;
+  letter-spacing: -0.03em;
+  color: #2b2b2b;
+  padding: 4px 0;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #000000;
+}
+
+.nav-link.active {
+  color: #000000;
+  font-weight: 500;
+  border-bottom: 1px solid #000000; /* Figma Component 1 state: on has strokeBottom: 1px solid black */
+}
+
+/* Header Actions (Frame 150) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Figma Frame 150 itemSpacing: 10px */
+}
+
+/* Language Switcher Pill (Frame 147) */
+.btn-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-lang:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.btn-lang svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* CTA Nộp Hồ Sơ (Frame 148) */
+.btn-submit-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 24px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  background-color: #000000;
+  border: none;
+  border-radius: 56px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.btn-submit-cta:hover {
+  background-color: #262626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-submit-cta:active {
+  transform: translateY(0);
+}
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #111827;
+  transition: all 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Drawer Navigation
+   -------------------------------------------------------------------------- */
+.mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 77px;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 20px 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  flex-direction: column;
+  gap: 16px;
+  z-index: 999;
+}
+
+.mobile-drawer.open {
+  display: flex;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 0;
+  color: #1f2937;
+  text-decoration: none;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.mobile-nav-link.active {
+  color: #000000;
+  font-weight: 600;
+}
+
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+@media (max-width: 1100px) {
+  .nav-desktop {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Toast Notification System
+   -------------------------------------------------------------------------- */
+.toast-notification {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #111827;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 9999;
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.toast-notification svg {
+  width: 18px;
+  height: 18px;
+  color: #10b981;
+}
+
+/* --------------------------------------------------------------------------
+   Staggered Text Animation Styles
+   Strictly following Section 8 of README.md
+   -------------------------------------------------------------------------- */
+.stagger-text {
+  /* Retain natural flow without clipping descenders */
+  position: relative;
+}
+
+.stagger-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--text-animation-duration, 600ms) var(--text-animation-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+              transform var(--text-animation-duration, 600ms) var(--text-animation-ease, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: opacity, transform;
+}
+
+.stagger-text.is-animated .stagger-word,
+[data-stagger-text].is-animated .stagger-word {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

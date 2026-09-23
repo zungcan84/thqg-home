@@ -1,0 +1,346 @@
+/* ==========================================================================
+   Section 03: Giải thưởng & Danh hiệu
+   Figma Node: 651:7348
+   - Two groups (Danh hiệu cấp quốc gia / Giải thưởng cấp quốc tế), each a
+     label column + a list of year/title/index rows.
+   - Hover a row -> row's text pill turns black/white (pure CSS :hover).
+   - Hover a row -> a floating medal image scale-reveals from the cursor
+     position and follows it while hovering, then scale-hides back into the
+     cursor's position on mouseleave (JS: initS03Awards in js/main.js).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Section 02 -> Section 03 handoff: Sticky Stacking & Overlapping Transition
+   1) PIN (Sticky) — Section 02 pins motionless once all 12 cards have cycled.
+   2) STACKING (Overlapping) — Section 03 slides up from below and smoothly
+      covers Section 02 directly like a new sheet of paper overlapping the old.
+   3) RELEASE — Once Section 03 fully covers Section 02, Section 02 unpins
+      and washes away underneath, yielding the screen to Section 03.
+   -------------------------------------------------------------------------- */
+.s03-track {
+  position: relative;
+  width: 100%;
+  margin-top: calc(var(--header-height, 77px) - 100vh);
+  margin-top: calc(var(--header-height, 77px) - 100dvh);
+  z-index: 10;
+}
+
+.s03 {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height, 77px));
+  min-height: calc(100dvh - var(--header-height, 77px));
+  box-sizing: border-box;
+  background-color: var(--color-bg-page);
+  padding-block: clamp(48px, 6vw, 96px);
+}
+
+.s03-container {
+  position: relative;
+}
+
+.s03-head {
+  margin-bottom: 28px;
+}
+
+.s03-title {
+  margin: 0;
+  font-family: "1K Faculty Glyphic", "Faculty Glyphic", Georgia, serif;
+  font-size: clamp(32px, 3.6vw, 50px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.s03-title-count {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.s03-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #252525;
+  margin-block: 28px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
+.s03-divider.is-animated {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Award Group: label column + list
+   -------------------------------------------------------------------------- */
+.s03-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.s03-group-label {
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-primary-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  padding-top: 22px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.s03-group-label.is-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.s03-group-count {
+  font-weight: 600;
+  opacity: 0.55;
+}
+
+.s03-list {
+  flex: 0 1 816px;
+  max-width: 816px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  margin-left: auto;
+  list-style: none;
+  padding: 0;
+}
+
+/* The whole row gets the black highlight on hover.
+   Dividing lines animate left-to-right via ::after.
+   Content fades in and slides up from top to bottom. */
+.s03-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 217px;
+  padding-block: 18px;
+  border-bottom: none;
+  transition: none !important;
+}
+
+/* Line drawing left to right */
+.s03-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.s03-item:last-child::after {
+  display: none;
+}
+
+.s03-item.is-animated::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.s03-item:hover::after {
+  opacity: 0;
+  transition: none !important;
+}
+
+.s03-item-main {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(24px, 3vw, 56px);
+  flex: 1 1 auto;
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.s03-item.is-animated .s03-item-main {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.s03-item-year {
+  flex: 0 0 auto;
+  min-width: 92px;
+  padding-left: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  transition: none !important;
+}
+
+.s03-item-title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-dark-main);
+  transition: none !important;
+}
+
+.s03-item-index {
+  flex: 0 0 auto;
+  min-width: 24px;
+  text-align: right;
+  padding-right: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.s03-item.is-animated .s03-item-index {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Instant active activation on hover (no delay) */
+.s03-item:hover {
+  background-color: #252525;
+  border-color: transparent;
+  transition: none !important;
+}
+
+.s03-item:hover .s03-item-year,
+.s03-item:hover .s03-item-title,
+.s03-item:hover .s03-item-index {
+  color: #ffffff;
+  transition: none !important;
+}
+
+.s03-item:hover .s03-item-year {
+  padding-left: 24px;
+  transition: none !important;
+}
+
+.s03-item:hover .s03-item-index {
+  padding-right: 24px;
+  transition: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Floating medal image
+   JS (initS03Awards in main.js) sets left/top to the live cursor position
+   relative to .s03, then toggles .is-visible.
+   -------------------------------------------------------------------------- */
+.s03-medal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 128px;
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transform: translate(-50%, -78%) scale(0);
+  transition: none !important;
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.25));
+}
+
+.s03-medal.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -78%) scale(1);
+  transition: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .s03-group {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .s03-group-label {
+    flex: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 0;
+  }
+
+  .s03-list {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .s03-item {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .s03-item-main {
+    gap: 16px;
+    padding: 14px 12px;
+  }
+
+  .s03-item-year {
+    min-width: 72px;
+    font-size: 14px;
+  }
+
+  .s03-item-title {
+    font-size: 14px;
+  }
+
+  /* Hover-driven cursor-follow doesn't translate to touch input; keep the
+     layout clean and skip the floating image on small/touch screens. */
+  .s03-medal {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s03-divider,
+  .s03-divider.is-animated,
+  .s03-group-label,
+  .s03-group-label.is-animated,
+  .s03-item::after,
+  .s03-item.is-animated::after,
+  .s03-item-main,
+  .s03-item.is-animated .s03-item-main,
+  .s03-item-index,
+  .s03-item.is-animated .s03-item-index {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

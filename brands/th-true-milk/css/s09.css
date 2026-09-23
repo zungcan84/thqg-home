@@ -1,0 +1,213 @@
+/* ==========================================================================
+   Section 09: Phát triển & Tác động ESG
+   Background image (BG ESG.png) pins sticky at the header for the whole
+   section; the title+cards stack scrolls THROUGH it — rising in from
+   below, passing through the centered reading position, then continuing
+   on and exiting off the top — rather than rising once and holding in
+   place. See initS09Stack() in js/main.js for the translateY math
+   (100% -> -100%, not 100% -> 0%).
+   ========================================================================== */
+
+.s09-pin {
+  position: relative;
+  width: 100%;
+  /* Roughly double a plain rise-and-hold's slack, since the content now
+     travels twice the distance (in below, all the way out above)
+     instead of stopping once centered. */
+  height: calc(260vh - var(--header-height, 77px));
+  background-color: #0b1f10;
+}
+
+.s09-viewport {
+  position: sticky;
+  top: var(--header-height, 77px);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height, 77px));
+  height: calc(100dvh - var(--header-height, 77px));
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Full Viewport Background Image */
+.s09-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Scrolling Content Stack (Width 920px)
+   -------------------------------------------------------------------------- */
+/* align-items: center gives translateY: 0% (the midpoint of the
+   100% -> -100% sweep in initS09Stack()) a symmetric meaning — the
+   stack centered in the viewport — for the "pass through" motion to
+   read cleanly as it enters from below and exits off the top. */
+.s09-content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 20px;
+  box-sizing: border-box;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.s09-content-inner {
+  width: 100%;
+  max-width: 920px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+/* Section Title */
+.s09-title {
+  margin: 0;
+  font-family: var(--font-heading, "Faculty Glyphic", sans-serif);
+  font-size: clamp(34px, 3.6vw, 46px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Beyond the shared content-max-width (1440px), fix the title at a flat
+   50px instead of letting the clamp's vw term keep scaling it. */
+@media (min-width: 1441px) {
+  .s09-title {
+    font-size: 50px;
+  }
+}
+
+.s09-title span {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   ESG Cards (Width 920px, 2-column layout matching reference Frame)
+   Large gap between cards + a translucent, blurred "frosted glass" fill
+   (background-color at 80% opacity + backdrop-filter: blur) so the
+   forest background stays faintly visible/blurred through each card
+   instead of sitting on a flat opaque fill.
+   -------------------------------------------------------------------------- */
+.s09-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  /* A bit of extra travel after the last card before the stack fully
+     exits off the top of the viewport. */
+  padding-bottom: 100px;
+}
+
+.s09-card {
+  width: 100%;
+  background-color: rgba(245, 245, 245, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 0;
+  padding: 40px 48px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  align-items: start;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.s09-card:hover {
+  background-color: rgba(238, 238, 238, 0.85);
+  transform: translateY(-2px);
+}
+
+/* Left Title Column */
+.s09-card-title {
+  margin: 0;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #111827;
+}
+
+/* Right Content Column */
+.s09-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.s09-card-bullet {
+  position: relative;
+  margin: 0;
+  padding-left: 16px;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #27272a;
+}
+
+.s09-card-bullet::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  color: #52525b;
+  font-size: 16px;
+}
+
+.s09-card-bullet strong {
+  font-weight: 700;
+  color: #09090b;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Mobile Fallback (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .s09-pin {
+    height: auto;
+  }
+
+  .s09-viewport {
+    position: relative;
+    top: 0;
+    height: auto;
+    min-height: 100vh;
+    padding-block: 60px;
+  }
+
+  .s09-content {
+    position: relative;
+    transform: none !important;
+    padding-inline: 16px;
+  }
+
+  .s09-cards {
+    gap: 20px;
+  }
+
+  .s09-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 20px 20px;
+  }
+
+  .s09-title {
+    font-size: 32px;
+  }
+}

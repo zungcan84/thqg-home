@@ -1,0 +1,659 @@
+/* ==========================================================================
+   Section 02: Thành Tựu Trong Năm 2025
+   Figma Node: 651:7308
+   Updated per user rules:
+   - Background image: assets/s2/background s2.jpg
+   - Hình ảnh k bo góc (border-radius: 0)
+   - Title lớn không bị dính nav (sticky top: var(--header-height, 77px), top: 48px)
+   - Cards inactive chỉ blur (14px), KHÔNG giảm opacity (opacity: 1)
+   - Cụm lĩnh vực và ảnh active luôn align center (đáy cụm lĩnh vực align đáy ảnh active)
+   - Text "Cuộn xuống" bỏ icon
+   - Ảnh active width 350px tại breakpoint 1440
+   - Ảnh inactive width 310px, luôn bị che đi một phần ở mép trên và mép dưới
+   ========================================================================== */
+
+/* Outer Scroll Track Spacer (provides scroll distance for scrubbing + transition hold) */
+.s02-track {
+  position: relative;
+  width: 100%;
+  height: calc(700vh - 2 * var(--header-height, 77px));
+  height: calc(700dvh - 2 * var(--header-height, 77px));
+  background-color: #2555ad;
+}
+
+/* Pinned Sticky Viewport (Sticks right below the site header)
+   z-index kept low relative to Section 03's own sticky layer below, so
+   Section 03 slides up and visually covers this one at the handoff instead
+   of the two sections just swapping abruptly. */
+.s02-sticky {
+  position: sticky;
+  top: var(--header-height, 77px);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height, 77px));
+  height: calc(100dvh - var(--header-height, 77px));
+  overflow: hidden; /* Clips top/bottom inactive cards and background */
+  background-color: #2555ad;
+  color: #ffffff;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+/* Background Globe Graphic (assets/s2/background s2.jpg) */
+.s02-bg-globe {
+  position: absolute;
+  top: 50%;
+  right: -5%;
+  transform: translateY(-50%);
+  width: min(95vw, 1100px);
+  height: min(95vw, 1100px);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+  mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+}
+
+.s02-globe-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Sticky Main Layout Container (Padding 2 bên 32px per user rule)
+   -------------------------------------------------------------------------- */
+.s02-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   Cụm 1: Title (Figma Node: 651:7310)
+   Top-left, plenty of breathing room, does NOT touch the nav
+   -------------------------------------------------------------------------- */
+.s02-cluster-1 {
+  position: absolute;
+  top: 48px;
+  left: 32px;
+  z-index: 5;
+}
+
+/* Plain block (not flex-column): the two lines come from a literal <br>
+   in the markup now, not two separate <span> elements. This used to be
+   display:flex; flex-direction:column with each phrase in its own
+   display:block span — but animations.js (data-stagger-text) rewrites the
+   title's contents into one <span class="stagger-word"> per WORD, and
+   with flex-column those word-spans each became their own stacked flex
+   item (and, with the old `span{display:block}` rule, each was also
+   forced onto its own line) — every word landing on its own line instead
+   of just wrapping normally within the two intended lines. */
+.s02-title {
+  margin: 0;
+  font-family: "1K Faculty Glyphic", "Faculty Glyphic", Georgia, serif;
+  font-size: clamp(34px, 3.6vw, 50px);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Cụm 2: Lĩnh vực container (Figma Node: 651:7311)
+   Center aligned, and its bottom aligns with the bottom of the active image
+   Active image height = 236px, centered at 50% -> bottom = 50% + 118px.
+   Cluster 2 bottom = calc(50% - 118px) from section bottom = 50% + 118px from top!
+   -------------------------------------------------------------------------- */
+.s02-cluster-2 {
+  position: absolute;
+  left: 32px;
+  bottom: calc(50% - 118px); /* Locks bottom baseline to bottom edge of active image */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 60px; /* Figma itemSpacing: 60px */
+  max-width: 420px;
+  z-index: 5;
+}
+
+.s02-category-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.s02-categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Figma gap: 8px */
+}
+
+.s02-category-item {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  white-space: nowrap; /* Keep each label + (count) on one line — without this
+    the label text wraps mid-phrase while the count stays stranded on the
+    first line instead of following it down, like "...hiệu quả tài (03)"
+    then "nguyên" alone on the next line. */
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.s02-category-item:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.s02-category-item.active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.s02-category-item .cat-count {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   Cụm 3: Vertical 3-Card Carousel Stream (Figma Nodes: 651:7318, 651:7332, 651:7325)
+   - Active image size: w350 x h236 at breakpoint 1440
+   - Inactive images size: w310 x h176
+   - NO rounded corners (border-radius: 0)
+   - Inactive cards have blur ONLY, NO opacity reduction (opacity: 1)
+   - Both inactive cards are ALWAYS partially cut off by the top and bottom edge
+   - Beyond ~1458px the active image keeps growing (24vw, capped at 520px) so
+     it doesn't stay visually tiny on 2K/wide screens; the container width
+     below grows in lockstep (image + 22px gap + fixed 266px info column) so
+     the info text never overflows. Below ~1458px this clamps back to the
+     original flat 638px, matching the 1440 reference frame exactly.
+   -------------------------------------------------------------------------- */
+.s02-cluster-3 {
+  position: absolute;
+  top: 0;
+  right: 32px;
+  width: clamp(638px, calc(24vw + 288px), 808px);
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.s02-cards-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+/* Base card item - strictly bounded dimensions, can NEVER blow up to raw image size */
+.s02-card {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: clamp(638px, calc(24vw + 288px), 808px);
+  max-width: clamp(638px, calc(24vw + 288px), 808px);
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  filter: blur(14px);
+  z-index: 1;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, filter, opacity;
+  overflow: visible; /* Allow WebGL canvas to visually exceed card bounds */
+  /* Transitions are managed exclusively by GSAP physics engine to avoid CSS fighting */
+}
+
+.s02-card-inner {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+/* Base image container - ALWAYS explicitly sized, NEVER auto or full size */
+.s02-card-image-wrap {
+  position: relative;
+  width: 310px;
+  height: 176px;
+  max-width: clamp(350px, 24vw, 520px);
+  max-height: clamp(236px, 16.2vw, 351px);
+  border-radius: 0; /* NO rounded corners per user rule */
+  overflow: visible; /* Allows curved WebGL mesh to flex beyond bounds without clipping */
+  background-color: transparent;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  transform-style: preserve-3d;
+}
+
+.s02-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0; /* NO rounded corners per user rule */
+  display: block;
+  box-shadow: 0 16px 36px rgba(0, 20, 60, 0.35);
+  transition: opacity 0.3s ease;
+}
+
+/* WebGL Curved Mesh Canvas */
+.s02-card-gl-canvas {
+  position: absolute;
+  top: -15%;
+  left: 0;
+  width: 100%;
+  height: 130%;
+  pointer-events: none;
+  z-index: 1;
+  display: block;
+  filter: drop-shadow(0 16px 28px rgba(0, 20, 60, 0.32));
+}
+
+.s02-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  width: 266px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Semantic & fallback classes (used for JS state tagging and noscript fallback) */
+.s02-card.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  filter: blur(0px);
+  z-index: 10;
+}
+
+.s02-card.is-active .s02-card-image-wrap {
+  width: clamp(350px, 24vw, 520px);
+  height: clamp(236px, 16.2vw, 351px);
+}
+
+.s02-card.is-active .s02-card-info {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.s02-card.is-prev,
+.s02-card.is-next {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  filter: blur(14px);
+  z-index: 3;
+}
+
+.s02-card.is-prev .s02-card-image-wrap,
+.s02-card.is-next .s02-card-image-wrap {
+  width: clamp(310px, 21.3vw, 461px);
+  height: clamp(176px, 12.1vw, 262px);
+}
+
+.s02-card.is-prev .s02-card-info,
+.s02-card.is-next .s02-card-info,
+.s02-card.is-passed .s02-card-info,
+.s02-card.is-future .s02-card-info {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Card Text Styling */
+.s02-card-metric {
+  font-family: "1K Faculty Glyphic", "Faculty Glyphic", Georgia, serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.s02-card-text {
+  margin: 0;
+}
+
+.s02-card-title {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.s02-card-sub {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Cụm 4: Bottom Bar (Cuộn xuống | 01 /12 | 2025)
+   - Text "Cuộn xuống" NO ICON per user rule
+   -------------------------------------------------------------------------- */
+.s02-cluster-4 {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 6;
+}
+
+/* Bottom Left: Cuộn xuống (No icon per user rule) */
+.s02-scroll-prompt {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.s02-scroll-prompt:hover {
+  color: #ffffff;
+}
+
+.s02-scroll-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Bottom Center: Counter Frame (Figma Node: 651:7345) */
+.s02-counter {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  line-height: 1;
+}
+
+.s02-counter-current {
+  font-family: "Manrope", sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+  display: inline-block;
+  min-width: 38px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.s02-counter-current.flip {
+  transform: translateY(-4px);
+  opacity: 0.5;
+}
+
+.s02-counter-total {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  padding-top: 2px;
+}
+
+/* Bottom Right: Year 2025 (Figma Node: 651:7344) */
+.s02-year {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   - Cụm 1 & Cụm 2: flow top, left
+   - Cụm 3: flow right / center
+   - Cụm 4: flow bottom
+   - Padding 2 bên: strictly 32px
+   -------------------------------------------------------------------------- */
+
+/* Large / 2K+ screens (> 1440px reference frame):
+   - Title steps up to the site's own H1 type scale (.heading-1 in
+     tokens.css: 68px / 125% line-height) instead of staying capped at the
+     H2 size (50px) it was hitting before.
+   - Card zone (Cụm 3) is pulled left proportionally as the viewport grows
+     past 1440px, closing the dead gap that opened up between it and the
+     bottom pagination counter on very wide screens, instead of staying
+     pinned flush to the right edge.
+   - Background globe's max size grows too, so it doesn't stay visually
+     static at 1100px once the screen is well past the 1157px width where
+     it used to hit that cap. */
+@media (min-width: 1441px) {
+  .s02-title {
+    font-size: 68px;
+    line-height: 1.25;
+  }
+
+  .s02-cluster-3 {
+    right: calc(32px + (100vw - 1440px) * 0.3);
+  }
+
+  .s02-bg-globe {
+    width: min(95vw, 1500px);
+    height: min(95vw, 1500px);
+  }
+
+  /* The active image's own height grows past 1440px too (see .s02-card
+     clamp() rules above, up to 351px), so the fixed -118px (half of the
+     original flat 236px) that keeps Cụm 2's bottom baseline aligned with
+     the image's bottom edge needs to track that growth the same way. */
+  .s02-cluster-2 {
+    bottom: calc(50% - clamp(118px, 8.1vw, 175.5px));
+  }
+
+  /* Card metric number (e.g. "10.000+ TỶ") steps up to the site's H3 type
+     scale (.heading-3 in tokens.css: 40px / 140% line-height) instead of
+     staying at the smaller 30px it used below this breakpoint. */
+  .s02-card-metric {
+    font-size: 40px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 1200px) {
+  .s02-cluster-3 {
+    right: 32px;
+    width: 540px;
+  }
+
+  .s02-card.is-active {
+    width: 540px;
+  }
+
+  .s02-card.is-active .s02-card-image-wrap {
+    width: 300px;
+    height: 202px;
+    flex: 0 0 300px;
+  }
+
+  .s02-card.is-prev,
+  .s02-card.is-next {
+    left: 150px;
+  }
+
+  .s02-cluster-2 {
+    bottom: calc(50% - 101px);
+    gap: 36px;
+  }
+}
+
+@media (max-width: 992px) {
+  .s02-viewport {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 28px;
+    padding-bottom: 20px;
+    padding-left: 32px;
+    padding-right: 32px;
+    overflow: hidden;
+  }
+
+  /* Cụm 1 & Cụm 2 flow top, left */
+  .s02-cluster-1 {
+    position: static;
+  }
+
+  .s02-title {
+    font-size: 30px;
+  }
+
+  .s02-cluster-2 {
+    position: static;
+    margin-top: 14px;
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .s02-categories-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  /* Cụm 3 flow center-right */
+  .s02-cluster-3 {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0;
+  }
+
+  .s02-cards-viewport {
+    height: 340px;
+  }
+
+  .s02-card.is-active {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .s02-card.is-active .s02-card-inner {
+    justify-content: center;
+  }
+
+  .s02-card.is-active .s02-card-image-wrap {
+    width: 250px;
+    height: 168px;
+    flex: 0 0 250px;
+  }
+
+  .s02-card.is-prev {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .s02-card.is-next {
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Cụm 4 flow bottom */
+  .s02-cluster-4 {
+    position: static;
+    width: 100%;
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .s02-viewport {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .s02-title {
+    font-size: 24px;
+  }
+
+  .s02-cluster-2 {
+    display: none;
+  }
+
+  .s02-card.is-active .s02-card-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .s02-card.is-active .s02-card-image-wrap {
+    width: 220px;
+    height: 148px;
+    flex: 0 0 220px;
+  }
+
+  .s02-card.is-active .s02-card-info {
+    width: 100%;
+    gap: 6px;
+  }
+
+  .s02-card-metric {
+    font-size: 22px;
+  }
+
+  .s02-card-title,
+  .s02-card-sub {
+    font-size: 14px;
+  }
+
+  .s02-card.is-prev,
+  .s02-card.is-next {
+    display: none;
+  }
+}

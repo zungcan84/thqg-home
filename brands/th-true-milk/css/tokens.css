@@ -1,0 +1,315 @@
+/* ==========================================================================
+   Design Tokens & Core Foundation
+   Strictly aligned with README.md Design System
+   ========================================================================== */
+
+/* Font Definitions */
+@font-face {
+  font-family: 'Faculty Glyphic';
+  src: url('../Font/1KFacultyGlyphic.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: '1K Faculty Glyphic';
+  src: url('../Font/1KFacultyGlyphic.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../Font/Manrope-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../Font/Manrope-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../Font/Manrope-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../Font/Manrope-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../Font/Manrope-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../Font/Manrope-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Layout */
+  --content-max-width: 1440px;
+  --header-height: 77px;
+
+  /* Desktop */
+  --desktop-padding: 32px;
+  --desktop-gutter: 24px;
+  --desktop-columns: 12;
+
+  /* Tablet */
+  --tablet-padding: 24px;
+  --tablet-gutter: 20px;
+  --tablet-columns: 8;
+
+  /* Mobile */
+  --mobile-padding: 16px;
+  --mobile-gutter: 16px;
+  --mobile-columns: 4;
+
+  /* Current Active Layout Tokens (Desktop default) */
+  --page-padding: var(--desktop-padding);
+  --grid-gutter: var(--desktop-gutter);
+  --grid-columns: var(--desktop-columns);
+
+  /* Typography */
+  --font-heading: "Faculty Glyphic", "1K Faculty Glyphic", sans-serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Animation */
+  --text-animation-duration: 600ms;
+  --text-animation-stagger: 40ms;
+  --text-animation-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Color Palette */
+  --color-primary-blue: #005bac;
+  --color-primary-blue-dark: #004380;
+  --color-blue-light-bg: #f0f7ff;
+  --color-dark-main: #111827;
+  --color-dark-sub: #374151;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-bg-white: #ffffff;
+  --color-bg-page: #f9fafb;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  :root {
+    --page-padding: var(--tablet-padding);
+    --grid-gutter: var(--tablet-gutter);
+    --grid-columns: var(--tablet-columns);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --page-padding: var(--mobile-padding);
+    --grid-gutter: var(--mobile-gutter);
+    --grid-columns: var(--mobile-columns);
+  }
+}
+
+/* Modern CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth; /* fallback only — overridden below whenever Lenis is actually running */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Lenis (js/main.js, initLenisSmoothScroll) adds the "lenis" class to
+   <html> once it takes over scrolling. Native scroll-behavior: smooth
+   must be OFF while Lenis is active — the two fight over the same native
+   scroll position, each trying to ease it independently, which is exactly
+   the kind of compounding-delay bug already hit once with a hand-rolled
+   version of this. This is Lenis's own documented recommended CSS. */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+html.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+html.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-dark-main);
+  background-color: var(--color-bg-white);
+  line-height: 1.4;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ==========================================================================
+   Layout Containers & Grid
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  width: 100%;
+}
+
+/* CSS Reset for Headings to prevent browser default faux-bold */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Typography Classes
+   ========================================================================== */
+.heading-1 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 68px;
+  line-height: 125%;
+  letter-spacing: -0.02em;
+}
+
+.heading-2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+}
+
+.heading-3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+}
+
+.body-1 {
+  font-family: var(--font-body);
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: 0;
+}
+
+.body-2 {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0;
+}
+
+.body-3 {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0;
+}
+
+.body-4 {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0;
+}
+
+.body-5 {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0;
+}
+
+/* Responsive typography adjustments */
+@media (max-width: 1024px) {
+  .heading-1 {
+    font-size: 50px;
+    line-height: 120%;
+  }
+  .heading-2 {
+    font-size: 38px;
+  }
+  .heading-3 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heading-1 {
+    font-size: 34px;
+    line-height: 125%;
+  }
+  .heading-2 {
+    font-size: 28px;
+  }
+  .heading-3 {
+    font-size: 24px;
+  }
+  .body-1 {
+    font-size: 18px;
+  }
+  .body-2 {
+    font-size: 15px;
+  }
+}

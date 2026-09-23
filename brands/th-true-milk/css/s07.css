@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Section 07: Tiềm lực tài chính
+   Figma inaccessible — built from a spacing-annotated screenshot + final
+   render, no node id available.
+
+   3-phase pinned scroll sequence — see index.html's comment above this
+   section's markup for the full description, and initS07Stack() in
+   js/main.js for the scroll-progress math (modeled on
+   initS04QuoteScroll's pinned-progress + hold-fraction technique):
+   1) SLIDE  — .s07-viewport (position: sticky) locks once it reaches
+               var(--header-height); pure CSS, no JS.
+   2) RISE   — JS translates .s07-content up from just below the viewport
+               to centered, over the first RISE_FRACTION of .s07-pin's
+               scrollable slack.
+   3) HOLD   — the remaining slack is spent with .s07-content parked at
+               translateY(0) before .s07-pin runs out and the page
+               releases into whatever follows.
+   Below S07_PIN_BREAKPOINT (js/main.js) this collapses to a plain
+   static stack (see the max-width media query at the bottom) — same
+   "don't trap taller-than-viewport content" reasoning as Section 04's
+   own mobile fallback.
+   ========================================================================== */
+
+.s07-pin {
+  position: relative;
+  width: 100%;
+  /* Pinned viewport + scroll slack tuned for immediate transition to Section 08 without dead scroll */
+  height: calc(180vh - var(--header-height, 77px));
+}
+
+.s07-viewport {
+  position: sticky;
+  top: var(--header-height, 77px);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height, 77px));
+  height: calc(100dvh - var(--header-height, 77px));
+  overflow: hidden;
+}
+
+.s07-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Transparent on purpose — this box covers the full sticky viewport, but
+   only .s07-content-inner (the actual 1190px-wide card) is white. That's
+   what lets the still-pinned background photo stay visible around the
+   card's edges once it's risen into view, instead of a full opaque sheet
+   blocking it out entirely. translateY is set by initS07Stack() each
+   frame; it starts at 100% (just below the viewport) and animates to 0
+   (centered) then holds — see the top-of-file comment. */
+.s07-content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.s07-content-inner {
+  width: 100%;
+  max-width: 1190px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  padding-block: 60px;
+  padding-inline: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.s07-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+/* Beyond the shared content-max-width (1440px), fix the title at a flat
+   50px instead of letting the clamp's vw term keep scaling it. */
+@media (min-width: 1441px) {
+  .s07-title {
+    font-size: 50px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Document cards
+   -------------------------------------------------------------------------- */
+.s07-cards {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+}
+
+/* No shared `gap` here — the title/description pair reads as one tighter
+   text block (8px apart) while the icon-to-title and description-to-link
+   spacing is looser (20-24px), so each is set explicitly below instead of
+   one uniform value that would either cram or over-space one of the two
+   pairings. */
+.s07-card {
+  flex: 1 1 0;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f5f5f7;
+  padding: 32px 28px;
+}
+
+.s07-card-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.s07-card-icon img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.s07-card-title {
+  margin: 0 0 8px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #111827;
+}
+
+.s07-card-desc {
+  margin: 0 0 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-muted, #6b7280);
+}
+
+.s07-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary-blue, #005bac);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.s07-card-link svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .s07-content-inner {
+    gap: 64px;
+    padding-inline: 48px;
+  }
+}
+
+/* Below this breakpoint (matches S07_PIN_BREAKPOINT in
+   initS07Stack(), js/main.js) the stacked cards can run taller than the
+   viewport, so the pin/rise/hold sequence is dropped in favor of a plain
+   static stack: background photo at a fixed height, card content
+   flowing normally right below it, no sticky/transform involved. */
+@media (max-width: 900px) {
+  .s07-pin {
+    height: auto;
+  }
+
+  .s07-viewport {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  .s07-bg-img {
+    position: relative;
+    inset: auto;
+    height: 56vh;
+    min-height: 320px;
+  }
+
+  .s07-content {
+    position: relative;
+    inset: auto;
+    transform: none;
+    padding-block: 32px;
+  }
+
+  .s07-cards {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .s07-content-inner {
+    gap: 40px;
+    padding-block: 40px;
+    padding-inline: 20px;
+  }
+
+  .s07-card {
+    padding: 24px 20px;
+  }
+}
