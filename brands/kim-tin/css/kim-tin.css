@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Kim Tín — page-level overrides on the shared premium-page modules
+   ========================================================================== */
+
+/* Shared dot list (Figma "Frame 2071856727" 4px dot + 14px body) */
+.kt-dot-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kt-dot-list li {
+  position: relative;
+  padding-left: 14px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.42;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.kt-dot-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.kt-dot-list--s08 { gap: 18px; }
+
+/* Hero brand mark is square (74×80), not the wide TH wordmark */
+.s01-brand-logo.s01-brand-logo--square {
+  width: auto;
+  height: clamp(56px, 9vh, 80px);
+  max-height: none;
+}
+
+/* Section 08 — design uses #2555ad and has no left-column paragraph */
+.kt-s08,
+.kt-s08 .s08-viewport { background-color: #2555ad; }
+.kt-s08 { height: calc(var(--header-height, 77px) + 240vh); }
+
+/* Section 06 — Figma shows only the prev/next buttons, no counter */
+.s06-counter { display: none; }
+
+@media (max-width: 900px) {
+  .kt-s08 { height: auto; }
+}
+
+/* Section 04 — Figma pill: "ĐỌC BÀI PHỎNG VẤN" on one line, centered, gap 16 */
+.s04-btn-outline {
+  justify-content: center;
+  gap: 16px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Section 10 (Liên hệ) — Kim Tín layout
+   Content column starts exactly where Section 08's white box starts
+   (.s08-left-col is 34% of the full-width viewport, so the box's left
+   edge = 34%). Title runs across 2 lines, then description and a
+   button of matching width stack underneath, all left-aligned.
+   -------------------------------------------------------------------------- */
+.kt-s10 {
+  min-height: 0;
+  padding-block: clamp(72px, 8.4vw, 120px) clamp(72px, 7vw, 100px);
+}
+
+.kt-s10 .s10-container {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: clamp(48px, 6.4vw, 92px);
+  padding-left: 34%;
+  padding-right: 32px;
+}
+
+.kt-s10 .s10-left {
+  flex: none;
+  width: 100%;
+  max-width: 960px;
+}
+
+.kt-s10 .s10-title {
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.36;
+}
+
+.kt-s10 .s10-title span { display: inline; }
+
+.kt-s10 .s10-right {
+  align-self: flex-start;
+  align-items: stretch;
+  max-width: 525px;
+  gap: clamp(32px, 3.4vw, 48px);
+}
+
+.kt-s10 .s10-desc {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.kt-s10 .s10-btn {
+  height: 74px;
+  font-size: 14px;
+  letter-spacing: 0;
+  gap: 18px;
+  border-width: 1px;
+}
+
+@media (min-width: 1441px) {
+  .kt-s10 .s10-title { font-size: 60px; line-height: 1.36; }
+  .kt-s10 .s10-desc { font-size: 17px; }
+}
+
+/* Section 08 stacks full-width below 900px, so there's no box edge to
+   align to — fall back to the normal page inset. */
+@media (max-width: 900px) {
+  .kt-s10 .s10-container { padding-left: 32px; }
+  .kt-s10 .s10-right { max-width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .kt-s10 .s10-container { padding-inline: var(--page-padding); }
+  .kt-s10 .s10-btn { height: 60px; }
+}

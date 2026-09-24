@@ -33,17 +33,26 @@
     <div class="container header-container">
       <!-- Nav Brand / Logo & Desktop Menu (Frame 146) -->
       <div class="header-left">
-        <a href="../../index.html" class="header-brand" aria-label="Báo Nhân Dân - Chuyên trang Thương hiệu Quốc gia">
+        <a href="../../" class="header-brand" aria-label="Báo Nhân Dân - Chuyên trang Thương hiệu Quốc gia">
           <img src="assets/s1/Logo nav.png" alt="Báo Nhân Dân - Chuyên trang của Báo Nhân Dân" width="180" height="34">
         </a>
 
         <!-- Desktop Navigation Menu (Frame 58) -->
         <nav class="nav-desktop" aria-label="Điều hướng chính">
-          <a href="../../index.html" class="nav-link">Trang Chủ</a>
-          <a href="../../index.html#hero" class="nav-link">Chương Trình Thương Hiệu Quốc Gia</a>
-          <a href="../../index.html#community" class="nav-link active" aria-current="page">Hồ Sơ Doanh Nghiệp</a>
-          <a href="../../index.html#products" class="nav-link">Thương Hiệu &amp; Nhãn Hiệu</a>
-          <a href="../../index.html#news" class="nav-link">Tin tức</a>
+          <a href="../../" class="nav-link">Trang Chủ</a>
+          <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Chương Trình Thương Hiệu Quốc Gia<em class="badge-soon">Sắp ra mắt</em></span>
+          <div class="nav-item">
+            <button type="button" class="nav-link nav-item__toggle active" aria-haspopup="true" aria-expanded="false">
+              <span>Hồ Sơ Doanh Nghiệp</span><svg class="nav-item__chevron" viewBox="0 0 18 18" width="12" height="12" aria-hidden="true"><path d="M11.8692 8.3247L7.38868 4.25972C7.21553 4.08657 7.00776 4 6.76537 4C6.52289 4 6.31508 4.08657 6.14193 4.25972C5.96879 4.43296 5.88221 4.64077 5.88221 4.88316C5.88221 5.12555 5.96879 5.33332 6.14193 5.50646L9.98602 9L6.14193 12.4935C5.96879 12.6667 5.88221 12.8745 5.88221 13.1168C5.88221 13.3592 5.96879 13.567 6.14193 13.7403C6.31508 13.9134 6.52289 14 6.76537 14C7.00776 14 7.21553 13.9134 7.38868 13.7403L11.8692 9.6753C11.9558 9.58877 12.0207 9.48487 12.0639 9.36358C12.1073 9.24239 12.1246 9.12119 12.1159 9C12.1246 8.87881 12.1073 8.75761 12.0639 8.63642C12.0207 8.51513 11.9558 8.41123 11.8692 8.3247Z" fill="currentColor"/></svg>
+            </button>
+            <div class="nav-item__menu" role="menu">
+              <a href="./" class="nav-item__link" role="menuitem" aria-current="page">Doanh nghiệp cao cấp</a>
+              <a href="../kim-tin/" class="nav-item__link" role="menuitem">Doanh nghiệp cơ bản</a>
+              <a href="../navico/" class="nav-item__link" role="menuitem">Doanh nghiệp miễn phí</a>
+            </div>
+          </div>
+          <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Thương Hiệu &amp; Nhãn Hiệu<em class="badge-soon">Sắp ra mắt</em></span>
+          <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Tin tức<em class="badge-soon">Sắp ra mắt</em></span>
         </nav>
       </div>
 
@@ -51,15 +60,13 @@
       <div class="header-actions">
         <!-- Language Switcher Pill (Frame 147) -->
         <button type="button" class="btn-lang" id="btnLang" aria-label="Thay đổi ngôn ngữ">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="2" y1="12" x2="22" y2="12"></line>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
           </svg>
           <span class="lang-label">EN</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-            stroke-linejoin="round" aria-hidden="true" style="width:10px;height:10px;">
+          <svg class="btn-lang__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
@@ -81,11 +88,16 @@
 
     <!-- Mobile Drawer Navigation -->
     <nav class="mobile-drawer" id="mobileDrawer" aria-label="Điều hướng trên điện thoại">
-      <a href="../../index.html" class="mobile-nav-link">Trang Chủ</a>
-      <a href="../../index.html#hero" class="mobile-nav-link">Chương Trình Thương Hiệu Quốc Gia</a>
-      <a href="../../index.html#community" class="mobile-nav-link active">Hồ Sơ Doanh Nghiệp</a>
-      <a href="../../index.html#products" class="mobile-nav-link">Thương Hiệu &amp; Nhãn Hiệu</a>
-      <a href="../../index.html#news" class="mobile-nav-link">Tin tức</a>
+      <a href="../../" class="mobile-nav-link">Trang Chủ</a>
+      <span class="mobile-nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt"><span>Chương Trình Thương Hiệu Quốc Gia</span><em class="badge-soon">Sắp ra mắt</em></span>
+      <div class="mobile-nav-group">
+        <span class="mobile-nav-link active">Hồ Sơ Doanh Nghiệp</span>
+        <a href="./" class="mobile-nav-sublink" role="menuitem" aria-current="page">Doanh nghiệp cao cấp</a>
+        <a href="../kim-tin/" class="mobile-nav-sublink" role="menuitem">Doanh nghiệp cơ bản</a>
+        <a href="../navico/" class="mobile-nav-sublink" role="menuitem">Doanh nghiệp miễn phí</a>
+      </div>
+      <span class="mobile-nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt"><span>Thương Hiệu &amp; Nhãn Hiệu</span><em class="badge-soon">Sắp ra mắt</em></span>
+      <span class="mobile-nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt"><span>Tin tức</span><em class="badge-soon">Sắp ra mắt</em></span>
       <div class="mobile-actions">
         <button type="button" class="btn-submit-cta" style="width:100%; text-align:center;">NỘP HỒ SƠ</button>
       </div>

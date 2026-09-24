@@ -27,17 +27,34 @@
       </a>
       <nav class="nav" id="nav" aria-label="Điều hướng chính">
         <a href="#top" class="is-active" aria-current="page">Trang Chủ</a>
-        <a href="#hero">Chương Trình Thương Hiệu Quốc Gia</a>
-        <a href="brands/th-true-milk/index.html">Hồ Sơ Doanh Nghiệp</a>
-        <a href="#products">Thương Hiệu &amp; Nhãn Hiệu</a>
-        <a href="#news">Tin tức</a>
+        <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Chương Trình Thương Hiệu Quốc Gia<em class="badge-soon">Sắp ra mắt</em></span>
+        <div class="nav-item">
+          <button type="button" class="nav-item__toggle" aria-haspopup="true" aria-expanded="false">
+            <span>Hồ Sơ Doanh Nghiệp</span>
+            <img class="nav-item__chevron" src="assets/svg/chevron-header.svg" alt="" width="12" height="12">
+          </button>
+          <div class="nav-item__menu" role="menu">
+            <a href="brands/th-true-milk/" role="menuitem">Doanh nghiệp cao cấp</a>
+            <a href="brands/kim-tin/" role="menuitem">Doanh nghiệp cơ bản</a>
+            <a href="brands/navico/" role="menuitem">Doanh nghiệp miễn phí</a>
+          </div>
+        </div>
+        <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Thương Hiệu &amp; Nhãn Hiệu<em class="badge-soon">Sắp ra mắt</em></span>
+        <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Tin tức<em class="badge-soon">Sắp ra mắt</em></span>
       </nav>
     </div>
     <div class="site-header__right">
-      <button class="lang" type="button" aria-label="Chọn ngôn ngữ">
-        <span class="lang__inner"><img src="assets/svg/global-line.svg" alt="" width="18" height="18"><span>EN</span></span>
-        <img src="assets/svg/chevron-header.svg" alt="" width="18" height="18">
-      </button>
+      <button type="button" class="btn-lang" id="btnLang" aria-label="Thay đổi ngôn ngữ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="lang-label">EN</span>
+          <svg class="btn-lang__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
       <a class="btn-dark" href="#apply">NỘP HỒ SƠ</a>
       <button class="burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
     </div>
@@ -114,6 +131,12 @@
       <div class="timeline__track">
         <span class="tl-backbone" aria-hidden="true"></span>
         <span class="tl-arrow" aria-hidden="true"></span>
+        <div class="tl-col tl-col--past">
+          <span class="pill pill--muted" data-reveal>Đã diễn ra</span>
+          <div class="tl-rail">
+            <span class="tl-dot tl-dot--past" aria-hidden="true"></span>
+          </div>
+        </div>
         <div class="tl-col">
           <span class="pill pill--dark" data-reveal>Đang diễn ra</span>
           <div class="tl-rail">
@@ -135,15 +158,20 @@
       </div>
 
       <div class="timeline__events">
-        <article class="event event--now" data-reveal>
-          <p class="event__date">12.09.2026</p>
+        <article class="event event--past" data-reveal>
+          <p class="event__date">31.03.2026</p>
           <h3 class="event__title">Ngày đóng cổng nhận hồ sơ</h3>
           <p class="event__desc">Hạn chót để ứng viên hoàn thiện và nộp toàn bộ hồ sơ đăng ký tham gia chương trình.</p>
         </article>
-        <article class="event" data-reveal>
-          <p class="event__date">12.10.2026</p>
+        <article class="event event--now" data-reveal>
+          <p class="event__date">29.08.2026</p>
           <h3 class="event__title">Thời gian thẩm định &amp; chấm điểm</h3>
           <p class="event__desc">Hội đồng chuyên môn tiến hành rà soát, đánh giá chi tiết và chấm điểm từng hồ sơ theo bộ tiêu chí.</p>
+        </article>
+        <article class="event" data-reveal>
+          <p class="event__date">29.09.2026</p>
+          <h3 class="event__title">Họp báo công bố Lễ vinh danh Thương hiệu Quốc gia 2026</h3>
+          <p class="event__desc">Giới thiệu các hoạt động trọng điểm tại Lễ công bố Thương hiệu Quốc gia Việt Nam 2026</p>
         </article>
         <article class="event" data-reveal>
           <p class="event__date">16.10.2026</p>
@@ -219,11 +247,11 @@
               <div class="cc__chips"><span class="chip chip--grow">DOANH NGHIỆP</span><span class="chip">2024</span></div>
             </div>
             <div class="cc__body cc__body--light">
-              <h3><a class="cc__link" href="brands/th-true-milk/index.html">Công ty cổ phần Sản xuất và Kinh doanh VinFast</a></h3>
+              <h3><a class="cc__link" href="brands/th-true-milk/">Công ty cổ phần Sản xuất và Kinh doanh VinFast</a></h3>
               <p>VinFast là công ty thành viên của Tập đoàn Vingroup, với tầm nhìn trở thành thương hiệu xe điện thông minh thúc đẩy mạnh mẽ cuộc cách mạng xe điện toàn cầu.</p>
             </div>
           </div>
-          <a class="link-more link-more--light" href="brands/th-true-milk/index.html" aria-label="Xem hồ sơ doanh nghiệp VinFast"><span>xem chi tiết</span><img src="assets/svg/chevron-a.svg" alt="" width="6.24" height="10"></a>
+          <a class="link-more link-more--light" href="brands/th-true-milk/" aria-label="Xem hồ sơ doanh nghiệp VinFast"><span>xem chi tiết</span><img src="assets/svg/chevron-a.svg" alt="" width="6.24" height="10"></a>
         </article>
 
         <article class="cc cc--link" data-reveal>
@@ -237,11 +265,11 @@
               <div class="cc__chips"><span class="chip chip--grow">DOANH NGHIỆP</span><span class="chip">2020</span></div>
             </div>
             <div class="cc__body cc__body--light">
-              <h3><a class="cc__link" href="brands/th-true-milk/index.html">Tổng công ty Hàng không VIỆT NAM - CTCP (Vietnam Airlines)</a></h3>
+              <h3><a class="cc__link" href="brands/th-true-milk/">Tổng công ty Hàng không VIỆT NAM - CTCP (Vietnam Airlines)</a></h3>
               <p>Tổng công ty Hàng không Việt Nam (Vietnam Airlines) là Hãng hàng không Quốc gia dẫn dắt thị trường nhờ đội tàu bay quy mô nhất, mạng bay quốc tế kỷ lục tới 21 quốc gia và vùng lãnh thổ. Giá trị cốt lõi của hãng được định vị qua ba trụ cột: An toàn tuyệt đối – Dịch vụ xuất sắc – Phát triển bền vững. Với sức bật mạnh mẽ, Vietnam Airlines đang tăng tốc hiện đại hóa, kiên định mục tiêu 5 sao quốc tế và tự hào sải cánh đưa thương hiệu Việt vươn tầm thế giới.</p>
             </div>
           </div>
-          <a class="link-more link-more--light" href="brands/th-true-milk/index.html" aria-label="Xem hồ sơ doanh nghiệp Vietnam Airlines"><span>xem chi tiết</span><img src="assets/svg/chevron-a.svg" alt="" width="6.24" height="10"></a>
+          <a class="link-more link-more--light" href="brands/th-true-milk/" aria-label="Xem hồ sơ doanh nghiệp Vietnam Airlines"><span>xem chi tiết</span><img src="assets/svg/chevron-a.svg" alt="" width="6.24" height="10"></a>
         </article>
 
         <article class="cc cc--link" data-reveal>
@@ -253,11 +281,11 @@
               <div class="cc__chips"><span class="chip chip--grow">DOANH NGHIỆP</span><span class="chip">2022</span></div>
             </div>
             <div class="cc__body cc__body--light">
-              <h3><a class="cc__link" href="brands/th-true-milk/index.html">Tập đoàn Bưu chính Viễn thông Việt Nam (VNPT)</a></h3>
+              <h3><a class="cc__link" href="brands/th-true-milk/">Tập đoàn Bưu chính Viễn thông Việt Nam (VNPT)</a></h3>
               <p>Tại Việt Nam, Tập đoàn VNPT tự hào là nhà cung cấp dịch vụ bưu chính, viễn thông đầu tiên đặt nền móng cho sự phát triển của ngành Bưu chính, Viễn thông Việt Nam. Với gần 40 nghìn cán bộ công nhân viên, hạ tầng viễn thông tiên tiến, mạng lưới dịch vụ phủ sóng toàn quốc, VNPT đang phục vụ khoảng 30 triệu thuê bao di động, gần 10 triệu thuê bao điện thoại cố định và khoảng hàng chục triệu người sử dụng Internet.</p>
             </div>
           </div>
-          <a class="link-more link-more--light" href="brands/th-true-milk/index.html" aria-label="Xem hồ sơ doanh nghiệp VNPT"><span>xem chi tiết</span><img src="assets/svg/chevron-a.svg" alt="" width="6.24" height="10"></a>
+          <a class="link-more link-more--light" href="brands/th-true-milk/" aria-label="Xem hồ sơ doanh nghiệp VNPT"><span>xem chi tiết</span><img src="assets/svg/chevron-a.svg" alt="" width="6.24" height="10"></a>
         </article>
       </div>
 

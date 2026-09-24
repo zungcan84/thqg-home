@@ -1,0 +1,476 @@
+/* ==========================================================================
+   Section 08: Chất lượng Sản phẩm & Dịch vụ
+   Strictly styled according to reference screenshot:
+   - Full viewport blue background
+   - Left Column: Sticky Title (exact 3-line break) & Description
+   - Right Zone: Inset by 32px from top, bottom, and right
+     * Content Column: 4 cards with accordion (Card 01) & structured lists
+     * Visual Column: Synchronized image showcase switching on card completion
+   ========================================================================== */
+
+.s08-pin {
+  position: relative;
+  width: 100%;
+  height: calc(var(--header-height, 77px) + 320vh);
+  background-color: var(--color-primary-blue, #005bac);
+}
+
+.s08-viewport {
+  position: sticky;
+  top: var(--header-height, 77px);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height, 77px));
+  height: calc(100dvh - var(--header-height, 77px));
+  background-color: var(--color-primary-blue, #005bac);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Solid Blue, Stationary Title & Description
+   -------------------------------------------------------------------------- */
+.s08-left-col {
+  flex: 0 0 34%;
+  max-width: 34%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.s08-left-inner {
+  height: 100%;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.s08-title {
+  margin: 0;
+  font-family: var(--font-heading, "Faculty Glyphic", sans-serif);
+  font-size: clamp(34px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+/* Beyond the shared content-max-width (1440px), fix the title at a flat
+   50px instead of letting the clamp's vw term keep scaling it. */
+@media (min-width: 1441px) {
+  .s08-title {
+    font-size: 50px;
+  }
+}
+
+.s08-title-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.s08-desc {
+  margin: 0;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 320px;
+}
+
+/* --------------------------------------------------------------------------
+   Right Zone: Floating Card Inset 32px (top, bottom, right)
+   -------------------------------------------------------------------------- */
+.s08-right-zone {
+  flex: 1 1 66%;
+  margin: 32px 32px 32px 0;
+  height: calc(100% - 64px);
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+/* Content Viewport (Left sub-column inside right zone) */
+.s08-content-viewport {
+  flex: 1 1 54%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.s08-content-track {
+  width: 100%;
+  padding-block: 36px 48px;
+  padding-inline: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  box-sizing: border-box;
+  will-change: transform;
+}
+
+.s08-card {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-inline: 36px 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.s08-card:last-child {
+  border-bottom: none;
+  padding-bottom: 20px;
+}
+
+.s08-card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 14px 20px;
+  background-color: #f1f5f9;
+  color: #475569;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 12px;
+  letter-spacing: 0.02em;
+}
+
+.s08-card-heading {
+  margin: 0;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.35;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+/* Accordion List for Card 01 */
+.s08-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.s08-accordion-item {
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.s08-accordion-item:hover {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.s08-accordion-item.is-open {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.s08-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  transition: color 0.2s ease;
+}
+
+.s08-accordion-item.is-open .s08-accordion-trigger {
+  color: var(--color-primary-blue, #005bac);
+}
+
+.s08-accordion-icon {
+  font-size: 16px;
+  font-weight: 500;
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  line-height: 1;
+  user-select: none;
+}
+
+.s08-accordion-icon .icon-minus {
+  display: none;
+}
+
+.s08-accordion-item.is-open .s08-accordion-icon .icon-plus {
+  display: none;
+}
+
+.s08-accordion-item.is-open .s08-accordion-icon .icon-minus {
+  display: inline;
+  color: var(--color-primary-blue, #005bac);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.s08-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+  padding: 0 16px;
+}
+
+.s08-accordion-item.is-open .s08-accordion-body {
+  max-height: 200px;
+  padding-bottom: 14px;
+}
+
+.s08-accordion-text {
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.s08-doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-primary-blue, #005bac);
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.s08-doc-link:hover {
+  opacity: 0.85;
+  transform: translateX(2px);
+}
+
+.s08-doc-link svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Bullet List for Cards 02, 03, 04 */
+.s08-bullet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.s08-bullet-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  padding-left: 18px;
+}
+
+.s08-bullet-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #94a3b8;
+}
+
+.s08-bullet-title {
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.45;
+}
+
+.s08-bullet-desc {
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.s08-bullet-desc strong {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.s08-sub-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+  padding-left: 12px;
+}
+
+.s08-sub-bullet-item {
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #475569;
+  position: relative;
+  padding-left: 10px;
+}
+
+.s08-sub-bullet-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #94a3b8;
+}
+
+/* --------------------------------------------------------------------------
+   Visual Column: Image Showcase
+   -------------------------------------------------------------------------- */
+.s08-visual-col {
+  flex: 1 1 46%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #0f172a;
+}
+
+/* Wipe reveal, direction-aware — the image itself never moves ("vị trí
+   giữ nguyên"); only how much of it is visible changes, and which edge
+   the reveal is anchored to flips with scroll direction (set by
+   initS08Cards() in js/main.js via .reveal-from-bottom /
+   .reveal-from-top):
+   - Scrolling down (forward): the incoming slide is
+     .reveal-from-bottom — top-inset shrinks 100% -> 0%, so the visible
+     sliver stays anchored to the BOTTOM edge and grows upward,
+     matching "cố định top, kéo mask bottom để ẩn ảnh cũ".
+   - Scrolling up (backward): the incoming slide is .reveal-from-top —
+     bottom-inset shrinks 100% -> 0%, so the visible sliver stays
+     anchored to the TOP edge and grows downward instead — the mirror
+     image of the forward case.
+   Only the INCOMING slide's clip-path is ever animated. Every slide
+   that has been revealed before is simply left at clip-path: inset(0)
+   (fully visible) forever after — z-index (set inline per element by
+   JS, a monotonically increasing counter bumped on every activation)
+   is what keeps only the most-recently-revealed slide actually visible,
+   by stacking it above all earlier ones. An earlier version also
+   animated the outgoing slide's clip-path back closed at the same
+   time, but that slide's own clip-path was left over from whatever
+   direction it was PREVIOUSLY revealed from — not necessarily matching
+   the current transition's direction — so the two independent
+   animations didn't line up frame-for-frame and a gap of the section's
+   dark background flashed through between them. Never touching the
+   outgoing slide again sidesteps that entirely. */
+.s08-img-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.s08-img-slide.no-anim {
+  transition: none !important;
+}
+
+.s08-img-slide.reveal-from-bottom {
+  clip-path: inset(100% 0 0 0);
+}
+
+.s08-img-slide.reveal-from-top {
+  clip-path: inset(0 0 100% 0);
+}
+
+.s08-img-slide.is-active {
+  clip-path: inset(0 0 0 0);
+  pointer-events: auto;
+}
+
+.s08-img-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Mobile Fallback (<= 900px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .s08-pin {
+    height: auto;
+  }
+
+  .s08-viewport {
+    position: relative;
+    top: 0;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .s08-left-col {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+
+  .s08-left-inner {
+    padding: 36px 20px;
+    gap: 28px;
+  }
+
+  .s08-right-zone {
+    flex: none;
+    width: auto;
+    margin: 0 16px 32px 16px;
+    height: auto;
+    flex-direction: column-reverse;
+  }
+
+  .s08-content-viewport {
+    height: auto;
+    overflow: visible;
+  }
+
+  .s08-content-track {
+    transform: none !important;
+    padding-block: 28px;
+    padding-inline: 0;
+    gap: 40px;
+  }
+
+  .s08-card {
+    padding-inline: 20px;
+    padding-bottom: 36px;
+  }
+
+  .s08-visual-col {
+    height: 320px;
+    flex: none;
+    width: 100%;
+  }
+}

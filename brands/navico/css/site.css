@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Site chrome (header + footer) — copied verbatim from the home page
+   (css/styles.css) so this tab shares the exact same nav and footer.
+   Only the font path is rewritten for this folder depth.
+   ========================================================================== */
+/* ==========================================================================
+   Thương hiệu Quốc gia Việt Nam 2026
+   ========================================================================== */
+
+@font-face {
+  font-family: "1K Faculty Glyphic";
+  src: url("../../../assets/fonts/1KFacultyGlyphic.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+:root {
+  --blue: #2555ad;
+  --blue-deep: #1b3f80;
+  --dark: #252525;
+  --paper: #f5f5f7;
+  --ink: #000;
+  --ink-80: rgba(0, 0, 0, .8);
+  --ink-60: rgba(0, 0, 0, .6);
+  --ink-40: rgba(0, 0, 0, .4);
+  --line: #8e8e8e;
+
+  --font-body: "Manrope", system-ui, sans-serif;
+  --font-display: "1K Faculty Glyphic", "Faculty Glyphic", "Hahmlet", Georgia, serif;
+  --font-serif: "Hahmlet", Georgia, serif;
+
+  --header-h: 76px;
+  --container: 1190px;
+  --ease-out: cubic-bezier(.22, .7, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, address { margin: 0; font-style: normal; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+section[id] { scroll-margin-top: var(--header-h); }
+.container { width: min(var(--container), 100% - 40px); margin-inline: auto; }
+.section { padding-block: 100px; background: #fff; }
+
+.crop { position: relative; overflow: hidden; display: block; }
+.crop img { position: absolute; max-width: none; }
+.blend { mix-blend-mode: multiply; }
+
+
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.site-header { position: sticky; top: 0; z-index: 100; height: var(--header-h); background: #fff; }
+.site-header__inner {
+  height: 100%; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.site-header__left, .site-header__right { display: flex; align-items: center; }
+.site-header__left { gap: 32px; }
+.site-header__right { gap: 10px; }
+.brand { display: flex; align-items: center; gap: 12px; flex: none; }
+.brand__mark { width: 89.032px; height: 33.771px; flex: none; }
+.brand__text { width: 94.034px; height: 32.011px; flex: none; }
+.nav { display: flex; align-items: center; gap: 24px; }
+.nav a, .nav .nav-link {
+  position: relative; display: flex; align-items: center; height: 31px; padding: 4px 0;
+  font: 600 14px/1.48 var(--font-body); letter-spacing: -.28px; white-space: nowrap;
+}
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: #000;
+  transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease-out);
+}
+.nav a:hover::after, .nav a.is-active::after { transform: scaleX(1); }
+.nav .nav-link.is-disabled {
+  color: var(--ink-40);
+  cursor: default;
+  gap: 6px;
+  user-select: none;
+}
+.nav .nav-link.is-disabled .badge-soon {
+  display: inline-flex;
+  align-items: center;
+  font: 500 10px/1 var(--font-body);
+  font-style: normal;
+  color: var(--ink-60);
+  background: rgba(0, 0, 0, .05);
+  border-radius: 99px;
+  padding: 3px 6px;
+  letter-spacing: 0;
+}
+.nav-item { position: relative; }
+.nav-item__toggle {
+  position: relative; display: flex; align-items: center; gap: 6px; height: 31px; padding: 4px 0; border: 0; background: none; cursor: pointer;
+  font: 600 14px/1.48 var(--font-body); letter-spacing: -.28px; white-space: nowrap; color: inherit;
+}
+.nav-item__toggle::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: #000;
+  transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease-out);
+}
+.nav-item__toggle:hover::after, .nav-item.is-open .nav-item__toggle::after { transform: scaleX(1); }
+.nav-item__chevron { transition: transform .3s var(--ease-out); }
+.nav-item.is-open .nav-item__chevron { transform: rotate(180deg); }
+.nav-item__menu {
+  position: absolute; top: 100%; left: 0; margin-top: 8px; z-index: 10;
+  display: flex; flex-direction: column; min-width: 220px; padding: 8px; border-radius: 12px;
+  background: #fff; box-shadow: 0 20px 30px rgba(0, 0, 0, .12);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .25s var(--ease-out), transform .25s var(--ease-out), visibility .25s;
+}
+.nav-item.is-open .nav-item__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-item__menu a, .nav-item__link {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: 8px;
+  font: 600 14px/1.4 var(--font-body); color: inherit; white-space: nowrap;
+}
+.nav-item__menu a:hover { background: rgba(0, 0, 0, .05); }
+.nav-item__link.is-disabled { color: var(--ink-60); cursor: default; }
+.nav-item__link.is-disabled em { font: 500 11px/1 var(--font-body); font-style: normal; color: var(--ink-60); opacity: .7; }
+
+.btn-dark {
+  display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 56px;
+  background: #000; color: #fff; font: 700 12px/1.32 var(--font-body); white-space: nowrap;
+  transition: background-color .4s var(--ease-out);
+}
+.btn-dark:hover { background: var(--blue); }
+.burger { display: none; width: 40px; height: 40px; border: 0; background: none; padding: 0; position: relative; cursor: pointer; }
+.burger span { position: absolute; left: 9px; right: 9px; height: 2px; background: #000; transition: transform .4s var(--ease-out), top .4s var(--ease-out); }
+.burger span:nth-child(1) { top: 15px; }
+.burger span:nth-child(2) { top: 23px; }
+.burger[aria-expanded="true"] span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { top: 19px; transform: rotate(-45deg); }
+
+
+/* Current section marker for the "Hồ Sơ Doanh Nghiệp" dropdown */
+.nav-item__toggle.is-current::after { transform: scaleX(1); }
+.nav-item__menu a[aria-current="page"] { background: rgba(37, 85, 173, .08); color: var(--blue); }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.site-footer { background: #000; border-top: 1px solid rgba(255, 255, 255, .1); }
+.site-footer__inner {
+  min-height: 118px; padding: 24px 32px; display: flex; align-items: center; gap: 40px;
+  font-family: "Google Sans Flex", var(--font-body); font-weight: 500; font-size: 12px; line-height: 1.41;
+  letter-spacing: -.12px; color: rgba(255, 255, 255, .8);
+}
+.site-footer__logo { width: 280px; height: 46px; object-fit: cover; flex: none; }
+.site-footer__editor { margin-left: auto; white-space: nowrap; }
+.site-footer__addr { margin-left: 28px; white-space: nowrap; }
+
+
+@media (max-width: 1260px) {
+  .nav { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 32px 24px; background: #fff; box-shadow: 0 20px 30px rgba(0, 0, 0, .08); }
+  .nav.is-open { display: flex; }
+  .burger { display: block; }
+  .nav-item { width: 100%; }
+  .nav-item__toggle { width: 100%; justify-content: space-between; }
+  .nav-item__menu {
+    position: static; margin-top: 4px; padding: 0 0 0 12px; box-shadow: none; opacity: 1; visibility: visible; transform: none;
+    display: none; transition: none;
+  }
+  .nav-item.is-open .nav-item__menu { display: flex; }
+}
+
+@media (max-width: 860px) {
+  .site-footer__inner { flex-direction: column; align-items: flex-start; gap: 20px; padding-block: 32px; }
+  .site-footer__editor, .site-footer__addr { margin-left: 0; white-space: normal; }
+  .site-header__inner { padding: 0 16px; }
+  .btn-dark { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Language button — SHARED component. This exact block is used on the home
+   page and every enterprise tab; keep all copies identical.
+   -------------------------------------------------------------------------- */
+.btn-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: #111827;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.btn-lang:hover { border-color: #cbd5e1; background-color: #f8fafc; }
+.btn-lang svg { flex: none; width: 14px; height: 14px; }
+.btn-lang .btn-lang__chev { width: 10px; height: 10px; }
+@media (max-width: 860px) { .btn-lang { display: none; } }

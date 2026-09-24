@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Kim Tín — Giới thiệu & Chỉ số (Figma 781:5024)
+   Blue band, 1190px content column (125px side inset at 1440).
+   ========================================================================== */
+.kt-intro {
+  background-color: #2555ad;
+  color: #ffffff;
+  padding-block: clamp(64px, 7.2vw, 104px) clamp(72px, 7.3vw, 105px);
+}
+
+.kt-intro-container {
+  width: 100%;
+  max-width: calc(1190px + 2 * var(--page-padding));
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+.kt-intro-lead {
+  max-width: 1050px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(20px, 1.95vw, 28px);
+  line-height: 1.48;
+  letter-spacing: -0.02em;
+}
+
+.kt-intro-lead p { margin: 0; }
+.kt-intro-strong { color: #ffffff; }
+.kt-intro-fade { color: rgba(255, 255, 255, 0.4); }
+.kt-intro-word { transition: color 0.12s linear; }
+
+.kt-stats {
+  list-style: none;
+  margin: clamp(56px, 6.5vw, 93px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.kt-stat {
+  min-height: 256px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  border: 1px solid #ffffff;
+  margin-left: -1px; /* collapse shared borders like the Figma row */
+}
+
+.kt-stat:first-child { margin-left: 0; }
+
+.kt-stat-value {
+  font-family: var(--font-heading);
+  font-size: clamp(44px, 4.2vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.kt-stat-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.48;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 1024px) {
+  .kt-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kt-stat { min-height: 200px; margin-left: 0; margin-top: -1px; }
+  .kt-stat:nth-child(even) { margin-left: -1px; }
+}
+
+@media (max-width: 560px) {
+  .kt-stats { grid-template-columns: 1fr; }
+  .kt-stat, .kt-stat:nth-child(even) { min-height: 160px; margin-left: 0; }
+}

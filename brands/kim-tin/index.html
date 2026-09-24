@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Chuyên trang Báo Nhân Dân - Thương hiệu Quốc gia Việt Nam. Hồ sơ doanh nghiệp Công ty Cổ phần Tập đoàn Kim Tín - 04 năm đạt Thương hiệu Quốc gia.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:,">
+  <title>Kim Tín - Hồ Sơ Doanh Nghiệp | Thương Hiệu Quốc Gia - Báo Nhân Dân</title>
+
+  <!-- Design System CSS Modules -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/s01.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/pioneer.css">
+  <link rel="stylesheet" href="css/s04.css">
+  <link rel="stylesheet" href="css/s06.css">
+  <link rel="stylesheet" href="css/s08.css">
+  <link rel="stylesheet" href="css/s10.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/kim-tin.css">
+</head>
+
+<body>
+
+  <!-- Site Navigation Bar (Figma Node: 651:7272) -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-container">
+      <!-- Nav Brand / Logo & Desktop Menu (Frame 146) -->
+      <div class="header-left">
+        <a href="../../" class="header-brand" aria-label="Báo Nhân Dân - Chuyên trang Thương hiệu Quốc gia">
+          <img src="assets/logo-nav.png" alt="Báo Nhân Dân - Chuyên trang của Báo Nhân Dân" width="180" height="34">
+        </a>
+
+        <!-- Desktop Navigation Menu (Frame 58) -->
+        <nav class="nav-desktop" aria-label="Điều hướng chính">
+          <a href="../../" class="nav-link">Trang Chủ</a>
+          <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Chương Trình Thương Hiệu Quốc Gia<em class="badge-soon">Sắp ra mắt</em></span>
+          <div class="nav-item">
+            <button type="button" class="nav-link nav-item__toggle active" aria-haspopup="true" aria-expanded="false">
+              <span>Hồ Sơ Doanh Nghiệp</span><svg class="nav-item__chevron" viewBox="0 0 18 18" width="12" height="12" aria-hidden="true"><path d="M11.8692 8.3247L7.38868 4.25972C7.21553 4.08657 7.00776 4 6.76537 4C6.52289 4 6.31508 4.08657 6.14193 4.25972C5.96879 4.43296 5.88221 4.64077 5.88221 4.88316C5.88221 5.12555 5.96879 5.33332 6.14193 5.50646L9.98602 9L6.14193 12.4935C5.96879 12.6667 5.88221 12.8745 5.88221 13.1168C5.88221 13.3592 5.96879 13.567 6.14193 13.7403C6.31508 13.9134 6.52289 14 6.76537 14C7.00776 14 7.21553 13.9134 7.38868 13.7403L11.8692 9.6753C11.9558 9.58877 12.0207 9.48487 12.0639 9.36358C12.1073 9.24239 12.1246 9.12119 12.1159 9C12.1246 8.87881 12.1073 8.75761 12.0639 8.63642C12.0207 8.51513 11.9558 8.41123 11.8692 8.3247Z" fill="currentColor"/></svg>
+            </button>
+            <div class="nav-item__menu" role="menu">
+              <a href="../th-true-milk/" class="nav-item__link" role="menuitem">Doanh nghiệp cao cấp</a>
+              <a href="./" class="nav-item__link" role="menuitem" aria-current="page">Doanh nghiệp cơ bản</a>
+              <a href="../navico/" class="nav-item__link" role="menuitem">Doanh nghiệp miễn phí</a>
+            </div>
+          </div>
+          <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Thương Hiệu &amp; Nhãn Hiệu<em class="badge-soon">Sắp ra mắt</em></span>
+          <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Tin tức<em class="badge-soon">Sắp ra mắt</em></span>
+        </nav>
+      </div>
+
+      <!-- Header Action Items (Frame 150) -->
+      <div class="header-actions">
+        <!-- Language Switcher Pill (Frame 147) -->
+        <button type="button" class="btn-lang" id="btnLang" aria-label="Thay đổi ngôn ngữ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="lang-label">EN</span>
+          <svg class="btn-lang__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <!-- CTA Nộp Hồ Sơ (Frame 148) -->
+        <button type="button" class="btn-submit-cta" id="btnSubmit">
+          NỘP HỒ SƠ
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mở menu điều hướng"
+          aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <nav class="mobile-drawer" id="mobileDrawer" aria-label="Điều hướng trên điện thoại">
+      <a href="../../" class="mobile-nav-link">Trang Chủ</a>
+      <span class="mobile-nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt"><span>Chương Trình Thương Hiệu Quốc Gia</span><em class="badge-soon">Sắp ra mắt</em></span>
+      <div class="mobile-nav-group">
+        <span class="mobile-nav-link active">Hồ Sơ Doanh Nghiệp</span>
+        <a href="../th-true-milk/" class="mobile-nav-sublink" role="menuitem">Doanh nghiệp cao cấp</a>
+        <a href="./" class="mobile-nav-sublink" role="menuitem" aria-current="page">Doanh nghiệp cơ bản</a>
+        <a href="../navico/" class="mobile-nav-sublink" role="menuitem">Doanh nghiệp miễn phí</a>
+      </div>
+      <span class="mobile-nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt"><span>Thương Hiệu &amp; Nhãn Hiệu</span><em class="badge-soon">Sắp ra mắt</em></span>
+      <span class="mobile-nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt"><span>Tin tức</span><em class="badge-soon">Sắp ra mắt</em></span>
+      <div class="mobile-actions">
+        <button type="button" class="btn-submit-cta" style="width:100%; text-align:center;">NỘP HỒ SƠ</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ====================================================================
+         SECTION 01: Hero - Kim Tín (Figma Node: 781:4989)
+         ==================================================================== -->
+    <section class="s01-hero" id="s01" aria-labelledby="s01Heading">
+      <div class="s01-container">
+        <div class="s01-layout">
+
+          <!-- Left Column: Visual & QR Badge (Figma Frame 2087330481) -->
+          <div class="s01-visual-col">
+            <!-- Hanging Certificate Shield Badge (Figma Node: 651:7276 / Frame 2087330433) -->
+            <div class="s01-cert-badge" title="Chứng nhận doanh nghiệp đạt Thương hiệu Quốc gia">
+              <div class="s01-cert-header">
+                <span class="s01-cert-tag">CHỨNG NHẬN</span>
+                <p class="s01-cert-title">Doanh Nghiệp<br>Đạt Thương Hiệu<br>Quốc Gia</p>
+              </div>
+              <div class="s01-cert-flower-wrap">
+                <!-- Rosette Vector Flower (Figma Nodes: 651:7279 & 651:7281) -->
+                <svg class="s01-cert-rosette" viewBox="0 0 92 92" fill="none" aria-hidden="true">
+                  <path
+                    d="M41.452 2.70906C44.2434 1.00323 47.0347 1.00323 49.8261 2.70906L54.0131 5.26779C55.4088 6.19824 56.9595 6.66347 58.6654 6.66347L63.5502 6.19824C66.9619 6.19824 69.4431 7.67146 70.9938 10.6179L73.3199 15.0375C74.0953 16.4332 75.1808 17.5187 76.5765 18.2941L81.2288 20.6202C84.0201 22.171 85.4158 24.6522 85.4158 28.0638L84.9506 32.9487C84.9506 34.6545 85.4158 36.2053 86.3462 37.6009L89.1376 41.788C90.8434 44.5793 90.8434 47.3707 89.1376 50.162L86.3462 54.349C85.4158 55.7447 84.9506 57.2955 84.9506 59.0013L85.4158 63.8862C85.4158 67.2978 83.9426 69.779 80.9962 71.3298L76.5765 73.6559C75.1808 74.4313 74.0953 75.5168 73.3199 76.9125L70.9938 81.5647C69.4431 84.3561 67.0394 85.7517 63.7828 85.7517L58.6654 85.2865C56.9595 85.2865 55.4088 85.7517 54.0131 86.6822L49.8261 89.4735C47.0347 91.1794 44.2434 91.1794 41.452 89.4735L37.265 86.6822C35.8693 85.7517 34.3186 85.2865 32.6128 85.2865L27.7279 85.7517C24.3162 85.7517 21.835 84.2785 20.2843 81.3321L17.9582 76.9125C17.1828 75.5168 16.0973 74.4313 14.7016 73.6559L10.2819 71.3298C7.33552 69.779 5.86231 67.3753 5.86231 64.1188L6.32753 59.0013C6.32753 57.2955 5.86231 55.7447 4.93186 54.349L2.37312 50.162C0.667294 47.3707 0.667294 44.5793 2.37312 41.788L4.93186 37.6009C5.86231 36.2053 6.32753 34.6545 6.32753 32.9487L5.86231 28.0638C5.86231 24.6522 7.33552 22.171 10.2819 20.6202L14.7016 18.2941C16.0973 17.5187 17.1828 16.4332 17.9582 15.0375L20.2843 10.6179C21.835 7.67146 24.3162 6.19824 27.7279 6.19824L32.6128 6.66347C34.3186 6.66347 35.8693 6.19824 37.265 5.26779L41.452 2.70906Z"
+                    fill="#E3E3E3" />
+                  <path
+                    d="M46.0013 5.16797C46.6408 5.16797 47.4062 5.35533 48.3429 5.92777L52.5077 8.47267C54.4715 9.75613 56.6737 10.4016 59.0279 10.4016H59.1959L64.0568 9.93835C65.1666 9.9579 65.9484 10.203 66.525 10.5454C67.1215 10.8995 67.705 11.4798 68.2237 12.4653L70.5501 16.8844L70.5688 16.9204L70.5881 16.955C71.6845 18.9285 73.2467 20.4907 75.2202 21.5871L75.2873 21.6244L79.9235 23.9418C80.7879 24.432 81.3139 24.9872 81.6464 25.5783C81.9783 26.1683 82.2173 26.9758 82.2361 28.117L81.7736 32.9793V33.1473C81.7736 35.5393 82.4384 37.7754 83.7634 39.7629L86.5039 43.873C87.0571 44.7912 87.2394 45.543 87.2395 46.1732C87.2395 46.8033 87.057 47.5552 86.5039 48.4733L83.7634 52.5842C82.4384 54.5716 81.7736 56.8078 81.7736 59.1998V59.3678L82.2361 64.2287C82.2166 65.3384 81.9721 66.1203 81.6298 66.6969C81.2756 67.2934 80.6953 67.8769 79.7099 68.3955L75.2907 70.722L75.2548 70.7406L75.2202 70.76C73.2467 71.8564 71.6845 73.4186 70.5881 75.3921L70.5508 75.4592L68.2327 80.0954C67.7281 80.9864 67.1746 81.5166 66.6135 81.8425C66.0623 82.1625 65.3232 82.39 64.285 82.4087L59.1883 81.9455H59.0279C56.6359 81.9455 54.3998 82.6103 52.4123 83.9352L48.3015 86.6758C47.3833 87.2288 46.6314 87.4114 46.0013 87.4114C45.3711 87.4113 44.6193 87.229 43.7012 86.6758L39.591 83.9352C37.6035 82.6103 35.3674 81.9455 32.9754 81.9455H32.8074L27.9458 82.408C26.8364 82.3884 26.0548 82.1439 25.4783 81.8017C24.8818 81.4475 24.2976 80.8672 23.7789 79.8818L21.4532 75.4626L21.4345 75.4267L21.4152 75.3921L21.2043 75.0271C20.1221 73.2252 18.6334 71.7879 16.7831 70.76L16.7485 70.7406L16.7126 70.722L12.2934 68.3955C11.2809 67.8626 10.6958 67.2804 10.3479 66.7128C10.0177 66.1741 9.78543 65.4613 9.76578 64.4569L10.2297 59.3602V59.1998C10.2297 56.8456 9.58426 54.6433 8.30079 52.6796L5.7559 48.5148C5.18345 47.5781 4.99609 46.8127 4.99609 46.1732C4.99616 45.5338 5.18356 44.7688 5.7559 43.8322L8.30079 39.6668C9.58405 37.7031 10.2297 35.5012 10.2297 33.1473V32.9793L9.76647 28.1176C9.78611 27.0083 10.0312 26.2267 10.3735 25.6502C10.7277 25.0537 11.308 24.4695 12.2934 23.9508L16.7126 21.6251L16.7485 21.6064L16.7831 21.5871C18.7566 20.4907 20.3188 18.9285 21.4152 16.955L21.4345 16.9204L21.4532 16.8844L23.7789 12.4653C24.2976 11.4798 24.8818 10.8995 25.4783 10.5454C26.0548 10.2031 26.8364 9.95799 27.9458 9.93835L32.8074 10.4016H32.9754C35.3294 10.4015 37.5313 9.75592 39.4949 8.47267L43.6604 5.92777C44.5969 5.35544 45.3619 5.16803 46.0013 5.16797Z"
+                    stroke="white" stroke-width="1.06193" stroke-linejoin="bevel" />
+                </svg>
+                <!-- Transparent QR Code centered on flower -->
+                <img src="assets/qr.png" alt="Mã QR Chứng nhận Thương hiệu Quốc gia" class="s01-cert-qr-img"
+                  width="56" height="56">
+              </div>
+            </div>
+
+            <!-- Hero Product Image (Figma Node: 651:7275 - image 1515851667) -->
+            <div class="s01-image-container">
+              <img src="assets/hero.jpg"
+                alt="Tòa nhà trụ sở Tập đoàn Kim Tín" class="s01-hero-image"
+                loading="eager">
+            </div>
+          </div>
+
+          <!-- Right Column: Content & Interactive Actions (Figma Node: 651:7286 - Frame 2087330478) -->
+          <div class="s01-content-col">
+
+            <!-- Top Block: Honor Badge + Headline + Description (Frame 2087330479) -->
+            <div class="s01-top-block">
+
+              <!-- Honor Badge Pill with Rosette Ribbon Symbol (Figma Node: 651:7289 - Frame 2087330547) -->
+              <div class="s01-honor-badge">
+                <!-- Rosette Vector Ribbon (Figma Node: 651:7290) -->
+                <svg class="s01-rosette-icon" viewBox="0 0 19 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.16831 0.258008 C8.73124 -0.0860028 9.29417 -0.0860028 9.8571 0.258008 L10.7015 0.774025 C10.983 0.961668 11.2957 1.05549 11.6397 1.05549 L12.6248 0.961668 C13.3128 0.961668 13.8132 1.25877 14.126 1.85297 L14.5951 2.74427 C14.7514 3.02574 14.9704 3.24465 15.2518 3.40102 L16.19 3.87013 C16.753 4.18286 17.0344 4.68324 17.0344 5.37127 L16.9406 6.35639 C16.9406 6.7004 17.0344 7.01314 17.2221 7.2946 L17.785 8.139 C18.129 8.70192 18.129 9.26485 17.785 9.82778 L17.2221 10.6722 C17.0344 10.9536 16.9406 11.2664 16.9406 11.6104 L17.0344 12.5955 C17.0344 13.2835 16.7373 13.7839 16.1431 14.0966 L15.2518 14.5658 C14.9704 14.7221 14.7514 14.941 14.5951 15.2225 L14.126 16.1607 C13.8132 16.7236 13.3285 17.0051 12.6717 17.0051 L11.6397 16.9113 C11.2957 16.9113 10.983 17.0051 10.7015 17.1927 L9.8571 17.7557 C9.29417 18.0997 8.73124 18.0997 8.16831 17.7557 L7.32392 17.1927 C7.04246 17.0051 6.72972 16.9113 6.38571 16.9113 L5.40059 17.0051 C4.71256 17.0051 4.21218 16.708 3.89945 16.1138 L3.43034 15.2225 C3.27397 14.941 3.05505 14.7221 2.77359 14.5658 L1.88229 14.0966 C1.28809 13.7839 0.990987 13.2992 0.990987 12.6424 L1.08481 11.6104 C1.08481 11.2664 0.990987 10.9536 0.803344 10.6722 L0.287328 9.82778 C-0.0566837 9.26485 -0.0566837 8.70192 0.287328 8.139 L0.803344 7.2946 C0.990987 7.01314 1.08481 6.7004 1.08481 6.35639 L0.990987 5.37127 C0.990987 4.68324 1.28809 4.18286 1.88229 3.87013 L2.77359 3.40102 C3.05505 3.24465 3.27397 3.02574 3.43034 2.74427 L3.89945 1.85297 C4.21218 1.25877 4.71256 0.961668 5.40059 0.961668 L6.38571 1.05549 C6.72972 1.05549 7.04246 0.961668 7.32392 0.774025 L8.16831 0.258008 Z M12.7656 8.98339 C12.7343 7.57607 12.1088 6.49712 10.8891 5.74655 C9.63818 5.05853 8.38723 5.05853 7.13628 5.74655 C5.9166 6.49712 5.29113 7.57607 5.25985 8.98339 C5.29113 10.3907 5.9166 11.4696 7.13628 12.2202 C8.38723 12.9082 9.63818 12.9082 10.8891 12.2202 C12.1088 11.4696 12.7343 10.3907 12.7656 8.98339 Z M0.0527745 20.711 L2.06993 15.8792 C2.10121 15.8792 2.11684 15.8949 2.11684 15.9262 L2.53904 16.8175 C3.19579 17.9433 4.16527 18.5062 5.4475 18.5062 L6.47953 18.4124 C6.47953 18.4124 6.47953 18.4281 6.47953 18.4593 L7.32392 18.9754 C7.57411 19.1317 7.8243 19.2568 8.07449 19.3506 L6.3388 23.5257 C6.2137 23.8071 5.99479 23.9635 5.68205 23.9948 C5.40059 24.0261 5.18167 23.9166 5.0253 23.6664 L3.47725 21.3678 L0.850255 21.7431 C0.568791 21.7744 0.334238 21.6805 0.146596 21.4616 C-0.00977304 21.2114 -0.0410468 20.9612 0.0527745 20.711 Z M11.6866 23.5257 L9.95092 19.3506 C10.2011 19.2568 10.4513 19.1317 10.7015 18.9754 L11.5459 18.4593 C11.5459 18.4281 11.5459 18.4124 11.5459 18.4124 L12.5779 18.5062 C13.8601 18.5062 14.8296 17.9433 15.4864 16.8175 L15.9086 15.9262 C15.9086 15.8949 15.9242 15.8792 15.9555 15.8792 L17.9726 20.711 C18.0665 20.9612 18.0352 21.2114 17.8788 21.4616 C17.6912 21.6805 17.4566 21.7744 17.1752 21.7431 L14.5482 21.3678 L13.0001 23.6664 C12.8437 23.8853 12.6248 23.9948 12.3434 23.9948 C12.0306 23.9635 11.8117 23.8071 11.6866 23.5257 Z" />
+                </svg>
+                <span class="s01-honor-text" data-stagger-text>04 NĂM ĐẠT THƯƠNG HIỆU QUỐC GIA</span>
+              </div>
+
+              <!-- Main Headline H1 with Staggered Entrance Animation -->
+              <h1 class="s01-headline heading-1" id="s01Heading" data-stagger-text>
+                Công ty Cổ phần<br>Tập đoàn Kim Tín
+              </h1>
+
+              <!-- Subtitle / Philosophy with Staggered Entrance Animation -->
+              <p class="s01-description body-3" data-stagger-text>
+                Từ nội lực công nghiệp Việt đến hành trình<br>
+                vươn ra thế giới
+              </p>
+
+            </div>
+
+            <!-- Middle Block: Brand Logo (Figma Node: 651:7295 - Frame 2087330550) -->
+            <div class="s01-brand-logo-wrap">
+              <img src="assets/logo-kim-tin.jpg" alt="Logo Kim Tín" class="s01-brand-logo s01-brand-logo--square" width="74" height="80">
+            </div>
+
+            <!-- Bottom Block: Action Buttons Group (Figma Node: 651:7297 - Frame 2071856709) -->
+            <div class="action-buttons-group">
+              <!-- Download Report Button (Frame 2087330423) -->
+              <button type="button" class="btn-action" id="btnDownloadReport"
+                aria-label="Tải xuống báo cáo hồ sơ Kim Tín">
+                <svg class="btn-action-icon icon-download" viewBox="0 0 24 17" fill="currentColor" width="24"
+                  height="17" aria-hidden="true">
+                  <path
+                    d="M20.3185 7.33485 C20.1874 6.30442 19.8784 5.3395 19.3913 4.44011 C18.9228 3.5597 18.3185 2.79162 17.5786 2.13588 C16.8384 1.48013 15.9906 0.955514 15.0352 0.562027 C14.0796 0.187342 13.0678 0 12 0 C11.1756 0 10.3793 0.12173 9.61117 0.365189 C8.8618 0.590038 8.16394 0.917912 7.51759 1.34881 C6.87124 1.77971 6.28571 2.30432 5.761 2.92266 C5.25528 3.541 4.84309 4.22485 4.52443 4.97422 C3.23173 5.36771 2.15449 6.11247 1.29269 7.20852 C0.430898 8.30437 0 9.49874 0 10.7916 C0 11.5972 0.149836 12.3466 0.449507 13.0397 C0.74937 13.7517 1.15226 14.3746 1.65817 14.9086 C2.16389 15.4427 2.76342 15.869 3.45677 16.1874 C4.13113 16.5247 4.86179 16.7121 5.64877 16.7495 L5.64877 16.8056 L19.1944 16.8056 C20.5247 16.8056 21.6582 16.3372 22.5948 15.4004 C23.5316 14.4638 24 13.3303 24 12 C24 10.8759 23.6534 9.88292 22.9603 9.02094 C22.2671 8.15914 21.3959 7.59711 20.3467 7.33485 L20.3185 7.33485 Z M7.19442 8.40279 L10.7916 8.40279 L10.7916 4.80558 L13.2084 4.80558 L13.2084 8.40279 L16.8056 8.40279 L12 14.3888 L7.19442 8.40279 Z" />
+                </svg>
+                <span class="btn-action-label">Tải xuống báo cáo</span>
+              </button>
+
+              <!-- Share Button (Frame 2087330424) -->
+              <button type="button" class="btn-action" id="btnShare" aria-label="Chia sẻ trang hồ sơ doanh nghiệp">
+                <svg class="btn-action-icon icon-share" viewBox="0 0 19 20" fill="currentColor" width="18" height="20"
+                  aria-hidden="true">
+                  <path
+                    d="M15.059 14.1412 C14.6825 14.1412 14.3256 14.2118 13.9885 14.353 C13.6511 14.4942 13.3492 14.6825 13.0825 14.9178 L5.92938 10.7528 C5.96086 10.6431 5.98439 10.5294 5.99998 10.4117 C6.01572 10.2941 6.02359 10.1726 6.02359 10.0471 C6.02359 9.92165 6.01572 9.80006 5.99998 9.68231 C5.98439 9.56473 5.96086 9.45101 5.92938 9.34114 L13.0119 5.22341 C13.2786 5.47448 13.5883 5.6706 13.9412 5.8118 C14.2943 5.95299 14.6669 6.02359 15.059 6.02359 C15.8904 6.02359 16.6002 5.7294 17.1884 5.14101 C17.7767 4.55279 18.0708 3.84305 18.0708 3.01179 C18.0708 2.18038 17.7767 1.47056 17.1884 0.882335 C16.6002 0.294112 15.8904 0 15.059 0 C14.2276 0 13.5177 0.294112 12.9295 0.882335 C12.3413 1.47056 12.0472 2.18038 12.0472 3.01179 C12.0472 3.13725 12.055 3.25876 12.0708 3.37634 C12.0864 3.49408 12.1099 3.60781 12.1414 3.71752 L5.05885 7.85885 C4.79221 7.60779 4.48243 7.40781 4.12953 7.2589 C3.77647 7.10984 3.40389 7.03531 3.01179 7.03531 C2.18038 7.03531 1.47056 7.32942 0.882335 7.91764 C0.294112 8.50587 0 9.21569 0 10.0471 C0 10.8785 0.294112 11.5883 0.882335 12.1766 C1.47056 12.7648 2.18038 13.0589 3.01179 13.0589 C3.40389 13.0589 3.77647 12.9883 4.12953 12.8471 C4.48243 12.7059 4.79221 12.5098 5.05885 12.2587 L12.212 16.4237 C12.1805 16.5334 12.1608 16.6432 12.153 16.753 C12.1452 16.8628 12.1414 16.9725 12.1414 17.0824 C12.1414 17.8823 12.4237 18.5686 12.9883 19.1413 C13.5531 19.7138 14.2433 20 15.059 20 C15.8746 20 16.5649 19.7138 17.1296 19.1413 C17.6943 18.5686 17.9766 17.8823 17.9766 17.0824 C17.9766 16.2667 17.6943 15.5726 17.1296 14.9999 C16.5649 14.4275 15.8746 14.1412 15.059 14.1412 Z" />
+                </svg>
+                <span class="btn-action-label">Chia sẻ</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section: Giới thiệu & Chỉ số (Figma Node: 781:5024)
+         Tone-split lead paragraph: the first sentence is solid white, the rest
+         starts at 40% white and brightens word by word as the paragraph
+         scrolls through the viewport (same scroll-scrub technique as the
+         Lãnh đạo quote, see initIntroReveal in js/main.js).
+         ========================================================================== -->
+    <section class="kt-intro" id="ktIntro" aria-label="Giới thiệu Tập đoàn Kim Tín">
+      <div class="kt-intro-container">
+        <div class="kt-intro-lead" id="ktIntroLead">
+          <p><span class="kt-intro-strong">Từ vật liệu hàn, Kim Tín từng bước phát triển năng lực sản xuất, chuỗi cung ứng và hệ sinh thái công nghiệp,</span> <span class="kt-intro-fade">đưa sản phẩm Việt hiện diện trên nhiều thị trường quốc tế. Hành trình ấy đã thể hiện năng lực của một doanh nghiệp Việt đang chủ động nâng chuẩn chất lượng, mở rộng quy mô và tham gia sâu hơn vào chuỗi giá trị toàn cầu.</span></p>
+          <p><span class="kt-intro-fade">Năm 2024, dây hàn, que hàn Kim Tín; ván gỗ ép Kim Tín và Timbee nằm trong danh sách sản phẩm được công nhận đạt Thương hiệu Quốc gia Việt Nam.</span></p>
+        </div>
+
+        <ul class="kt-stats" role="list">
+          <li class="kt-stat">
+            <span class="kt-stat-value" data-count-to="2" data-pad="2">02</span>
+            <span class="kt-stat-label">Kỳ đạt Thương hiệu Quốc gia Việt Nam (2022-2024)</span>
+          </li>
+          <li class="kt-stat">
+            <span class="kt-stat-value" data-count-to="32">32</span>
+            <span class="kt-stat-label">Công ty thành viên, Hệ sinh thái sản xuất &amp; dịch vụ công nghiệp</span>
+          </li>
+          <li class="kt-stat">
+            <span class="kt-stat-value" data-count-to="45" data-suffix="%">45%</span>
+            <span class="kt-stat-label">Thị phần dẫn đầu tại thị trường<br>vật liệu hàn nội địa</span>
+          </li>
+          <li class="kt-stat">
+            <span class="kt-stat-value" data-count-to="5" data-pad="2">05</span>
+            <span class="kt-stat-label">Châu lục có thị phần xuất khẩu có sản phẩm vật liệu hàn</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         Section: Năng lực tiên phong (Figma Node: 781:5039)
+         ========================================================================== -->
+    <section class="kt-pioneer" id="ktPioneer" aria-labelledby="ktPioneerHeading">
+      <div class="kt-pioneer-container">
+        <span class="kt-eyebrow" data-stagger-text>Năng lực tiên phong</span>
+        <h2 class="kt-pioneer-title" id="ktPioneerHeading" data-stagger-text>Dấu ấn tiên phong của một thương hiệu lớn lên cùng năng lực công nghiệp Việt</h2>
+
+        <div class="kt-pioneer-intro">
+          <img src="assets/arrow-right.svg" alt="" class="kt-pioneer-arrow" width="60" height="27" aria-hidden="true">
+          <div class="kt-pioneer-desc">
+            <p>Kim Tín thuộc Top X nhóm dẫn đầu ngành vật liệu hàn Việt Nam. Từ thế mạnh trong lĩnh vực vật liệu hàn, Kim Tín đã mở rộng hệ sinh thái sản xuất – nguyên vật liệu – logistics và các lĩnh vực công nghiệp hỗ trợ, từng bước hình thành năng lực phục vụ chuỗi sản xuất trong nước và thị trường quốc tế.</p>
+            <p>Với 32 công ty thành viên, hệ sinh thái Kim Tín phản ánh quá trình một doanh nghiệp Việt chuyển từ phát triển sản phẩm sang xây dựng năng lực công nghiệp và chuỗi cung ứng có quy mô.</p>
+          </div>
+        </div>
+
+        <div class="kt-pioneer-cards">
+          <article class="kt-pioneer-card">
+            <div class="kt-pioneer-media">
+              <img src="assets/pioneer-1.jpg" alt="Đội ngũ lãnh đạo Kim Tín tại lễ tổng kết 2025" width="1400" height="933" loading="lazy">
+            </div>
+            <div class="kt-pioneer-body">
+              <h3 class="kt-pioneer-card-title">Nội lực tạo dựng vị thế, uy tín</h3>
+              <ul class="kt-dot-list">
+                <li>Kim Tín phát triển hệ sinh thái hoạt động trên nhiều lĩnh vực như kim loại màu, vật liệu kim khí, gỗ công nghiệp, khoáng sản, máy móc thiết bị và logistics; từng bước kết nối các mắt xích từ sản xuất, cung ứng, phân phối đến vận tải.</li>
+                <li>Nền tảng này giúp doanh nghiệp gia tăng khả năng chủ động trong chuỗi cung ứng và mở rộng năng lực phục vụ các ngành sản xuất công nghiệp.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="kt-pioneer-card">
+            <div class="kt-pioneer-media">
+              <img src="assets/pioneer-2.jpg" alt="Nhà máy sản xuất dây hàn Kim Tín" width="1230" height="721" loading="lazy">
+            </div>
+            <div class="kt-pioneer-body">
+              <h3 class="kt-pioneer-card-title">Mang năng lực Việt vươn ra thị trường quốc tế</h3>
+              <ul class="kt-dot-list">
+                <li>Sản phẩm vật liệu hàn của Kim Tín đã được xuất khẩu tới các thị trường trên 5 châu lục, mở rộng sự hiện diện của sản phẩm công nghiệp Việt Nam trong chuỗi cung ứng quốc tế.</li>
+                <li>Việc đáp ứng các tiêu chuẩn, chứng nhận quốc tế như ABS, DNV, NK… tạo nền tảng để sản phẩm tham gia những ngành và thị trường có yêu cầu cao về chất lượng.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 04: Lãnh đạo doanh nghiệp (Doanh nhân Nguyễn Tiến Hải)
+         Figma Node: 781:5077
+         - Category Tag: "Lãnh đạo doanh nghiệp"
+         - Quote: Scroll-scrubbed text color transition (gray -> black), driven
+           by scroll progress while the section is PINNED (sticky) — not by
+           the section's raw position on the page. .s04-track (desktop only,
+           see css/s04.css?v=2.0) gives the scroll distance for that pin; once the
+           quote finishes turning black, the remaining track distance is a
+           hold before the section releases to the next one. See
+           initS04QuoteScroll in js/main.js.
+         - Bottom: Author Info (left) & Portrait + Action Button (right)
+         ========================================================================== -->
+    <div class="s04-track" id="s04Track">
+    <section class="s04" id="s04" aria-labelledby="s04Tag">
+      <div class="s04-container container">
+
+        <!-- Category Tag (Figma Node: 651:7458) -->
+        <span class="s04-tag" id="s04Tag" data-stagger-text>Lãnh đạo doanh nghiệp</span>
+
+        <!-- Main Quote with Scroll-Scrubbed Text Reveal (Figma Node: 651:7453) -->
+        <blockquote class="s04-quote" id="s04Quote">
+          “Lời hứa, lời cam kết của chúng tôi là VÀNG. Với tầm nhìn của mình, Kim Tín sẽ trở thành Tập đoàn lớn trong ngành kim khí và gỗ. Vì thế Kim Tín luôn tâm niệm rằng uy tín là kim chỉ nam, là sợi dây kết nối Kim Tín với khách hàng và người tiêu dùng”.
+        </blockquote>
+
+        <!-- Bottom Row: Author details & Portrait with Button -->
+        <div class="s04-bottom">
+
+          <!-- Left Column: Author Name & Title (Figma Node: 651:7454) -->
+          <div class="s04-author-col" data-stagger-text>
+            <h3 class="s04-author-name">Doanh nhân Nguyễn Tiến Hải</h3>
+            <p class="s04-author-title">Chủ tịch CTCP Tập đoàn Kim Tín</p>
+          </div>
+
+          <!-- Right Column: Portrait (Rectangle 139) & Action Button (Frame 2087330346) -->
+          <div class="s04-media-col">
+            <div class="s04-portrait-wrap">
+              <img src="assets/leader.jpg" alt="Doanh nhân Nguyễn Tiến Hải - Chủ tịch CTCP Tập đoàn Kim Tín" class="s04-portrait-img" width="233" height="289" loading="lazy">
+            </div>
+
+            <button type="button" class="s04-btn-outline" id="btnS04ViewAll" aria-label="Đọc bài phỏng vấn lãnh đạo doanh nghiệp">
+              <span>ĐỌC BÀI PHỎNG VẤN</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    </div>
+    <!-- ==========================================================================
+         Section 06: Lịch sử hình thành (History Timeline)
+         Figma Node: 781:5086
+         ========================================================================== -->
+    <section class="s06" id="s06" aria-labelledby="s06Heading">
+      <div class="container s06-container">
+        <!-- Section Title -->
+        <h2 class="s06-title" id="s06Heading" data-stagger-text>Lịch sử hình thành</h2>
+
+        <!-- Interactive Timeline Wrapper -->
+        <div class="s06-interactive-wrap">
+          <!-- Fixed Vertical Black Indicator Line (Cố định, không di chuyển) -->
+          <div class="s06-fixed-indicator" aria-hidden="true"></div>
+
+          <!-- Sliding Timeline Track (Di chuyển ngang qua vạch mốc đen) -->
+          <div class="s06-timeline-viewport">
+            <div class="s06-timeline-track" id="s06TimelineTrack">
+              <!-- Rendered and controlled by initS06Timeline() in js/main.js -->
+            </div>
+          </div>
+
+          <!-- Content Panel (Cố định vị trí, nội dung chuyển đổi mượt mà) -->
+          <div class="s06-content-panel" id="s06ContentPanel">
+            <div class="s06-content-inner" id="s06ContentInner">
+              <div class="s06-text-group">
+                <h3 class="s06-milestone-title" id="s06MilestoneTitle">Khởi dựng nền móng</h3>
+                <p class="s06-milestone-desc" id="s06MilestoneDesc">Kim Tín bắt đầu hành trình phát triển thương hiệu trong lĩnh vực vật liệu hàn.</p>
+              </div>
+              <div class="s06-media-wrap">
+                <img src="assets/quality-2.jpg" alt="Khởi dựng nền móng" class="s06-milestone-img" id="s06MilestoneImg" width="240" height="160" loading="lazy">
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Row: Navigation Buttons & Slide Counter -->
+          <div class="s06-footer">
+            <div class="s06-nav-buttons">
+              <button type="button" class="s06-btn-nav" id="btnS06Prev" aria-label="Năm trước">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="s06-btn-nav" id="btnS06Next" aria-label="Năm tiếp theo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="s06-counter" aria-live="polite">
+              <span class="s06-counter-current" id="s06CounterCurrent">01</span>
+              <span class="s06-counter-total" id="s06CounterTotal">/06</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==========================================================================
+         Section 08: Chất lượng Sản phẩm & Dịch vụ (Figma Node: 781:5243)
+         Same pinned scroll + synced image wipe as the premium page
+         (initS08Cards in js/main.js); 3 cards with plain dot lists.
+         ========================================================================== -->
+    <section class="s08-pin kt-s08" id="s08Pin" aria-labelledby="s08Heading">
+      <div class="s08-viewport" id="s08Viewport">
+
+        <div class="s08-left-col">
+          <div class="s08-left-inner">
+            <h2 class="s08-title" id="s08Heading" data-stagger-text>
+              <span class="s08-title-line">Chất lượng</span>
+              <span class="s08-title-line">Sản phẩm &amp;</span>
+              <span class="s08-title-line">Dịch vụ</span>
+            </h2>
+          </div>
+        </div>
+
+        <div class="s08-right-zone" id="s08RightZone">
+          <div class="s08-content-viewport" id="s08ContentViewport">
+            <div class="s08-content-track" id="s08ContentTrack">
+
+              <article class="s08-card" id="s08Card1" data-s08-card="0">
+                <div class="s08-card-badge">01</div>
+                <h3 class="s08-card-heading" data-stagger-text>Nguồn lực con người</h3>
+                <ul class="kt-dot-list kt-dot-list--s08">
+                  <li>Năm 2018: TH True Milk triển khai kiểm kê khí nhà kính, xây dựng lộ trình trung hòa carbon theo các chuẩn quốc tế.</li>
+                  <li>Năm 2018: TH True Milk triển khai kiểm kê khí nhà kính, xây dựng lộ trình trung hòa carbon theo các chuẩn quốc tế.</li>
+                </ul>
+              </article>
+              <article class="s08-card" id="s08Card2" data-s08-card="1">
+                <div class="s08-card-badge">02</div>
+                <h3 class="s08-card-heading" data-stagger-text>Chiến lược kinh doanh chủ động nội lực, gia giá trị công nghiệp bền vững</h3>
+                <ul class="kt-dot-list kt-dot-list--s08">
+                  <li>Kim Tín định hướng phát triển các sản phẩm vật liệu hàn, kim loại và giải pháp công nghiệp dựa trên nền tảng công nghệ, chất lượng và năng lực sản xuất quy mô; qua đó góp phần tăng khả năng chủ động nguồn cung cho các ngành sản xuất tại Việt Nam.</li>
+                  <li>Từ hệ sinh thái sản xuất – phân phối – logistics, doanh nghiệp hướng tới nâng cao giá trị sản phẩm công nghiệp Việt, tăng năng lực tham gia chuỗi cung ứng và mở rộng sức cạnh tranh trên thị trường quốc tế.</li>
+                </ul>
+              </article>
+              <article class="s08-card" id="s08Card3" data-s08-card="2">
+                <div class="s08-card-badge">03</div>
+                <h3 class="s08-card-heading" data-stagger-text>Khát vọng vươn xa, gia tăng năng lực cạnh tranh toàn cầu</h3>
+                <ul class="kt-dot-list kt-dot-list--s08">
+                  <li>Trên nền tảng năng lực sản xuất, công nghệ và chuỗi cung ứng đã được xây dựng, Kim Tín đặt mục tiêu phát triển thành tập đoàn công nghiệp đa ngành có năng lực cạnh tranh cao; đồng thời mở rộng thị trường và từng bước nâng vị thế sản phẩm công nghiệp mang thương hiệu Việt trong chuỗi giá trị quốc tế.</li>
+                </ul>
+              </article>
+
+            </div>
+          </div>
+
+          <div class="s08-visual-col" id="s08VisualCol" aria-label="Hình ảnh minh họa chất lượng sản phẩm và dịch vụ">
+
+            <div class="s08-img-slide is-active" id="s08Img0" data-slide-index="0">
+              <img src="assets/quality-1.jpg" alt="Công nhân Kim Tín trên dây chuyền đóng gói que hàn" width="1400" height="933" loading="lazy">
+            </div>
+
+            <div class="s08-img-slide" id="s08Img1" data-slide-index="1">
+              <img src="assets/quality-2.jpg" alt="Thợ hàn sử dụng vật liệu hàn Kim Tín" width="1400" height="933" loading="lazy">
+            </div>
+
+            <div class="s08-img-slide" id="s08Img2" data-slide-index="2">
+              <img src="assets/quality-3.jpg" alt="Kim Tín nhận giải Vietnam 100 Best Places to Work 2025" width="1400" height="933" loading="lazy">
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 10: Liên hệ cập nhật thông tin Hồ sơ Doanh nghiệp (CTA)
+         ========================================================================== -->
+    <section class="s10-cta kt-s10" id="s10" aria-labelledby="s10Heading">
+      <div class="s10-container">
+        
+        <!-- Left Column: Heading -->
+        <div class="s10-left">
+          <h2 class="s10-title" id="s10Heading">
+            <span>Liên hệ với chúng tôi</span>
+            <span>để cập nhật thông tin</span>
+            <span>Hồ sơ Doanh nghiệp.</span>
+          </h2>
+        </div>
+
+        <!-- Right Column: Description & Action Button -->
+        <div class="s10-right">
+          <p class="s10-desc">Doanh nghiệp cần chủ động liên hệ để cập nhật thông tin trên hồ sơ Thương hiệu quốc gia. Việc cập nhật áp dụng theo mức phí xử lý hiện hành.</p>
+          <a href="#lien-he" class="s10-btn" id="btnS10Contact" aria-label="Liên hệ cập nhật ngay hồ sơ doanh nghiệp">
+            <span>LIÊN HỆ CẬP NHẬT NGAY</span>
+            <span class="s10-btn-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       Site Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="assets/logo-nav.png" alt="Báo Nhân Dân - Chuyên trang của Báo Nhân Dân" class="footer-logo" width="196" height="34">
+        <span class="footer-copyright">©2026 Bản quyền thuộc về báo Nhân Dân</span>
+      </div>
+
+      <div class="footer-editor">
+        <span class="footer-editor-label">Tổng Biên tập</span>
+        <span class="footer-editor-name">Lê Quốc Minh</span>
+      </div>
+
+      <div class="footer-contact">
+        <p>Trụ sở chính: 71 Hàng Trống - Hà Nội.</p>
+        <p>Tel: (84) 24 382 54231/382 54232 Fax: (84) 24 382 55593.</p>
+        <p>E-mail: <a href="mailto:nhandandientu@nhandan.vn">nhandandientu@nhandan.vn</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-notification" id="globalToast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <span class="toast-message">Thông báo</span>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <!-- Lenis: momentum/inertial smooth scrolling. Loaded from CDN (no
+       bundler in this project) — must load before main.js, which
+       instantiates it in initLenisSmoothScroll(). -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="js/gsap.min.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>

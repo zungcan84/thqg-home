@@ -19,17 +19,12 @@
     initNavDropdown();
     initActionButtons();
     initLanguageSwitcher();
-    initS02Scroller();
-    initS03Awards();
     initS03ScrollAnimations();
+    initIntroReveal();
+    initIntroStats();
     initS04QuoteScroll();
-    initS05HorizontalScroll();
     initS06Timeline();
-    initS07Stack();
-    initS07Downloads();
     initS08Cards();
-    initS08Accordions();
-    initS09Stack();
     initFooterEditorAlign();
   });
 
@@ -152,20 +147,20 @@
     if (downloadBtn) {
       downloadBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        showToast('Báo cáo hồ sơ TH True Milk đang được tải xuống...', 'download');
+        showToast('Báo cáo hồ sơ Kim Tín đang được tải xuống...', 'download');
 
         // Create a simulated download trigger
         const fakeBlob = new Blob([
           'BÁO CÁO HỒ SƠ DOANH NGHIỆP THƯƠNG HIỆU QUỐC GIA\n\n' +
-          'Doanh nghiệp: CÔNG TY CỔ PHẦN THỰC PHẨM SỮA TH TRUE MILK\n' +
-          'Thời gian đạt Thương hiệu Quốc gia: 12 năm liên tiếp\n' +
+          'Doanh nghiệp: CÔNG TY CỔ PHẦN TẬP ĐOÀN KIM TÍN\n' +
+          'Thời gian đạt Thương hiệu Quốc gia: 04 năm\n' +
           'Chuyên trang Báo Nhân Dân - Thương hiệu Quốc gia Việt Nam.'
         ], { type: 'text/plain;charset=utf-8' });
 
         const downloadUrl = URL.createObjectURL(fakeBlob);
         const tempLink = document.createElement('a');
         tempLink.href = downloadUrl;
-        tempLink.download = 'Bao-cao-TH-True-Milk-Thuong-hieu-quoc-gia.txt';
+        tempLink.download = 'Bao-cao-Kim-Tin-Thuong-hieu-quoc-gia.txt';
         document.body.appendChild(tempLink);
         tempLink.click();
         document.body.removeChild(tempLink);
@@ -177,8 +172,8 @@
       shareBtn.addEventListener('click', async (e) => {
         e.preventDefault();
         const shareData = {
-          title: 'TH True Milk - Doanh nghiệp đạt Thương hiệu Quốc gia',
-          text: 'Công ty Cổ phần Thực phẩm sữa TH True Milk - Tiên phong nông nghiệp công nghệ cao.',
+          title: 'Kim Tín - Doanh nghiệp đạt Thương hiệu Quốc gia',
+          text: 'Công ty Cổ phần Tập đoàn Kim Tín - Từ nội lực công nghiệp Việt đến hành trình vươn ra thế giới.',
           url: window.location.href
         };
 
@@ -1033,6 +1028,83 @@
   // stacked below the quote can be taller than the viewport — pinning
   // would trap them off-screen with no way to scroll to them. Falls back
   // to a simple reveal driven by the quote's own position on the page.
+  // Kim Tín intro (Figma 781:5024): the faded part of the lead paragraph
+  // brightens word by word from 40% to 100% white as it scrolls up through
+  // the viewport — the same per-word scrub as initS04QuoteScroll's
+  // simpleProgress() path, applied to white text on the blue band.
+  function initIntroReveal() {
+    const lead = document.getElementById('ktIntroLead');
+    if (!lead) return;
+    const words = [];
+    lead.querySelectorAll('.kt-intro-fade').forEach((el) => {
+      const parts = el.textContent.split(/(\s+)/);
+      el.textContent = '';
+      parts.forEach((chunk) => {
+        if (!chunk) return;
+        if (/^\s+$/.test(chunk)) { el.appendChild(document.createTextNode(chunk)); return; }
+        const span = document.createElement('span');
+        span.className = 'kt-intro-word';
+        span.textContent = chunk;
+        el.appendChild(span);
+        words.push(span);
+      });
+    });
+    const total = words.length;
+    if (!total) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function paint() {
+      const rect = lead.getBoundingClientRect();
+      const winH = window.innerHeight;
+      const startY = winH * 0.9;
+      const endY = -rect.height * 0.2;
+      const progress = reduce ? 1 : Math.max(0, Math.min(1, (startY - rect.top) / (startY - endY)));
+      words.forEach((span, i) => {
+        const a = i / total;
+        const b = Math.min(1, (i + 1.2) / total);
+        const wp = Math.max(0, Math.min(1, (progress - a) / (b - a)));
+        span.style.color = `rgba(255, 255, 255, ${(0.4 + 0.6 * wp).toFixed(3)})`;
+      });
+      ticking = false;
+    }
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(paint); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', paint, { passive: true });
+    paint();
+  }
+
+  // Kim Tín stats: count up once when the row first scrolls into view.
+  function initIntroStats() {
+    const values = Array.from(document.querySelectorAll('.kt-stat-value[data-count-to]'));
+    if (!values.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const fmt = (el, n) => {
+      const pad = parseInt(el.dataset.pad || '0', 10);
+      return String(n).padStart(pad, '0') + (el.dataset.suffix || '');
+    };
+    values.forEach((el) => { el.textContent = fmt(el, 0); });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        const el = entry.target;
+        const to = parseInt(el.dataset.countTo, 10);
+        const dur = 1200;
+        const t0 = performance.now();
+        const step = (t) => {
+          const k = Math.min(1, (t - t0) / dur);
+          const eased = 1 - Math.pow(1 - k, 3);
+          el.textContent = fmt(el, Math.round(to * eased));
+          if (k < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.4 });
+    values.forEach((el) => io.observe(el));
+  }
+
   function initS04QuoteScroll() {
     const track = document.getElementById('s04Track');
     const quoteEl = document.getElementById('s04Quote');
@@ -1117,7 +1189,7 @@
     if (btnViewAll) {
       btnViewAll.addEventListener('click', () => {
         if (typeof showToast === 'function') {
-          showToast('Đang tải thêm thông tin lãnh đạo doanh nghiệp...');
+          showToast('Bài phỏng vấn đang được cập nhật.');
         }
       });
     }
@@ -1313,41 +1385,18 @@
 
     const milestones = [
       {
-        year: '2009',
-        title: 'Khởi dựng chuỗi sữa công nghệ cao',
-        desc: 'Triển khai dự án 1,2 tỷ USD tại Nghệ An',
-        image: 'assets/s6/milestone-2009.jpg'
+        year: '2000',
+        title: 'Khởi dựng nền móng',
+        desc: 'Kim Tín bắt đầu hành trình phát triển thương hiệu trong lĩnh vực vật liệu hàn.',
+        image: 'assets/quality-2.jpg'
       },
-      {
-        year: '2010',
-        title: 'TH True Milk ra mắt thị trường',
-        desc: 'Đặt nền tảng thương hiệu sữa tươi của TH.',
-        image: 'assets/s6/milestone-2010.jpg'
-      },
-      {
-        year: '2013',
-        title: 'Mở rộng năng lực chế biến quy mô lớn',
-        desc: 'Khánh thành nhà máy sữa tươi sạch tại Nghệ An.',
-        image: 'assets/s6/milestone-2013.jpg'
-      },
-      {
-        year: '2018',
-        title: 'Bắt đầu đầu tư sản xuất tại Liên bang Nga',
-        desc: 'Mở rộng mô hình nông nghiệp công nghệ cao ra thị trường quốc tế.',
-        image: 'assets/s6/milestone-2018.jpg'
-      },
-      {
-        year: '2019',
-        title: 'Thiết lập dấu mốc xuất khẩu sữa chính ngạch sang Trung Quốc',
-        desc: 'TH True Milk trở thành doanh nghiệp Việt Nam đầu tiên được cấp mã xuất khẩu sản phẩm sữa.',
-        image: 'assets/s6/milestone-2019.jpg'
-      },
-      {
-        year: '2025',
-        title: 'Hoàn thiện năng lực chuỗi sản xuất tại Nga',
-        desc: 'Khánh thành nhà máy chế biến sữa Kaluga',
-        image: 'assets/s6/milestone-2025.jpg'
-      }
+      // TODO: Figma (781:5086) chỉ có nội dung cho mốc 2000 — các mốc dưới
+      // đây đang để trống ảnh + chữ chờ khách hàng cung cấp.
+      { year: '2006', title: 'Đang cập nhật', desc: 'Nội dung mốc 2006 đang được cập nhật.', image: '' },
+      { year: '2015', title: 'Đang cập nhật', desc: 'Nội dung mốc 2015 đang được cập nhật.', image: '' },
+      { year: '2020', title: 'Đang cập nhật', desc: 'Nội dung mốc 2020 đang được cập nhật.', image: '' },
+      { year: '2024', title: 'Đang cập nhật', desc: 'Nội dung mốc 2024 đang được cập nhật.', image: '' },
+      { year: '2025', title: 'Đang cập nhật', desc: 'Nội dung mốc 2025 đang được cập nhật.', image: '' }
     ];
 
     let currentIndex = 0;
@@ -1387,7 +1436,8 @@
     function updateIndicatorHeight() {
       const wrap = document.querySelector('.s06-interactive-wrap');
       const indicator = document.querySelector('.s06-fixed-indicator');
-      const mediaWrap = document.querySelector('.s06-media-wrap');
+      let mediaWrap = document.querySelector('.s06-media-wrap');
+      if (mediaWrap && mediaWrap.hidden) mediaWrap = document.querySelector('.s06-text-group');
       if (wrap && indicator && mediaWrap) {
         const wrapRect = wrap.getBoundingClientRect();
         const mediaRect = mediaWrap.getBoundingClientRect();
@@ -1426,8 +1476,14 @@
         if (milestoneTitle) milestoneTitle.textContent = m.title;
         if (milestoneDesc) milestoneDesc.textContent = m.desc;
         if (milestoneImg) {
-          milestoneImg.src = m.image;
-          milestoneImg.alt = m.title;
+          const mediaWrap = milestoneImg.closest('.s06-media-wrap');
+          if (m.image) {
+            milestoneImg.src = m.image;
+            milestoneImg.alt = m.title;
+            if (mediaWrap) mediaWrap.hidden = false;
+          } else if (mediaWrap) {
+            mediaWrap.hidden = true;
+          }
         }
         if (counterCurrent) {
           counterCurrent.textContent = String(currentIndex + 1).padStart(2, '0');

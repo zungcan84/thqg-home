@@ -113,9 +113,11 @@ section[id] { scroll-margin-top: var(--header-h); }
 .pill {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 10px 19px; border-radius: 81px; font: 700 14px/1.32 var(--font-body); white-space: nowrap;
+  border: 1px solid transparent; /* mọi pill cao bằng nhau → các chấm nằm đúng trên trục */
 }
 .pill--dark { background: var(--dark); color: #fff; }
 .pill--outline { border: 1px solid var(--line); color: var(--line); }
+.pill--muted { background: rgba(0, 0, 0, .1); color: var(--line); }
 
 /* --------------------------------------------------------------------------
    Header
@@ -131,7 +133,7 @@ section[id] { scroll-margin-top: var(--header-h); }
 .brand__mark { width: 89.032px; height: 33.771px; flex: none; }
 .brand__text { width: 94.034px; height: 32.011px; flex: none; }
 .nav { display: flex; align-items: center; gap: 24px; }
-.nav a {
+.nav a, .nav .nav-link {
   position: relative; display: flex; align-items: center; height: 31px; padding: 4px 0;
   font: 600 14px/1.48 var(--font-body); letter-spacing: -.28px; white-space: nowrap;
 }
@@ -140,13 +142,51 @@ section[id] { scroll-margin-top: var(--header-h); }
   transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease-out);
 }
 .nav a:hover::after, .nav a.is-active::after { transform: scaleX(1); }
-.lang {
-  display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 56px;
-  border: 1px solid #000; background: transparent; cursor: pointer;
-  transition: background-color .4s var(--ease-out);
+.nav .nav-link.is-disabled {
+  color: var(--ink-40);
+  cursor: default;
+  gap: 6px;
+  user-select: none;
 }
-.lang:hover { background: rgba(0, 0, 0, .05); }
-.lang__inner { display: flex; align-items: center; gap: 4px; font: 500 14px/1.32 var(--font-body); }
+.nav .nav-link.is-disabled .badge-soon {
+  display: inline-flex;
+  align-items: center;
+  font: 500 10px/1 var(--font-body);
+  font-style: normal;
+  color: var(--ink-60);
+  background: rgba(0, 0, 0, .05);
+  border-radius: 99px;
+  padding: 3px 6px;
+  letter-spacing: 0;
+}
+.nav-item { position: relative; }
+.nav-item__toggle {
+  position: relative; display: flex; align-items: center; gap: 6px; height: 31px; padding: 4px 0; border: 0; background: none; cursor: pointer;
+  font: 600 14px/1.48 var(--font-body); letter-spacing: -.28px; white-space: nowrap; color: inherit;
+}
+.nav-item__toggle::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: #000;
+  transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease-out);
+}
+.nav-item__toggle:hover::after, .nav-item.is-open .nav-item__toggle::after { transform: scaleX(1); }
+.nav-item__chevron { transition: transform .3s var(--ease-out); }
+.nav-item.is-open .nav-item__chevron { transform: rotate(180deg); }
+.nav-item__menu {
+  position: absolute; top: 100%; left: 0; margin-top: 8px; z-index: 10;
+  display: flex; flex-direction: column; min-width: 220px; padding: 8px; border-radius: 12px;
+  background: #fff; box-shadow: 0 20px 30px rgba(0, 0, 0, .12);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .25s var(--ease-out), transform .25s var(--ease-out), visibility .25s;
+}
+.nav-item.is-open .nav-item__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-item__menu a, .nav-item__link {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: 8px;
+  font: 600 14px/1.4 var(--font-body); color: inherit; white-space: nowrap;
+}
+.nav-item__menu a:hover { background: rgba(0, 0, 0, .05); }
+.nav-item__link.is-disabled { color: var(--ink-60); cursor: default; }
+.nav-item__link.is-disabled em { font: 500 11px/1 var(--font-body); font-style: normal; color: var(--ink-60); opacity: .7; }
+
 .btn-dark {
   display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 56px;
   background: #000; color: #fff; font: 700 12px/1.32 var(--font-body); white-space: nowrap;
@@ -164,7 +204,7 @@ section[id] { scroll-margin-top: var(--header-h); }
    1. Hero — kích thước tỉ lệ theo 1440px (--u)
    -------------------------------------------------------------------------- */
 .hero {
-  --u: calc(min(100vw, 2000px) / 1440);
+  --u: calc(100vw / 1440);
   /* Hero + header không được cao hơn 1 màn hình: giới hạn chiều cao theo viewport,
      rồi thu nhỏ chữ (--t) theo đúng tỉ lệ đó. --u vẫn dùng cho nền/hiệu ứng theo chiều rộng. */
   --vh: 100vh;
@@ -238,9 +278,9 @@ section[id] { scroll-margin-top: var(--header-h); }
    3. Roadmap
    -------------------------------------------------------------------------- */
 .timeline { margin-top: 40px; }
-.timeline__track, .timeline__events { display: grid; grid-template-columns: repeat(3, 1fr); }
+.timeline__track, .timeline__events { display: grid; grid-template-columns: repeat(4, 1fr); }
 .timeline__track { position: relative; }
-.tl-backbone { position: absolute; left: 20px; right: 5px; bottom: 10px; height: 1px; background: #8E8E8E; }
+.tl-backbone { position: absolute; left: 6px; right: 5px; bottom: 10px; height: 1px; background: #8E8E8E; }
 .tl-arrow {
   position: absolute; right: 0; bottom: 7px; width: 0; height: 0;
   border-top: 3px solid transparent; border-bottom: 3px solid transparent; border-left: 5px solid #8E8E8E;
@@ -248,12 +288,19 @@ section[id] { scroll-margin-top: var(--header-h); }
 .tl-col { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .tl-rail { display: flex; align-items: center; width: 100%; height: 20px; }
 .tl-dot { flex: none; }
+.tl-dot--active { margin-left: 48px; } /* tâm chấm ở x≈58px như Figma 897:2731 */
 .tl-dot--idle {
   box-sizing: border-box; width: 11px; height: 11px; margin-left: 52px;
   border-radius: 50%; background: #fff; border: 1px solid #8E8E8E;
 }
+/* Figma 897:2731: mốc đã qua — chấm 12px nằm ngay đầu trục, pill cách trục 20px */
+.tl-col--past { gap: 10px; }
+.tl-dot--past {
+  box-sizing: border-box; width: 12px; height: 12px; margin-left: 0;
+  border-radius: 50%; background: #fff; border: 1px solid #8E8E8E;
+}
 .timeline__events { margin-top: 10px; }
-.event { display: flex; flex-direction: column; gap: 14px; width: 328px; max-width: 100%; line-height: 1.4; }
+.event { display: flex; flex-direction: column; gap: 14px; width: auto; max-width: 100%; padding-right: 50px; line-height: 1.4; }
 .event__date { font-weight: 700; font-size: 24px; color: #000; }
 .event--now .event__date { color: var(--blue); }
 .event__title { font-weight: 700; font-size: 16px; color: var(--ink-80); }
@@ -467,6 +514,13 @@ section[id] { scroll-margin-top: var(--header-h); }
   .nav { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 32px 24px; background: #fff; box-shadow: 0 20px 30px rgba(0, 0, 0, .08); }
   .nav.is-open { display: flex; }
   .burger { display: block; }
+  .nav-item { width: 100%; }
+  .nav-item__toggle { width: 100%; justify-content: space-between; }
+  .nav-item__menu {
+    position: static; margin-top: 4px; padding: 0 0 0 12px; box-shadow: none; opacity: 1; visibility: visible; transform: none;
+    display: none; transition: none;
+  }
+  .nav-item.is-open .nav-item__menu { display: flex; }
 }
 
 @media (max-width: 1100px) {
@@ -510,6 +564,8 @@ section[id] { scroll-margin-top: var(--header-h); }
   .event { width: auto; }
   .event::before { content: "Sắp diễn ra"; align-self: flex-start; padding: 8px 16px; border: 1px solid var(--line); border-radius: 81px; font-weight: 700; font-size: 13px; color: var(--line); }
   .event--now::before { content: "Đang diễn ra"; background: var(--dark); border-color: var(--dark); color: #fff; }
+  .event--past::before { content: "Đã diễn ra"; background: rgba(0, 0, 0, .1); border-color: transparent; color: var(--line); }
+  .event { padding-right: 0; }
 
   .community__head { flex-direction: column; gap: 24px; margin-bottom: 56px; }
   .row-head { flex-direction: column; align-items: flex-start; }
@@ -521,7 +577,7 @@ section[id] { scroll-margin-top: var(--header-h); }
   .site-footer__inner { flex-direction: column; align-items: flex-start; gap: 20px; padding-block: 32px; }
   .site-footer__editor, .site-footer__addr { margin-left: 0; white-space: normal; }
   .site-header__inner { padding: 0 16px; }
-  .btn-dark, .lang { display: none; }
+  .btn-dark { display: none; }
 }
 
 @media (max-width: 560px) {
@@ -531,3 +587,30 @@ section[id] { scroll-margin-top: var(--header-h); }
   .ms-info__num { font-size: 48px; }
   .ms-info__label { font-size: 20px; }
 }
+
+/* --------------------------------------------------------------------------
+   Language button — SHARED component. This exact block is used on the home
+   page and every enterprise tab; keep all copies identical.
+   -------------------------------------------------------------------------- */
+.btn-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: #111827;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.btn-lang:hover { border-color: #cbd5e1; background-color: #f8fafc; }
+.btn-lang svg { flex: none; width: 14px; height: 14px; }
+.btn-lang .btn-lang__chev { width: 10px; height: 10px; }
+@media (max-width: 860px) { .btn-lang { display: none; } }

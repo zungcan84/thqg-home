@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Section 10: Liên hệ cập nhật thông tin hồ sơ doanh nghiệp (CTA)
+   Design: Deep Blue Background (#2555ad), White Faculty Glyphic Heading,
+   Manrope descriptive copy & pill outline action button.
+   ========================================================================== */
+
+.s10-cta {
+  position: relative;
+  width: 100%;
+  /* min-height (not a hard height) so it never clips content if any
+     breakpoint's title+desc+button stack ends up taller than the
+     target — but in every normal case it settles at exactly that
+     target height. */
+  min-height: 600px;
+  display: flex;
+  /* stretch (the default, spelled out for clarity): .s10-container fills
+     this section's full height so its own flex-start/flex-end children
+     (the title vs. the description+button column) actually have room
+     to land at opposite corners — align-items: center here would
+     collapse that back into a single vertically-centered block. */
+  align-items: stretch;
+  background-color: #2555ad;
+  color: #ffffff;
+  padding-block: clamp(64px, 8vw, 110px);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Beyond 1440px, retain large display scale (title 68px, body 24px) and 800px min-height */
+@media (min-width: 1441px) {
+  .s10-cta {
+    min-height: 800px;
+  }
+
+  .s10-title {
+    font-size: 68px;
+    line-height: 1.22;
+  }
+
+  .s10-desc {
+    font-size: 24px;
+  }
+}
+
+/* Full-bleed, same as .header-container / .footer-container — no
+   max-width/centering, just a flat 32px inset on both sides, so the
+   title's left edge lines up with the nav logo and the footer logo
+   instead of sitting further in due to the shared .container's
+   1440px-centered max-width. */
+/* Title (left) anchors to the top of the row; the description+button
+   column overrides that back down to the bottom via align-self below —
+   the two columns intentionally sit at opposite corners rather than
+   lining up on either edge. */
+.s10-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(32px, 5vw, 64px);
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+  padding-inline: 32px;
+  box-sizing: border-box;
+}
+
+/* Left Column: Heading — wide enough that "để cập nhật thông tin" (the
+   longest of the 3 forced line breaks below) fits on one line at 68px
+   instead of wrapping a second time inside its own span. */
+.s10-left {
+  flex: 1;
+  max-width: 960px;
+}
+
+.s10-title {
+  margin: 0;
+  font-family: var(--font-heading, "Faculty Glyphic", sans-serif);
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-align: left;
+}
+
+.s10-title span {
+  display: block;
+}
+
+/* Right Column: Copy & Pill Button — bottom-anchored (align-self, not
+   the row's own align-items) while .s10-left stays top-anchored, so the
+   two columns sit at opposite corners of the row instead of sharing one
+   edge. max-width is sized so .s10-desc wraps to exactly 3 lines at its
+   20px size; the button (width: 100% of this column) matches that same
+   width automatically. */
+.s10-right {
+  flex-shrink: 0;
+  align-self: flex-end;
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 28px;
+}
+
+.s10-desc {
+  margin: 0;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: left;
+}
+
+/* Pill Outline CTA Button */
+.s10-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 100px;
+  padding-inline: 28px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background-color: transparent;
+  color: #ffffff;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  box-sizing: border-box;
+}
+
+.s10-btn:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.s10-btn:active {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+.s10-btn-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.s10-btn:hover .s10-btn-icon {
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Mobile Fallback (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .s10-cta {
+    min-height: auto;
+    padding-block: 48px;
+  }
+
+  .s10-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .s10-left {
+    max-width: 100%;
+  }
+
+  .s10-right {
+    align-self: stretch;
+    max-width: 100%;
+    width: 100%;
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .s10-desc {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .s10-btn {
+    height: 64px;
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .s10-title {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+}

@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Kim Tín — Năng lực tiên phong (Figma 781:5039)
+   ========================================================================== */
+.kt-pioneer {
+  background-color: #f5f5f7;
+  padding-block: clamp(64px, 6.2vw, 89px) clamp(72px, 7vw, 101px);
+}
+
+.kt-pioneer-container {
+  width: 100%;
+  max-width: calc(1190px + 2 * var(--page-padding));
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+.kt-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #2555ad;
+}
+
+.kt-pioneer-title {
+  margin: 20px 0 0;
+  max-width: 957px;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(32px, 3.5vw, 50px);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.kt-pioneer-intro {
+  margin-top: clamp(48px, 7vw, 101px);
+  display: grid;
+  grid-template-columns: 1fr 583px;
+  gap: 24px;
+  align-items: start;
+}
+
+.kt-pioneer-arrow {
+  width: 60px;
+  height: auto;
+  margin-top: 5px;
+}
+
+.kt-pioneer-desc {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.kt-pioneer-desc p { margin: 0; }
+
+.kt-pioneer-cards {
+  margin-top: clamp(64px, 10.5vw, 154px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.kt-pioneer-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.kt-pioneer-media {
+  aspect-ratio: 1440 / 691;
+  overflow: hidden;
+}
+
+.kt-pioneer-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kt-pioneer-card:hover .kt-pioneer-media img { transform: scale(1.04); }
+
+.kt-pioneer-body {
+  flex: 1;
+  min-height: 332px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.kt-pioneer-card-title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(20px, 1.7vw, 24px);
+  line-height: 1.4;
+  color: #3b3b3b;
+}
+
+@media (max-width: 900px) {
+  .kt-pioneer-intro { grid-template-columns: 1fr; gap: 20px; }
+  .kt-pioneer-cards { grid-template-columns: 1fr; }
+  .kt-pioneer-body { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kt-pioneer-media img { transition: none; }
+}

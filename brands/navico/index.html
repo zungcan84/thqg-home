@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NAVICO - Hồ Sơ Doanh Nghiệp | Thương Hiệu Quốc Gia - Báo Nhân Dân</title>
+  <meta name="description" content="Hồ sơ doanh nghiệp Công ty Cổ phần Nam Việt - NAVICO, doanh nghiệp có sản phẩm đạt Thương hiệu Quốc gia Việt Nam 2026.">
+  <script>
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Hahmlet:wght@400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/s08.css">
+  <link rel="stylesheet" href="css/s10.css">
+  <link rel="stylesheet" href="css/navico.css">
+</head>
+<body>
+
+<!-- ============ HEADER (shared with home) ============ -->
+<header class="site-header" id="top">
+  <div class="site-header__inner">
+    <div class="site-header__left">
+      <a class="brand" href="../../" aria-label="Báo Nhân Dân – Chuyên trang">
+        <span class="brand__mark crop"><img src="../../assets/img/header-logo-mark.png" alt="Nhân Dân" style="height:104.77%;left:-1.99%;top:-3.03%;width:103.33%"></span>
+        <img class="brand__text" src="../../assets/img/header-logo-text.png" alt="Chuyên trang của báo Nhân Dân">
+      </a>
+      <nav class="nav" id="nav" aria-label="Điều hướng chính">
+        <a href="../../">Trang Chủ</a>
+        <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Chương Trình Thương Hiệu Quốc Gia<em class="badge-soon">Sắp ra mắt</em></span>
+        <div class="nav-item">
+          <button type="button" class="nav-item__toggle is-current" aria-haspopup="true" aria-expanded="false">
+            <span>Hồ Sơ Doanh Nghiệp</span>
+            <img class="nav-item__chevron" src="../../assets/svg/chevron-header.svg" alt="" width="12" height="12">
+          </button>
+          <div class="nav-item__menu" role="menu">
+            <a href="../th-true-milk/" role="menuitem">Doanh nghiệp cao cấp</a>
+            <a href="../kim-tin/" role="menuitem">Doanh nghiệp cơ bản</a>
+            <a href="./" role="menuitem" aria-current="page">Doanh nghiệp miễn phí</a>
+          </div>
+        </div>
+        <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Thương Hiệu &amp; Nhãn Hiệu<em class="badge-soon">Sắp ra mắt</em></span>
+        <span class="nav-link is-disabled" aria-disabled="true" title="Sắp ra mắt">Tin tức<em class="badge-soon">Sắp ra mắt</em></span>
+      </nav>
+    </div>
+    <div class="site-header__right">
+      <button type="button" class="btn-lang" id="btnLang" aria-label="Thay đổi ngôn ngữ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="lang-label">EN</span>
+          <svg class="btn-lang__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      <a class="btn-dark" href="#lien-he">NỘP HỒ SƠ</a>
+      <button class="burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 1. HOME (Figma 781:5311) — full height ============ -->
+<section class="np-hero" id="np-hero" aria-labelledby="npHeroTitle">
+  <div class="container np-hero__inner">
+    <div class="np-hero__box">
+      <div class="np-hero__main">
+
+        <div class="np-hero__content">
+          <div class="np-hero__top">
+            <p class="np-honor" data-reveal><img src="assets/rosette.svg" alt="" width="18" height="24">Doanh nghiệp có sản phẩm đạt Thương hiệu Quốc gia Việt Nam 2026</p>
+            <h1 class="np-hero__title" id="npHeroTitle" data-reveal>Công ty Cổ phần<br>Nam Việt - NAVICO</h1>
+            <p class="np-hero__sub" data-reveal>Từ nội lực công nghiệp Việt đến hành trình<br>vươn ra thế giới</p>
+          </div>
+          <div class="np-actions" data-reveal>
+            <button type="button" class="np-action" id="btnDownloadReport"><img src="assets/cloud.svg" alt="" width="24" height="24"><span>Tải xuống báo cáo</span></button>
+            <button type="button" class="np-action" id="btnShare"><img src="assets/share.svg" alt="" width="24" height="24"><span>Chia sẻ</span></button>
+          </div>
+        </div>
+        <!-- Figma 897:2659: certificate shield sits at the right edge of the text column -->
+        <div class="np-cert" title="Chứng nhận doanh nghiệp đạt Thương hiệu Quốc gia">
+          <span class="np-cert__tag">CHỨNG NHẬN</span>
+          <p class="np-cert__title">Doanh Nghiệp<br>Đạt Thương Hiệu<br>Quốc Gia</p>
+          <div class="np-cert__flower">
+            <svg class="np-cert__rosette" viewBox="0 0 92 92" fill="none" aria-hidden="true">
+                  <path
+                    d="M41.452 2.70906C44.2434 1.00323 47.0347 1.00323 49.8261 2.70906L54.0131 5.26779C55.4088 6.19824 56.9595 6.66347 58.6654 6.66347L63.5502 6.19824C66.9619 6.19824 69.4431 7.67146 70.9938 10.6179L73.3199 15.0375C74.0953 16.4332 75.1808 17.5187 76.5765 18.2941L81.2288 20.6202C84.0201 22.171 85.4158 24.6522 85.4158 28.0638L84.9506 32.9487C84.9506 34.6545 85.4158 36.2053 86.3462 37.6009L89.1376 41.788C90.8434 44.5793 90.8434 47.3707 89.1376 50.162L86.3462 54.349C85.4158 55.7447 84.9506 57.2955 84.9506 59.0013L85.4158 63.8862C85.4158 67.2978 83.9426 69.779 80.9962 71.3298L76.5765 73.6559C75.1808 74.4313 74.0953 75.5168 73.3199 76.9125L70.9938 81.5647C69.4431 84.3561 67.0394 85.7517 63.7828 85.7517L58.6654 85.2865C56.9595 85.2865 55.4088 85.7517 54.0131 86.6822L49.8261 89.4735C47.0347 91.1794 44.2434 91.1794 41.452 89.4735L37.265 86.6822C35.8693 85.7517 34.3186 85.2865 32.6128 85.2865L27.7279 85.7517C24.3162 85.7517 21.835 84.2785 20.2843 81.3321L17.9582 76.9125C17.1828 75.5168 16.0973 74.4313 14.7016 73.6559L10.2819 71.3298C7.33552 69.779 5.86231 67.3753 5.86231 64.1188L6.32753 59.0013C6.32753 57.2955 5.86231 55.7447 4.93186 54.349L2.37312 50.162C0.667294 47.3707 0.667294 44.5793 2.37312 41.788L4.93186 37.6009C5.86231 36.2053 6.32753 34.6545 6.32753 32.9487L5.86231 28.0638C5.86231 24.6522 7.33552 22.171 10.2819 20.6202L14.7016 18.2941C16.0973 17.5187 17.1828 16.4332 17.9582 15.0375L20.2843 10.6179C21.835 7.67146 24.3162 6.19824 27.7279 6.19824L32.6128 6.66347C34.3186 6.66347 35.8693 6.19824 37.265 5.26779L41.452 2.70906Z"
+                    fill="#E3E3E3" />
+                  <path
+                    d="M46.0013 5.16797C46.6408 5.16797 47.4062 5.35533 48.3429 5.92777L52.5077 8.47267C54.4715 9.75613 56.6737 10.4016 59.0279 10.4016H59.1959L64.0568 9.93835C65.1666 9.9579 65.9484 10.203 66.525 10.5454C67.1215 10.8995 67.705 11.4798 68.2237 12.4653L70.5501 16.8844L70.5688 16.9204L70.5881 16.955C71.6845 18.9285 73.2467 20.4907 75.2202 21.5871L75.2873 21.6244L79.9235 23.9418C80.7879 24.432 81.3139 24.9872 81.6464 25.5783C81.9783 26.1683 82.2173 26.9758 82.2361 28.117L81.7736 32.9793V33.1473C81.7736 35.5393 82.4384 37.7754 83.7634 39.7629L86.5039 43.873C87.0571 44.7912 87.2394 45.543 87.2395 46.1732C87.2395 46.8033 87.057 47.5552 86.5039 48.4733L83.7634 52.5842C82.4384 54.5716 81.7736 56.8078 81.7736 59.1998V59.3678L82.2361 64.2287C82.2166 65.3384 81.9721 66.1203 81.6298 66.6969C81.2756 67.2934 80.6953 67.8769 79.7099 68.3955L75.2907 70.722L75.2548 70.7406L75.2202 70.76C73.2467 71.8564 71.6845 73.4186 70.5881 75.3921L70.5508 75.4592L68.2327 80.0954C67.7281 80.9864 67.1746 81.5166 66.6135 81.8425C66.0623 82.1625 65.3232 82.39 64.285 82.4087L59.1883 81.9455H59.0279C56.6359 81.9455 54.3998 82.6103 52.4123 83.9352L48.3015 86.6758C47.3833 87.2288 46.6314 87.4114 46.0013 87.4114C45.3711 87.4113 44.6193 87.229 43.7012 86.6758L39.591 83.9352C37.6035 82.6103 35.3674 81.9455 32.9754 81.9455H32.8074L27.9458 82.408C26.8364 82.3884 26.0548 82.1439 25.4783 81.8017C24.8818 81.4475 24.2976 80.8672 23.7789 79.8818L21.4532 75.4626L21.4345 75.4267L21.4152 75.3921L21.2043 75.0271C20.1221 73.2252 18.6334 71.7879 16.7831 70.76L16.7485 70.7406L16.7126 70.722L12.2934 68.3955C11.2809 67.8626 10.6958 67.2804 10.3479 66.7128C10.0177 66.1741 9.78543 65.4613 9.76578 64.4569L10.2297 59.3602V59.1998C10.2297 56.8456 9.58426 54.6433 8.30079 52.6796L5.7559 48.5148C5.18345 47.5781 4.99609 46.8127 4.99609 46.1732C4.99616 45.5338 5.18356 44.7688 5.7559 43.8322L8.30079 39.6668C9.58405 37.7031 10.2297 35.5012 10.2297 33.1473V32.9793L9.76647 28.1176C9.78611 27.0083 10.0312 26.2267 10.3735 25.6502C10.7277 25.0537 11.308 24.4695 12.2934 23.9508L16.7126 21.6251L16.7485 21.6064L16.7831 21.5871C18.7566 20.4907 20.3188 18.9285 21.4152 16.955L21.4345 16.9204L21.4532 16.8844L23.7789 12.4653C24.2976 11.4798 24.8818 10.8995 25.4783 10.5454C26.0548 10.2031 26.8364 9.95799 27.9458 9.93835L32.8074 10.4016H32.9754C35.3294 10.4015 37.5313 9.75592 39.4949 8.47267L43.6604 5.92777C44.5969 5.35544 45.3619 5.16803 46.0013 5.16797Z"
+                    stroke="white" stroke-width="1.06193" stroke-linejoin="bevel" />
+                </svg>
+            <img src="assets/qr.png" alt="Mã QR chứng nhận Thương hiệu Quốc gia" class="np-cert__qr" width="56" height="56">
+          </div>
+        </div>
+      </div>
+
+      <div class="np-hero__side">
+        <div class="np-hero__logo"><img src="assets/logo-navico.png" alt="Logo NAVICO - Nam Viet Corporation" width="108" height="101"></div>
+        <div class="np-hero__photo"><img src="assets/hero.jpg" alt="Công nhân NAVICO phi lê cá tra trên dây chuyền chế biến" width="1600" height="830"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. GIỚI THIỆU + CHỈ SỐ (Figma 781:5358) ============ -->
+<section class="np-intro" aria-label="Giới thiệu NAVICO">
+  <div class="container">
+    <p class="np-intro__lead" data-reveal>Thành lập năm 1993, Công ty Cổ phần Nam Việt – NAVICO là một trong những doanh nghiệp hoạt động lâu năm trong lĩnh vực nuôi trồng, chế biến và xuất khẩu cá tra của Việt Nam. Doanh nghiệp phát triển chuỗi sản xuất từ con giống, thức ăn thủy sản, vùng nuôi đến chế biến và xuất khẩu, từng bước đưa sản phẩm thủy sản Việt Nam hiện diện tại nhiều thị trường quốc tế.</p>
+    <ul class="np-stats" role="list">
+      <li class="np-stat" data-reveal><span class="np-stat__num" data-count="600" data-suffix=" ha">600 ha</span><span class="np-stat__label">Quy mô vùng nuôi công nghệ cao Bình Phú</span></li>
+      <li class="np-stat" data-reveal><span class="np-stat__num" data-count="30" data-prefix="&gt; ">&gt; 30</span><span class="np-stat__label">Thị trường xuất khẩu</span></li>
+      <li class="np-stat" data-reveal><span class="np-stat__num" data-count="6300" data-prefix="&gt; ">&gt; 6.300</span><span class="np-stat__label">Tổng quy mô nhân sự</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 3. NĂNG LỰC SẢN XUẤT KHÉP KÍN (Figma 886:258) ============ -->
+<section class="np-capacity" aria-labelledby="npCapTitle">
+  <div class="container np-split">
+    <h2 class="np-h2 np-split__title" id="npCapTitle" data-reveal>Năng lực sản xuất khép kín</h2>
+    <div class="np-split__body">
+      <div class="np-copy" data-reveal>
+        <p>NAVICO xây dựng chuỗi sản xuất cá tra tương đối hoàn chỉnh, bao gồm chủ động con giống, sản xuất thức ăn thủy sản, tổ chức vùng nuôi, chế biến và phát triển thị trường xuất khẩu.</p>
+        <p>Vùng nuôi công nghệ cao Bình Phú được đầu tư theo hướng tập trung, tạo nền tảng để doanh nghiệp kiểm soát nguồn nguyên liệu và chất lượng sản phẩm.</p>
+        <p>Với 32 công ty thành viên, hệ sinh thái Kim Tín phản ánh quá trình một doanh nghiệp Việt chuyển từ phát triển sản phẩm sang xây dựng năng lực công nghiệp và chuỗi cung ứng có quy mô.</p>
+      </div>
+      <div class="np-panel" data-reveal>
+        <h3 class="np-h3">Công suất sản xuất, tỷ lệ tự chủ nguyên liệu và hệ thống nhà máy</h3>
+        <p class="np-empty">Doanh nghiệp chưa cập nhật nội dung.</p>
+        <a class="np-btn" href="#lien-he">Liên hệ cập nhật thông tin<svg class="np-btn__chev" viewBox="0 0 7 10" width="7" height="10" aria-hidden="true"><path d="M1.2 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. SẢN PHẨM ĐẠT THQG (Figma 781:5380) ============ -->
+<section class="np-products" aria-labelledby="npProdTitle">
+  <div class="container">
+    <h2 class="np-h2 np-products__title" id="npProdTitle" data-reveal>Sản phẩm đạt<br>Thương hiệu Quốc gia</h2>
+    <div class="np-products__grid">
+      <article class="np-product" data-reveal>
+        <div class="np-product__media"><img src="assets/product-1.jpg" alt="Phi lê cá tra NAVICO trên thớt gỗ" width="860" height="572" loading="lazy"></div>
+        <h3 class="np-product__name">Cá tra chế biến và đông lạnh NAVICO</h3>
+      </article>
+      <article class="np-product" data-reveal>
+        <div class="np-product__media"><img src="assets/product-2.jpg" alt="Phi lê cá rô phi NAVICO trên thớt gỗ" width="860" height="572" loading="lazy"></div>
+        <h3 class="np-product__name">Cá rô phi chế biến và đông lạnh NAVICO</h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. CHẤT LƯỢNG SP & DV (Figma 781:5404) — full height ============
+     Same pinned-scroll card track as the Doanh nghiệp cơ bản tab (initS08Cards),
+     with a single static image on the right. -->
+<section class="s08-pin np-s08" id="s08Pin" aria-labelledby="s08Heading">
+  <div class="s08-viewport" id="s08Viewport">
+    <div class="s08-left-col">
+      <div class="s08-left-inner">
+        <h2 class="s08-title" id="s08Heading">
+          <span class="s08-title-line">Chất lượng</span>
+          <span class="s08-title-line">Sản phẩm &amp;</span>
+          <span class="s08-title-line">Dịch vụ</span>
+        </h2>
+      </div>
+    </div>
+    <div class="s08-right-zone" id="s08RightZone">
+      <div class="s08-content-viewport" id="s08ContentViewport">
+        <div class="s08-content-track" id="s08ContentTrack">
+
+            <article class="s08-card np-qcard" data-s08-card="0">
+              <div class="s08-card-badge">01</div>
+              <h3 class="s08-card-heading">Giá trị nổi bật của sản phẩm</h3>
+              <p class="np-empty">Doanh nghiệp chưa cập nhật nội dung.</p>
+              <a class="np-btn" href="#lien-he">Liên hệ cập nhật thông tin<svg class="np-btn__chev" viewBox="0 0 7 10" width="7" height="10" aria-hidden="true"><path d="M1.2 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </article>
+
+            <article class="s08-card np-qcard" data-s08-card="1">
+              <div class="s08-card-badge">02</div>
+              <h3 class="s08-card-heading">Dấu ấn trên thị trường quốc tế</h3>
+              <ul class="np-dots"><li>Sản phẩm của NAVICO đã hiện diện tại hơn 30 quốc gia và vùng lãnh thổ. Doanh nghiệp đang tiếp tục mở rộng thị trường, trong đó có định hướng phát triển cá tra, cá basa và cá rô phi tại khu vực Nam Mỹ.</li></ul>
+            </article>
+
+            <article class="s08-card np-qcard" data-s08-card="2">
+              <div class="s08-card-badge">03</div>
+              <h3 class="s08-card-heading">Thị trường xuất khẩu trọng điểm, kim ngạch xuất khẩu và các cột mốc mở rộng quốc tế:</h3>
+              <p class="np-empty">Doanh nghiệp chưa cập nhật nội dung.</p>
+              <a class="np-btn" href="#lien-he">Liên hệ cập nhật thông tin<svg class="np-btn__chev" viewBox="0 0 7 10" width="7" height="10" aria-hidden="true"><path d="M1.2 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </article>
+
+            <article class="s08-card np-qcard" data-s08-card="3">
+              <div class="s08-card-badge">04</div>
+              <h3 class="s08-card-heading">Tiêu chuẩn chất lượng</h3>
+              <ul class="np-dots"><li>Vùng nuôi của NAVICO được giới thiệu đạt các chứng nhận quốc tế như ASC và BAP, tạo điều kiện để sản phẩm tiếp cận những thị trường có yêu cầu cao về chất lượng, an toàn thực phẩm và nuôi trồng có trách nhiệm.</li></ul>
+            </article>
+
+            <article class="s08-card np-qcard" data-s08-card="4">
+              <div class="s08-card-badge">05</div>
+              <h3 class="s08-card-heading">Danh sách chứng nhận theo vùng nuôi, nhà máy và sản phẩm</h3>
+              <p class="np-empty">Doanh nghiệp chưa cập nhật nội dung.</p>
+              <a class="np-btn" href="#lien-he">Liên hệ cập nhật thông tin<svg class="np-btn__chev" viewBox="0 0 7 10" width="7" height="10" aria-hidden="true"><path d="M1.2 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </article>
+
+        </div>
+      </div>
+      <div class="s08-visual-col" id="s08VisualCol">
+        <div class="s08-img-slide is-active" id="s08Img0" data-slide-index="0">
+          <img src="assets/quality.jpg" alt="Công nhân trên dây chuyền đóng gói" width="1400" height="933" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. LÃNH ĐẠO DOANH NGHIỆP (Figma 781:5465) ============ -->
+<section class="np-leaders" aria-labelledby="npLeadTitle">
+  <div class="container np-split np-split--leaders">
+    <h2 class="np-h2 np-split__title" id="npLeadTitle" data-reveal>Lãnh đạo<br>doanh nghiệp</h2>
+    <div class="np-split__body">
+      <div class="np-people">
+        <figure class="np-person" data-reveal>
+          <div class="np-person__photo"><img src="assets/leader-1.jpg" alt="Ông Đỗ Lập Nghiệp" width="600" height="763" loading="lazy"></div>
+          <figcaption><strong>Ông Đỗ Lập Nghiệp</strong><span>Chủ tịch Hội đồng quản trị</span></figcaption>
+        </figure>
+        <figure class="np-person" data-reveal>
+          <div class="np-person__photo"><img src="assets/leader-2.jpg" alt="Ông Doãn Tới" width="960" height="640" loading="lazy"></div>
+          <figcaption><strong>Ông Doãn Tới</strong><span>Tổng Giám đốc</span></figcaption>
+        </figure>
+      </div>
+      <div class="np-leaders__foot" data-reveal>
+        <div>
+          <h3 class="np-h3">Dấu ấn điều hành và định hướng<br>phát triển của lãnh đạo</h3>
+          <p class="np-empty">Doanh nghiệp chưa cập nhật nội dung.</p>
+        </div>
+        <a class="np-btn" href="#lien-he">Liên hệ cập nhật thông tin<svg class="np-btn__chev" viewBox="0 0 7 10" width="7" height="10" aria-hidden="true"><path d="M1.2 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. PHÁT TRIỂN & TÁC ĐỘNG ESG (Figma 781:5391) ============ -->
+<section class="np-esg" aria-labelledby="npEsgTitle">
+  <div class="container">
+    <h2 class="np-h2" id="npEsgTitle" data-reveal>Phát triển &amp; Tác động ESG</h2>
+    <p class="np-esg__desc" data-reveal>NAVICO định hướng nâng cao hiệu quả sử dụng nguồn nguyên liệu và gia tăng giá trị trong chuỗi sản xuất thủy sản.</p>
+    <div class="np-esg__row" data-reveal>
+      <div class="np-esg__media"><img src="assets/esg.jpg" alt="Chữ ESG giữa rừng xanh nhìn từ trên cao" width="1400" height="782" loading="lazy"></div>
+      <div class="np-esg__card">
+        <div>
+          <h3 class="np-h3">Các sáng kiến về kinh tế tuần hoàn, quản lý môi trường, năng lượng và trách nhiệm cộng đồng</h3>
+          <p class="np-empty">Doanh nghiệp chưa cập nhật nội dung.</p>
+        </div>
+        <a class="np-btn" href="#lien-he">Liên hệ cập nhật thông tin<svg class="np-btn__chev" viewBox="0 0 7 10" width="7" height="10" aria-hidden="true"><path d="M1.2 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. LIÊN HỆ (Figma 781:5348) ============ -->
+<section class="s10-cta np-s10" id="lien-he" aria-labelledby="s10Heading">
+  <div class="s10-container">
+    <div class="s10-left">
+      <h2 class="s10-title" id="s10Heading">
+        <span>Liên hệ với chúng tôi</span>
+        <span>để cập nhật thông tin</span>
+        <span>Hồ sơ Doanh nghiệp.</span>
+      </h2>
+    </div>
+    <div class="s10-right">
+      <p class="s10-desc">Doanh nghiệp cần chủ động liên hệ để cập nhật thông tin trên hồ sơ Thương hiệu quốc gia. Việc cập nhật áp dụng theo mức phí xử lý hiện hành.</p>
+      <a href="mailto:nhandandientu@nhandan.vn" class="s10-btn" id="btnS10Contact">
+        <span>LIÊN HỆ CẬP NHẬT NGAY</span>
+        <span class="s10-btn-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER (shared with home) ============ -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <img class="site-footer__logo" src="../../assets/img/footer-logo.png" alt="Báo Nhân Dân – Chuyên trang">
+    <p class="site-footer__copy">©2026 Bản quyền thuộc về báo Nhân Dân</p>
+    <p class="site-footer__editor">Tổng Biên tập<br>Lê Quốc Minh</p>
+    <address class="site-footer__addr">
+      Trụ sở chính: 71 Hàng Trống - Hà Nội.<br>
+      Tel: (84) 24 382 54231/382 54232 Fax: (84) 24 382 55593.<br>
+      E-mail: nhandandientu@nhandan.vn
+    </address>
+  </div>
+</footer>
+
+<div class="np-toast" id="npToast" role="status" aria-live="polite"></div>
+
+<script src="js/navico.js"></script>
+</body>
+</html>

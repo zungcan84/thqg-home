@@ -34,6 +34,8 @@
     { year: 2020, count: 124, desc: generic(2020) },
     { year: 2022, count: 158, desc: generic(2022) },
     { year: 2024, count: 190, desc: generic(2024) },
+    // 2026: số liệu theo yêu cầu (227 doanh nghiệp); mô tả tạm dùng lại nguyên văn của năm 2024.
+    { year: 2026, count: 227, desc: generic(2024) },
   ];
 
   const header = $('.site-header');
@@ -45,10 +47,40 @@
   function initUI() {
     const burger = $('.burger');
     const nav = $('#nav');
+
+    // Nút ngôn ngữ dùng chung (.btn-lang): đổi nhãn EN ⇄ VI, giống các tab doanh nghiệp.
+    const langBtn = $('#btnLang');
+    if (langBtn) langBtn.addEventListener('click', () => {
+      const label = $('.lang-label', langBtn);
+      if (label) label.textContent = label.textContent.trim() === 'EN' ? 'VI' : 'EN';
+    });
+
     burger.addEventListener('click', () => {
       const open = burger.getAttribute('aria-expanded') !== 'true';
       burger.setAttribute('aria-expanded', String(open));
       nav.classList.toggle('is-open', open);
+    });
+
+    $$('.nav-item', nav).forEach((item) => {
+      const toggle = $('.nav-item__toggle', item);
+      const closeItem = () => {
+        item.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = !item.classList.contains('is-open');
+        $$('.nav-item', nav).forEach((other) => { if (other !== item) other.classList.remove('is-open'); });
+        item.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      item.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeItem(); });
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-item')) $$('.nav-item.is-open', nav).forEach((item) => {
+        item.classList.remove('is-open');
+        $('.nav-item__toggle', item).setAttribute('aria-expanded', 'false');
+      });
     });
 
     $$('.tabs').forEach((tabs) => {

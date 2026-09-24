@@ -1,0 +1,313 @@
+/* ==========================================================================
+   Hồ sơ Doanh nghiệp (miễn phí) — NAVICO  ·  Figma 886:270
+   Whole tab is capped at 1190px (.container from site.css); section
+   backgrounds stay full-bleed.
+   ========================================================================== */
+:root {
+  --font-heading: var(--font-display);
+  --header-height: var(--header-h);
+  --color-primary-blue: var(--blue);
+  --np-ink-3b: #3b3b3b;
+  --np-border: #c5c5c5;
+}
+
+html { scroll-padding-top: var(--header-h); }
+
+/* ---------- shared bits ---------- */
+.np-h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(34px, 3.5vw, 50px);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: #000;
+}
+.np-h3 {
+  font: 700 clamp(20px, 1.7vw, 24px)/1.4 var(--font-body);
+  color: var(--np-ink-3b);
+}
+.np-empty { font: 400 14px/1.42 var(--font-body); color: var(--ink-60); }
+
+.np-btn {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 12px 24px; border: 1px solid #000; border-radius: 56px;
+  font: 700 14px/1.32 var(--font-body); text-transform: uppercase; color: #000;
+  white-space: nowrap;
+  transition: background-color .3s var(--ease-out), color .3s var(--ease-out);
+}
+.np-btn__chev { transition: transform .3s var(--ease-out); }
+.np-btn:hover { background: #000; color: #fff; }
+.np-btn:hover .np-btn__chev { transform: translateX(3px); }
+
+.np-dots { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+.np-dots li { position: relative; padding-left: 14px; font: 400 14px/1.42 var(--font-body); color: var(--ink-60); }
+.np-dots li::before { content: ""; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: var(--ink-60); }
+
+/* reveal on scroll (driven by js/navico.js) */
+.js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   1. Home — full height (viewport minus header)
+   ========================================================================== */
+.np-hero { background: var(--paper); }
+.np-hero__inner {
+  height: calc(100vh - var(--header-h));
+  height: calc(100svh - var(--header-h));
+  min-height: 560px;
+  padding-block: 32px;
+}
+.np-hero__box {
+  height: 100%;
+  display: flex;
+  background: #fff;
+  border: 1px solid var(--np-border);
+}
+.np-hero__main {
+  flex: 1 1 auto; min-width: 0;
+  display: flex; gap: 32px;
+  padding: 0 32px 32px;
+}
+
+/* certificate shield — same component as the premium/basic tabs */
+.np-cert {
+  flex: none; width: 120px; height: 189.75px;
+  display: flex; flex-direction: column; align-items: center;
+  background: #e3e3e3; border-top: .5px solid var(--np-border);
+  border-radius: 0 0 90px 90px; overflow: hidden;
+  cursor: default; transition: transform .28s var(--ease-out);
+}
+.np-cert:hover { transform: translateY(3px); }
+.np-cert__tag { padding: 8px 10px 0; height: 29px; font: 700 10px/1.32 var(--font-body); color: #295dbe; }
+.np-cert__title { font: 500 10px/1.32 var(--font-body); color: rgba(28, 28, 28, .8); text-align: center; }
+.np-cert__flower { position: relative; width: 92px; height: 92px; margin-top: 14px; display: flex; align-items: center; justify-content: center; }
+.np-cert__rosette { position: absolute; inset: 0; width: 100%; height: 100%; }
+.np-cert__qr { position: relative; width: 54px; height: 54px; object-fit: contain; mix-blend-mode: darken; }
+
+.np-hero__content { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; }
+.np-hero__top { display: flex; flex-direction: column; gap: 24px; padding-top: 24px; }
+.np-honor {
+  display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px;
+  font: 700 14px/1.32 var(--font-body); color: #295dbe;
+}
+.np-honor img { flex: none; width: 18px; height: 24px; }
+.np-hero__title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(40px, 4.7vw, 68px); line-height: 1.25; letter-spacing: -0.05em; color: #000;
+}
+.np-hero__sub { font: 500 16px/1.4 var(--font-body); color: var(--ink-80); }
+
+.np-actions { display: flex; gap: 24px; align-items: center; }
+.np-action {
+  display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px 4px 4px;
+  border: 0; border-radius: 42px; background: none; cursor: pointer;
+  font: 500 14px/1.48 var(--font-body); letter-spacing: -0.03em; color: #4d4d4d;
+  transition: background-color .2s ease, transform .2s ease;
+}
+.np-action img { width: 24px; height: 24px; margin: 4px; }
+.np-action:hover { background: rgba(0, 0, 0, .05); transform: translateY(-1px); }
+
+.np-hero__side {
+  flex: 0 0 334px;
+  display: flex; flex-direction: column;
+  border-left: 1px solid var(--np-border);
+}
+.np-hero__logo {
+  flex: 1 1 auto; min-height: 185px;
+  display: flex; align-items: center; justify-content: center; padding: 42px;
+  border-bottom: 1px solid var(--np-border);
+}
+.np-hero__logo img { width: 108px; height: auto; }
+.np-hero__photo { flex: 0 0 68%; overflow: hidden; }
+.np-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 84% 32%; transition: transform 1.2s var(--ease-out); }
+.np-hero__box:hover .np-hero__photo img { transform: scale(1.03); }
+
+/* ==========================================================================
+   2. Intro + stats
+   ========================================================================== */
+.np-intro { background: var(--paper); padding-block: 72px 83px; }
+.np-intro__lead {
+  max-width: 1050px;
+  font: 700 clamp(20px, 1.95vw, 28px)/1.48 var(--font-body); letter-spacing: -0.02em; color: #000;
+}
+.np-stats {
+  list-style: none; margin: 79px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.np-stat {
+  display: flex; flex-direction: column; gap: 40px; padding: 32px;
+  border: 1px solid rgba(0, 0, 0, .2); margin-left: -1px;
+}
+.np-stat:first-child { margin-left: 0; }
+.np-stat__num {
+  font-family: var(--font-display); font-size: clamp(44px, 4.2vw, 60px);
+  line-height: 1.05; letter-spacing: -0.03em; color: #000; white-space: nowrap;
+}
+.np-stat__label { font: 600 14px/1.48 var(--font-body); color: var(--ink-80); }
+
+/* ==========================================================================
+   3. Năng lực + 6. Lãnh đạo — title column + body column
+   ========================================================================== */
+.np-capacity { background: #fff; padding-block: 95px 117px; }
+.np-split { display: grid; grid-template-columns: 374px minmax(0, 1fr); column-gap: 116px; align-items: start; }
+.np-split__title { max-width: 374px; }
+.np-split__body { display: flex; flex-direction: column; min-width: 0; }
+.np-copy { padding-top: 25px; font: 500 14px/1.4 var(--font-body); color: var(--ink-80); display: flex; flex-direction: column; gap: 20px; }
+.np-panel {
+  margin-top: 58px; padding: 32px; background: var(--paper);
+  display: flex; flex-direction: column; gap: 20px;
+}
+.np-panel .np-btn { margin-top: 20px; }
+
+/* ==========================================================================
+   4. Sản phẩm đạt THQG
+   ========================================================================== */
+.np-products { background: var(--paper); padding-block: 68px 69px; }
+.np-products__title { text-align: center; }
+.np-products__grid {
+  width: min(958px, 100%); margin: 61px auto 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
+}
+.np-product { background: #fff; display: flex; flex-direction: column; }
+.np-product__media { aspect-ratio: 860 / 572; overflow: hidden; }
+.np-product__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out); }
+.np-product:hover .np-product__media img { transform: scale(1.05); }
+.np-product__name { padding: 32px; font: 700 clamp(18px, 1.7vw, 24px)/1.4 var(--font-body); color: var(--np-ink-3b); text-align: center; }
+
+/* ==========================================================================
+   5. Chất lượng — s08 module, capped to the 1190 column, full height
+   ========================================================================== */
+.np-s08,
+.np-s08 .s08-viewport { background-color: var(--blue); }
+.np-s08 { height: calc(var(--header-h) + 260vh); }
+.np-s08 .s08-viewport {
+  padding-inline: max(20px, calc((100% - 1190px) / 2));
+}
+.np-s08 .s08-left-col { flex: 0 0 300px; max-width: 300px; }
+.np-s08 .s08-left-inner { padding: 40px 24px 40px 0; }
+.np-s08 .s08-title { font-size: clamp(34px, 3.5vw, 50px); line-height: 1.4; }
+.np-s08 .s08-right-zone { margin: 40px 0; height: calc(100% - 80px); }
+.np-s08 .s08-content-track { padding-block: 0; gap: 0; }
+.np-s08 .s08-card {
+  padding: 40px; gap: 40px; border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+.np-s08 .s08-card:last-child { gap: 40px; border-bottom: 0; }
+.np-s08 .s08-card-badge {
+  align-self: flex-start; padding: 12px; border-radius: 10px; background: #f4f4f4;
+  font: 700 16px/1.05 var(--font-body); color: rgba(59, 59, 59, .8);
+}
+.np-s08 .s08-card-heading { margin: 0 0 -20px; font: 700 clamp(20px, 1.7vw, 24px)/1.4 var(--font-body); color: var(--np-ink-3b); }
+.np-s08 .s08-card-heading + .np-dots { margin-top: 20px; }
+.np-s08 .np-empty { margin-top: 0; }
+.np-s08 .s08-img-slide { clip-path: none; }
+
+@media (max-width: 1440px) { .np-s08 .s08-title { font-size: clamp(34px, 3.5vw, 50px); } }
+
+/* ==========================================================================
+   6. Lãnh đạo
+   ========================================================================== */
+.np-leaders { background: #fff; padding-block: 69px 82px; }
+.np-split--leaders { column-gap: 0; }
+.np-people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.np-person { margin: 0; display: flex; flex-direction: column; }
+.np-person__photo { aspect-ratio: 233 / 289; overflow: hidden; background: #eee; }
+.np-person__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .8s var(--ease-out); }
+.np-person:hover .np-person__photo img { transform: scale(1.04); }
+.np-person figcaption { display: flex; flex-direction: column; gap: 12px; padding: 24px; background: var(--paper); }
+.np-person strong { font: 700 16px/1.3 var(--font-body); color: var(--np-ink-3b); }
+.np-person span { font: 400 14px/1.39 var(--font-body); color: var(--ink-60); }
+.np-leaders__foot { margin-top: 65px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.np-leaders__foot > div { display: flex; flex-direction: column; gap: 20px; }
+
+/* ==========================================================================
+   7. ESG
+   ========================================================================== */
+.np-esg { background: var(--paper); padding-block: 64px 109px; }
+.np-esg__desc { margin-top: 20px; max-width: 314px; font: 500 14px/1.4 var(--font-body); color: var(--ink-80); }
+.np-esg__row { margin-top: 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.np-esg__media { min-height: 335px; overflow: hidden; }
+.np-esg__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+.np-esg__row:hover .np-esg__media img { transform: scale(1.04); }
+.np-esg__card { background: #fff; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+.np-esg__card > div { display: flex; flex-direction: column; gap: 20px; }
+
+/* ==========================================================================
+   8. Liên hệ — s10 module capped to the 1190 column
+   ========================================================================== */
+.np-s10 { min-height: 467px; padding-block: 48px 75px; }
+.np-s10 .s10-container {
+  width: min(1190px, 100% - 40px); max-width: none; margin-inline: auto; padding-inline: 0;
+}
+.np-s10 .s10-left { max-width: 520px; }
+.np-s10 .s10-title { font-size: clamp(34px, 3.5vw, 50px); line-height: 1.4; }
+.np-s10 .s10-right { max-width: 467px; align-items: stretch; gap: 42px; }
+.np-s10 .s10-desc { font-size: 16px; }
+.np-s10 .s10-btn { height: 66px; font-size: 14px; letter-spacing: 0; border-width: 1px; }
+@media (min-width: 1441px) {
+  .np-s10 { min-height: 467px; }
+  .np-s10 .s10-title { font-size: 50px; line-height: 1.4; }
+  .np-s10 .s10-desc { font-size: 16px; }
+}
+
+/* ==========================================================================
+   Toast
+   ========================================================================== */
+.np-toast {
+  position: fixed; left: 50%; bottom: 32px; z-index: 200; transform: translate(-50%, 20px);
+  padding: 12px 20px; border-radius: 40px; background: #111; color: #fff;
+  font: 600 14px/1.4 var(--font-body); opacity: 0; pointer-events: none;
+  transition: opacity .3s var(--ease-out), transform .3s var(--ease-out);
+}
+.np-toast.is-show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .np-split { grid-template-columns: 1fr; row-gap: 32px; }
+  .np-hero__side { flex-basis: 280px; }
+}
+
+@media (max-width: 900px) {
+  .np-hero__inner { height: auto; min-height: calc(100svh - var(--header-h)); padding-block: 20px; }
+  .np-hero__box { flex-direction: column; min-height: calc(100svh - var(--header-h) - 40px); }
+  .np-hero__main { flex-direction: column; gap: 16px; padding: 0 20px 24px; }
+  .np-hero__content { gap: 32px; }
+  .np-hero__side { flex: none; border-left: 0; border-top: 1px solid var(--np-border); }
+  .np-hero__logo { min-height: 140px; padding: 24px; }
+  .np-hero__photo { flex: none; height: 260px; }
+  .np-honor { padding-left: 0; }
+
+  .np-stats { grid-template-columns: 1fr; }
+  .np-stat { margin-left: 0; margin-top: -1px; }
+
+  .np-products__grid, .np-esg__row { grid-template-columns: 1fr; }
+  .np-esg__media { min-height: 220px; }
+
+  .np-s08 { height: auto; }
+  .np-s08 .s08-viewport { padding-inline: 20px; }
+  .np-s08 .s08-left-col { flex: none; max-width: none; }
+  .np-s08 .s08-left-inner { padding: 48px 0 24px; }
+  .np-s08 .s08-right-zone { margin: 0 0 48px; height: auto; }
+  .np-s08 .s08-card { padding: 28px 24px; }
+
+  .np-leaders__foot { flex-direction: column; }
+}
+
+@media (max-width: 560px) {
+  .np-people { grid-template-columns: 1fr; }
+  .np-btn { white-space: normal; text-align: left; }
+  .np-intro, .np-capacity, .np-products, .np-leaders, .np-esg { padding-block: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .np-hero__photo img, .np-product__media img, .np-person__photo img, .np-esg__media img { transition: none; }
+}
+
+/* Home (Figma 897:2659): shield moved to the right of the text column.
+   On small screens it goes back on top so it isn't stranded below the copy. */
+@media (max-width: 900px) {
+  .np-cert { order: -1; }
+}
